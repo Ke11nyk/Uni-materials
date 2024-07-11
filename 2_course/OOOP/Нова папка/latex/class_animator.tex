@@ -1,0 +1,310 @@
+\doxysection{Animator Class Reference}
+\hypertarget{class_animator}{}\label{class_animator}\index{Animator@{Animator}}
+
+
+This is the class to animate player.  
+
+
+
+
+{\ttfamily \#include $<$Animator.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_animator_1_1_animation}{Animation}}
+\begin{DoxyCompactList}\small\item\em This is the struct to create animations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_animator_aa8d46060aae0db3babe5e6db85e6279c}{Animator}} (sf\+::\+Sprite \&\mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}})
+\begin{DoxyCompactList}\small\item\em Initialization of SSprite. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \& \mbox{\hyperlink{class_animator_a3d82412e67b826a0db620414701bf03d}{Create\+Animation}} (std\+::string const \&s\+Name, std\+::string const \&s\+Texture\+Name, sf\+::\+Time const \&TDuration, bool b\+Loop=false)
+\item 
+void \mbox{\hyperlink{class_animator_aa52e6608bcc7e6d0d680843da8db983a}{Update}} (sf\+::\+Time const \&TDt)
+\begin{DoxyCompactList}\small\item\em The method that works out how to choose the right frame at the right time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{Switch\+Animation}} (std\+::string const \&s\+Name)
+\begin{DoxyCompactList}\small\item\em The method that check if animation exists. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_animator_ac8ac25bf21b250548bfb605c14844a12}{Get\+Current\+Animation\+Name}} () const
+\begin{DoxyCompactList}\small\item\em The method that gives a name of the animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_animator_a91402fd025ecd9ed1986f596e65e7068}{Restart}} ()
+\begin{DoxyCompactList}\small\item\em The method that restarts the animation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_animator_a9362df6fd44bc6f34c7b8bf37619f351}{get\+End\+Anim}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}{Find\+Animation}} (std\+::string const \&s\+Name)
+\begin{DoxyCompactList}\small\item\em The method that searches for the given animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_animator_a73efe59aa24ae86538ed0622a6364844}{Switch\+Animation}} (\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \texorpdfstring{$\ast$}{*}ani\+Animation)
+\begin{DoxyCompactList}\small\item\em The method that switch animations of the sprite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \& \mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}}
+\begin{DoxyCompactList}\small\item\em The sprite for which animations will be created. \end{DoxyCompactList}\item 
+sf\+::\+Time \mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrent\+Time}}
+\begin{DoxyCompactList}\small\item\em The time to countdown. \end{DoxyCompactList}\item 
+std\+::list$<$ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} $>$ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{l\+Animations}}
+\begin{DoxyCompactList}\small\item\em The list of the animations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{ani\+Current\+Animation}}
+\begin{DoxyCompactList}\small\item\em The current animation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{b\+End\+Anim}} = false
+\begin{DoxyCompactList}\small\item\em The end of the animation is reached or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the class to animate player. 
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00011}{11}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_animator_aa8d46060aae0db3babe5e6db85e6279c}\label{class_animator_aa8d46060aae0db3babe5e6db85e6279c} 
+\index{Animator@{Animator}!Animator@{Animator}}
+\index{Animator@{Animator}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{Animator()}{Animator()}}
+{\footnotesize\ttfamily Animator\+::\+Animator (\begin{DoxyParamCaption}\item[{sf\+::\+Sprite \&}]{SSprite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initialization of SSprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em SSprite} & The sprite that will be animated \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_animator_a3d82412e67b826a0db620414701bf03d}\label{class_animator_a3d82412e67b826a0db620414701bf03d} 
+\index{Animator@{Animator}!CreateAnimation@{CreateAnimation}}
+\index{CreateAnimation@{CreateAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{CreateAnimation()}{CreateAnimation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \& Animator\+::\+Create\+Animation (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{s\+Name,  }\item[{std\+::string const \&}]{s\+Texture\+Name,  }\item[{sf\+::\+Time const \&}]{TDuration,  }\item[{bool}]{b\+Loop = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00012}{12}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}\label{class_animator_a13a1044b0c82452a88a9c00b9e5aae40} 
+\index{Animator@{Animator}!FindAnimation@{FindAnimation}}
+\index{FindAnimation@{FindAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{FindAnimation()}{FindAnimation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \texorpdfstring{$\ast$}{*} Animator\+::\+Find\+Animation (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{s\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that searches for the given animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Name} & The name of the animation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Link on the animation if it exists 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00109}{109}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_ac8ac25bf21b250548bfb605c14844a12}\label{class_animator_ac8ac25bf21b250548bfb605c14844a12} 
+\index{Animator@{Animator}!GetCurrentAnimationName@{GetCurrentAnimationName}}
+\index{GetCurrentAnimationName@{GetCurrentAnimationName}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{GetCurrentAnimationName()}{GetCurrentAnimationName()}}
+{\footnotesize\ttfamily std\+::string Animator\+::\+Get\+Current\+Animation\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The method that gives a name of the animation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Name} & The name of the searched animation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The name of the animation or empty string 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00089}{89}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_a9362df6fd44bc6f34c7b8bf37619f351}\label{class_animator_a9362df6fd44bc6f34c7b8bf37619f351} 
+\index{Animator@{Animator}!getEndAnim@{getEndAnim}}
+\index{getEndAnim@{getEndAnim}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{getEndAnim()}{getEndAnim()}}
+{\footnotesize\ttfamily bool Animator\+::get\+End\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00066}{66}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{class_animator_a91402fd025ecd9ed1986f596e65e7068}\label{class_animator_a91402fd025ecd9ed1986f596e65e7068} 
+\index{Animator@{Animator}!Restart@{Restart}}
+\index{Restart@{Restart}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{Restart()}{Restart()}}
+{\footnotesize\ttfamily void Animator\+::\+Restart (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that restarts the animation. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00098}{98}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_a73efe59aa24ae86538ed0622a6364844}\label{class_animator_a73efe59aa24ae86538ed0622a6364844} 
+\index{Animator@{Animator}!SwitchAnimation@{SwitchAnimation}}
+\index{SwitchAnimation@{SwitchAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{SwitchAnimation()}{SwitchAnimation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Animator\+::\+Switch\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}} \texorpdfstring{$\ast$}{*}}]{ani\+Animation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that switch animations of the sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ani\+Animation} & The animation to be switched to {\bfseries{Example using}} 
+\begin{DoxyCode}{1}
+\DoxyCodeLine{\textcolor{keyword}{auto}\&\ idleForwardStatic\ =\ StickAnim.CreateAnimation(\textcolor{stringliteral}{"{}idleForwardStatic"{}},\ StrTexture,\ sf::seconds(fTime),\ \textcolor{keyword}{true});}
+\DoxyCodeLine{idleForwardStatic.AddFrames(sf::Vector2i(0,\ 0),\ iSpriteSize,\ 1,\ 1);}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ animation\ =\ \&idleForwardStatic;}
+\DoxyCodeLine{\mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{SwitchAnimation}}(animation);}
+
+\end{DoxyCode}
+ \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00034}{34}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_a5943c73a80eebcde875948102ace7dce}\label{class_animator_a5943c73a80eebcde875948102ace7dce} 
+\index{Animator@{Animator}!SwitchAnimation@{SwitchAnimation}}
+\index{SwitchAnimation@{SwitchAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{SwitchAnimation()}{SwitchAnimation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Animator\+::\+Switch\+Animation (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{s\+Name }\end{DoxyParamCaption})}
+
+
+
+The method that check if animation exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Name} & The name of the searched animation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if animation exist and false otherwise 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00073}{73}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+\Hypertarget{class_animator_aa52e6608bcc7e6d0d680843da8db983a}\label{class_animator_aa52e6608bcc7e6d0d680843da8db983a} 
+\index{Animator@{Animator}!Update@{Update}}
+\index{Update@{Update}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Animator\+::\+Update (\begin{DoxyParamCaption}\item[{sf\+::\+Time const \&}]{TDt }\end{DoxyParamCaption})}
+
+
+
+The method that works out how to choose the right frame at the right time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em TDt} & The delta time \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_animator_8cpp_source_l00050}{50}} of file \mbox{\hyperlink{_animator_8cpp_source}{Animator.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}\label{class_animator_ad80289d06e499c43a5e6835fda6cb7d0} 
+\index{Animator@{Animator}!aniCurrentAnimation@{aniCurrentAnimation}}
+\index{aniCurrentAnimation@{aniCurrentAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{aniCurrentAnimation}{aniCurrentAnimation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}}\texorpdfstring{$\ast$}{*} Animator\+::ani\+Current\+Animation\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The current animation. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00080}{80}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}\label{class_animator_a0d7dd2ab48861770116d6cc9f673da7d} 
+\index{Animator@{Animator}!bEndAnim@{bEndAnim}}
+\index{bEndAnim@{bEndAnim}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{bEndAnim}{bEndAnim}}
+{\footnotesize\ttfamily bool Animator\+::b\+End\+Anim = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The end of the animation is reached or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00081}{81}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{class_animator_a4f825bb8dc53b63aab8572984e7d043e}\label{class_animator_a4f825bb8dc53b63aab8572984e7d043e} 
+\index{Animator@{Animator}!lAnimations@{lAnimations}}
+\index{lAnimations@{lAnimations}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{lAnimations}{lAnimations}}
+{\footnotesize\ttfamily std\+::list$<$\mbox{\hyperlink{struct_animator_1_1_animation}{Animator\+::\+Animation}}$>$ Animator\+::l\+Animations\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The list of the animations. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00079}{79}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{class_animator_a81bee303fed6445bdba48fbdeb31f164}\label{class_animator_a81bee303fed6445bdba48fbdeb31f164} 
+\index{Animator@{Animator}!SSprite@{SSprite}}
+\index{SSprite@{SSprite}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{SSprite}{SSprite}}
+{\footnotesize\ttfamily sf\+::\+Sprite\& Animator\+::\+SSprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The sprite for which animations will be created. 
+
+\doxylink{struct_animator_1_1_animation}{Animation} properties 
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00077}{77}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{class_animator_a955b3725b3722be8dd68eacf8f438f3c}\label{class_animator_a955b3725b3722be8dd68eacf8f438f3c} 
+\index{Animator@{Animator}!TCurrentTime@{TCurrentTime}}
+\index{TCurrentTime@{TCurrentTime}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{TCurrentTime}{TCurrentTime}}
+{\footnotesize\ttfamily sf\+::\+Time Animator\+::\+TCurrent\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The time to countdown. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00078}{78}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Animator.\+h\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/sources/Animator.\+cpp\end{DoxyCompactItemize}

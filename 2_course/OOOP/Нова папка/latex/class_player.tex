@@ -1,0 +1,610 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+
+
+This is the class to create the player and control his physics.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_player_1_1_borders}{Borders}}
+\begin{DoxyCompactList}\small\item\em This is the struct that save window borders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_af7bc48560916000de31e8c657f2eb3c1}{Player}} (sf\+::\+Render\+Window \&\mbox{\hyperlink{class_player_a4b19d5b8d1ea3edda70c8f892d6f626b}{WWindow}}, std\+::vector$<$ sf\+::\+String $>$ \&\mbox{\hyperlink{class_player_a27a764cb44d5ccfb5d44dfed5d6ac071}{vec\+Map}}, sf\+::\+String \mbox{\hyperlink{class_player_ab38c690cd65425e1dee361c54bc81bb5}{Str\+Texture}}, int \mbox{\hyperlink{class_player_a6fc21598d1c2ae9d7c9e6ab1b02da384}{n\+Frame}}, sf\+::\+Vector2f fi\+Mypos=sf\+::\+Vector2f(800, 300), float f\+Time=0.\+5, sf\+::\+Vector2i i\+Sprite\+Size=sf\+::\+Vector2i(\mbox{\hyperlink{class_player_a6e558a5578de3a4fc30b1782963b9e94}{stc\+\_\+n\+Width}}, \mbox{\hyperlink{class_player_a2334685710727ff07b5d5719a7014811}{stc\+\_\+n\+Height}}), int n\+Stepy=60)
+\item 
+void \mbox{\hyperlink{class_player_a62286e7262010b6a7f6ab30bb090e97a}{set\+Stepx}} (float fX)
+\item 
+void \mbox{\hyperlink{class_player_a402ca74b84869890ae3bca5679037ec9}{set\+Stepy}} (float fY)
+\item 
+void \mbox{\hyperlink{class_player_a2ac2f99669c81870a4416d29250ad1f0}{Keys}} (sf\+::\+Event EEvent)
+\begin{DoxyCompactList}\small\item\em The method that monitors keystrokes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a8dda2d0eb31cff364ff1612e4ac86c6f}{Collision}} (float f\+Dir)
+\begin{DoxyCompactList}\small\item\em The method that controles collision of the player. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a9656a421d7eeb7221344408a07730adc}{Update}} (sf\+::\+Time const \&TDelta\+Time)
+\begin{DoxyCompactList}\small\item\em The method that updates game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a36ca5c92516b79a532a2ef02d33ba550}{set\+Borders\+Player}} (float fX, float fY, float f\+Maxx, float f\+Maxy)
+\item 
+void \mbox{\hyperlink{class_player_af9a1c553c89e5ba2ada2025e2c12a798}{set\+OffsetX}} (float fX)
+\item 
+void \mbox{\hyperlink{class_player_a37a3517672be91986eb3561a7ecc59cc}{set\+OffsetY}} (float fY)
+\item 
+int \mbox{\hyperlink{class_player_ab98ee3c0e10f7b2b65ad43b2a2929445}{get\+Points}} ()
+\item 
+void \mbox{\hyperlink{class_player_a6c70a880243746c719f93058872e08dc}{set\+Points}} (int n\+Value)
+\item 
+void \mbox{\hyperlink{class_player_a70f4c8b48ca56e0b68df99146493f959}{set\+Texture}} (sf\+::\+String Str\+Text)
+\item 
+void \mbox{\hyperlink{class_player_ab1796917f482c152443edf971a95b3ed}{set\+Dead}} (bool b\+Playerdead)
+\item 
+bool \mbox{\hyperlink{class_player_a67cccdef9084ad387159f2254c338a29}{get\+Dead}} () const
+\item 
+void \mbox{\hyperlink{class_player_ad535b1e7e183ee24f4e230cd3180915b}{set\+Door\+Opened}} (bool b\+Value)
+\item 
+bool \mbox{\hyperlink{class_player_ac3f46dc787d1384aaa0a915b75041c45}{get\+Door\+Opened}} ()
+\item 
+sf\+::\+Sprite \& \mbox{\hyperlink{class_player_adbbd7ab6cc5f3d4dd0a4f6525e9968bb}{get\+Stick}} ()
+\item 
+\mbox{\hyperlink{struct_player_1_1_borders}{Borders}} \mbox{\hyperlink{class_player_a5cd3a14f48c586df20c80fd6be29489c}{get\+Borders}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Render\+Window \& \mbox{\hyperlink{class_player_a4b19d5b8d1ea3edda70c8f892d6f626b}{WWindow}}
+\begin{DoxyCompactList}\small\item\em Window of the game. \end{DoxyCompactList}\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_player_aef9bc2f9828b74693b3c4d1b3cc29103}{SStick\+Sprite}}
+\begin{DoxyCompactList}\small\item\em Sprite of the player. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_animator}{Animator}} \mbox{\hyperlink{class_player_a9bc957f64845a3df8d743eb7254e835c}{Stick\+Anim}} = \mbox{\hyperlink{class_animator}{Animator}}(\mbox{\hyperlink{class_player_aef9bc2f9828b74693b3c4d1b3cc29103}{SStick\+Sprite}})
+\begin{DoxyCompactList}\small\item\em Animation of the player. \end{DoxyCompactList}\item 
+sf\+::\+String \mbox{\hyperlink{class_player_ab38c690cd65425e1dee361c54bc81bb5}{Str\+Texture}}
+\begin{DoxyCompactList}\small\item\em Texture of the player. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_player_a6fc21598d1c2ae9d7c9e6ab1b02da384}{n\+Frame}}
+\begin{DoxyCompactList}\small\item\em Number of frames of the animation. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a340a8e65076528eeb8cfec134acb3d94}{f\+OffsetX}} = 0
+\begin{DoxyCompactList}\small\item\em X-\/delta of the camera. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a3e448739caeb42a95dd0f8670fd4b91b}{f\+OffsetY}} = 0
+\begin{DoxyCompactList}\small\item\em Y-\/delta of the camera. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_a60a004def26455d5ff65b23077366787}{f\+Stepx}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Step of X-\/moving of sprite. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_player_afd64b425f66d14ce9b6cac7bd4b561c3}{f\+Stepy}} = 0.\+0f
+\begin{DoxyCompactList}\small\item\em Step of Y-\/moving of sprite. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_player_1_1_borders}{Borders}} \mbox{\hyperlink{class_player_a68e1a7f733e8e0995280db07bf88115b}{borders}} \{0\}
+\begin{DoxyCompactList}\small\item\em The window borders. \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_player_a95b5907a1d16c1b2ef9b6e6e59384081}{fi\+Pos}}
+\begin{DoxyCompactList}\small\item\em Start coordinates. \end{DoxyCompactList}\item 
+sf\+::\+Time \mbox{\hyperlink{class_player_ae4e68afd8a6045720e657adb5fe51f8f}{TTime\+Update}}
+\begin{DoxyCompactList}\small\item\em Update time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a51f18967541916d7ad10abba3428ca3c}{b\+Dead}} = false
+\begin{DoxyCompactList}\small\item\em Status of the player. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_afe2de8b9b55191a326914d45f4fee006}{b\+On\+Ground}}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_player}{Player} is on ground or not. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_player_a66c68d5dea2643cce7c2d6cd3c8bfbf9}{n\+Points}} = 0
+\begin{DoxyCompactList}\small\item\em Points number of the player. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+String $>$ \& \mbox{\hyperlink{class_player_a27a764cb44d5ccfb5d44dfed5d6ac071}{vec\+Map}}
+\begin{DoxyCompactList}\small\item\em Map of the level. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a8a547c1c0032289014c3bd83f4ede094}{b\+Door\+Opened}} = false
+\begin{DoxyCompactList}\small\item\em State of the door. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int static const \mbox{\hyperlink{class_player_a6e558a5578de3a4fc30b1782963b9e94}{stc\+\_\+n\+Width}} = 54
+\begin{DoxyCompactList}\small\item\em Width of the player. \end{DoxyCompactList}\item 
+int static const \mbox{\hyperlink{class_player_a2334685710727ff07b5d5719a7014811}{stc\+\_\+n\+Height}} = 60
+\begin{DoxyCompactList}\small\item\em Height of the player. \end{DoxyCompactList}\item 
+int static const \mbox{\hyperlink{class_player_ada26bfaa51366502df6e910f3fb89bd6}{stc\+\_\+n\+Ts}} = 50
+\begin{DoxyCompactList}\small\item\em Side of block and point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the class to create the player and control his physics. 
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00007}{7}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_af7bc48560916000de31e8c657f2eb3c1}\label{class_player_af7bc48560916000de31e8c657f2eb3c1} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{WWindow,  }\item[{std\+::vector$<$ sf\+::\+String $>$ \&}]{vec\+Map,  }\item[{sf\+::\+String}]{Str\+Texture,  }\item[{int}]{n\+Frame,  }\item[{sf\+::\+Vector2f}]{fi\+Mypos = {\ttfamily sf\+:\+:Vector2f(800,~300)},  }\item[{float}]{f\+Time = {\ttfamily 0.5},  }\item[{sf\+::\+Vector2i}]{i\+Sprite\+Size = {\ttfamily sf\+:\+:Vector2i(\mbox{\hyperlink{class_player_a6e558a5578de3a4fc30b1782963b9e94}{stc\+\_\+n\+Width}},~\mbox{\hyperlink{class_player_a2334685710727ff07b5d5719a7014811}{stc\+\_\+n\+Height}})},  }\item[{int}]{n\+Stepy = {\ttfamily 60} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00054}{54}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a8dda2d0eb31cff364ff1612e4ac86c6f}\label{class_player_a8dda2d0eb31cff364ff1612e4ac86c6f} 
+\index{Player@{Player}!Collision@{Collision}}
+\index{Collision@{Collision}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Collision()}{Collision()}}
+{\footnotesize\ttfamily void Player\+::\+Collision (\begin{DoxyParamCaption}\item[{float}]{f\+Dir }\end{DoxyParamCaption})}
+
+
+
+The method that controles collision of the player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\+Dir} & Direction of the movement \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_player_8cpp_source_l00045}{45}} of file \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_player_a5cd3a14f48c586df20c80fd6be29489c}\label{class_player_a5cd3a14f48c586df20c80fd6be29489c} 
+\index{Player@{Player}!getBorders@{getBorders}}
+\index{getBorders@{getBorders}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getBorders()}{getBorders()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_player_1_1_borders}{Borders}} Player\+::get\+Borders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00145}{145}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a67cccdef9084ad387159f2254c338a29}\label{class_player_a67cccdef9084ad387159f2254c338a29} 
+\index{Player@{Player}!getDead@{getDead}}
+\index{getDead@{getDead}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getDead()}{getDead()}}
+{\footnotesize\ttfamily bool Player\+::get\+Dead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00125}{125}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ac3f46dc787d1384aaa0a915b75041c45}\label{class_player_ac3f46dc787d1384aaa0a915b75041c45} 
+\index{Player@{Player}!getDoorOpened@{getDoorOpened}}
+\index{getDoorOpened@{getDoorOpened}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getDoorOpened()}{getDoorOpened()}}
+{\footnotesize\ttfamily bool Player\+::get\+Door\+Opened (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00135}{135}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ab98ee3c0e10f7b2b65ad43b2a2929445}\label{class_player_ab98ee3c0e10f7b2b65ad43b2a2929445} 
+\index{Player@{Player}!getPoints@{getPoints}}
+\index{getPoints@{getPoints}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getPoints()}{getPoints()}}
+{\footnotesize\ttfamily int Player\+::get\+Points (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00105}{105}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_adbbd7ab6cc5f3d4dd0a4f6525e9968bb}\label{class_player_adbbd7ab6cc5f3d4dd0a4f6525e9968bb} 
+\index{Player@{Player}!getStick@{getStick}}
+\index{getStick@{getStick}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getStick()}{getStick()}}
+{\footnotesize\ttfamily sf\+::\+Sprite \& Player\+::get\+Stick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00140}{140}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a2ac2f99669c81870a4416d29250ad1f0}\label{class_player_a2ac2f99669c81870a4416d29250ad1f0} 
+\index{Player@{Player}!Keys@{Keys}}
+\index{Keys@{Keys}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Keys()}{Keys()}}
+{\footnotesize\ttfamily void Player\+::\+Keys (\begin{DoxyParamCaption}\item[{sf\+::\+Event}]{event }\end{DoxyParamCaption})}
+
+
+
+The method that monitors keystrokes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The active event \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_player_8cpp_source_l00007}{7}} of file \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+\Hypertarget{class_player_a36ca5c92516b79a532a2ef02d33ba550}\label{class_player_a36ca5c92516b79a532a2ef02d33ba550} 
+\index{Player@{Player}!setBordersPlayer@{setBordersPlayer}}
+\index{setBordersPlayer@{setBordersPlayer}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setBordersPlayer()}{setBordersPlayer()}}
+{\footnotesize\ttfamily void Player\+::set\+Borders\+Player (\begin{DoxyParamCaption}\item[{float}]{fX,  }\item[{float}]{fY,  }\item[{float}]{f\+Maxx,  }\item[{float}]{f\+Maxy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00087}{87}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ab1796917f482c152443edf971a95b3ed}\label{class_player_ab1796917f482c152443edf971a95b3ed} 
+\index{Player@{Player}!setDead@{setDead}}
+\index{setDead@{setDead}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setDead()}{setDead()}}
+{\footnotesize\ttfamily void Player\+::set\+Dead (\begin{DoxyParamCaption}\item[{bool}]{b\+Playerdead }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00120}{120}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ad535b1e7e183ee24f4e230cd3180915b}\label{class_player_ad535b1e7e183ee24f4e230cd3180915b} 
+\index{Player@{Player}!setDoorOpened@{setDoorOpened}}
+\index{setDoorOpened@{setDoorOpened}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setDoorOpened()}{setDoorOpened()}}
+{\footnotesize\ttfamily void Player\+::set\+Door\+Opened (\begin{DoxyParamCaption}\item[{bool}]{b\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00130}{130}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_af9a1c553c89e5ba2ada2025e2c12a798}\label{class_player_af9a1c553c89e5ba2ada2025e2c12a798} 
+\index{Player@{Player}!setOffsetX@{setOffsetX}}
+\index{setOffsetX@{setOffsetX}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setOffsetX()}{setOffsetX()}}
+{\footnotesize\ttfamily void Player\+::set\+OffsetX (\begin{DoxyParamCaption}\item[{float}]{fX }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00095}{95}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a37a3517672be91986eb3561a7ecc59cc}\label{class_player_a37a3517672be91986eb3561a7ecc59cc} 
+\index{Player@{Player}!setOffsetY@{setOffsetY}}
+\index{setOffsetY@{setOffsetY}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setOffsetY()}{setOffsetY()}}
+{\footnotesize\ttfamily void Player\+::set\+OffsetY (\begin{DoxyParamCaption}\item[{float}]{fY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00100}{100}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a6c70a880243746c719f93058872e08dc}\label{class_player_a6c70a880243746c719f93058872e08dc} 
+\index{Player@{Player}!setPoints@{setPoints}}
+\index{setPoints@{setPoints}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setPoints()}{setPoints()}}
+{\footnotesize\ttfamily void Player\+::set\+Points (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00110}{110}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a62286e7262010b6a7f6ab30bb090e97a}\label{class_player_a62286e7262010b6a7f6ab30bb090e97a} 
+\index{Player@{Player}!setStepx@{setStepx}}
+\index{setStepx@{setStepx}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setStepx()}{setStepx()}}
+{\footnotesize\ttfamily void Player\+::set\+Stepx (\begin{DoxyParamCaption}\item[{float}]{fX }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00072}{72}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a402ca74b84869890ae3bca5679037ec9}\label{class_player_a402ca74b84869890ae3bca5679037ec9} 
+\index{Player@{Player}!setStepy@{setStepy}}
+\index{setStepy@{setStepy}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setStepy()}{setStepy()}}
+{\footnotesize\ttfamily void Player\+::set\+Stepy (\begin{DoxyParamCaption}\item[{float}]{fY }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00076}{76}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a70f4c8b48ca56e0b68df99146493f959}\label{class_player_a70f4c8b48ca56e0b68df99146493f959} 
+\index{Player@{Player}!setTexture@{setTexture}}
+\index{setTexture@{setTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setTexture()}{setTexture()}}
+{\footnotesize\ttfamily void Player\+::set\+Texture (\begin{DoxyParamCaption}\item[{sf\+::\+String}]{Str\+Text }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00115}{115}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a9656a421d7eeb7221344408a07730adc}\label{class_player_a9656a421d7eeb7221344408a07730adc} 
+\index{Player@{Player}!Update@{Update}}
+\index{Update@{Update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily void Player\+::\+Update (\begin{DoxyParamCaption}\item[{sf\+::\+Time const \&}]{TDelta\+Time }\end{DoxyParamCaption})}
+
+
+
+The method that updates game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em TDelta\+Time} & Delta time \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_player_8cpp_source_l00090}{90}} of file \mbox{\hyperlink{_player_8cpp_source}{Player.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_player_a51f18967541916d7ad10abba3428ca3c}\label{class_player_a51f18967541916d7ad10abba3428ca3c} 
+\index{Player@{Player}!bDead@{bDead}}
+\index{bDead@{bDead}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{bDead}{bDead}}
+{\footnotesize\ttfamily bool Player\+::b\+Dead = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Status of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00042}{42}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a8a547c1c0032289014c3bd83f4ede094}\label{class_player_a8a547c1c0032289014c3bd83f4ede094} 
+\index{Player@{Player}!bDoorOpened@{bDoorOpened}}
+\index{bDoorOpened@{bDoorOpened}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{bDoorOpened}{bDoorOpened}}
+{\footnotesize\ttfamily bool Player\+::b\+Door\+Opened = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+State of the door. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00049}{49}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_afe2de8b9b55191a326914d45f4fee006}\label{class_player_afe2de8b9b55191a326914d45f4fee006} 
+\index{Player@{Player}!bOnGround@{bOnGround}}
+\index{bOnGround@{bOnGround}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{bOnGround}{bOnGround}}
+{\footnotesize\ttfamily bool Player\+::b\+On\+Ground\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxylink{class_player}{Player} is on ground or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00043}{43}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a68e1a7f733e8e0995280db07bf88115b}\label{class_player_a68e1a7f733e8e0995280db07bf88115b} 
+\index{Player@{Player}!borders@{borders}}
+\index{borders@{borders}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{borders}{borders}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_player_1_1_borders}{Borders}} Player\+::borders \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The window borders. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00039}{39}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a95b5907a1d16c1b2ef9b6e6e59384081}\label{class_player_a95b5907a1d16c1b2ef9b6e6e59384081} 
+\index{Player@{Player}!fiPos@{fiPos}}
+\index{fiPos@{fiPos}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fiPos}{fiPos}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Player\+::fi\+Pos\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start coordinates. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00040}{40}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a340a8e65076528eeb8cfec134acb3d94}\label{class_player_a340a8e65076528eeb8cfec134acb3d94} 
+\index{Player@{Player}!fOffsetX@{fOffsetX}}
+\index{fOffsetX@{fOffsetX}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fOffsetX}{fOffsetX}}
+{\footnotesize\ttfamily float Player\+::f\+OffsetX = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X-\/delta of the camera. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00033}{33}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a3e448739caeb42a95dd0f8670fd4b91b}\label{class_player_a3e448739caeb42a95dd0f8670fd4b91b} 
+\index{Player@{Player}!fOffsetY@{fOffsetY}}
+\index{fOffsetY@{fOffsetY}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fOffsetY}{fOffsetY}}
+{\footnotesize\ttfamily float Player\+::f\+OffsetY = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Y-\/delta of the camera. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00034}{34}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a60a004def26455d5ff65b23077366787}\label{class_player_a60a004def26455d5ff65b23077366787} 
+\index{Player@{Player}!fStepx@{fStepx}}
+\index{fStepx@{fStepx}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fStepx}{fStepx}}
+{\footnotesize\ttfamily float Player\+::f\+Stepx = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Step of X-\/moving of sprite. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00036}{36}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_afd64b425f66d14ce9b6cac7bd4b561c3}\label{class_player_afd64b425f66d14ce9b6cac7bd4b561c3} 
+\index{Player@{Player}!fStepy@{fStepy}}
+\index{fStepy@{fStepy}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fStepy}{fStepy}}
+{\footnotesize\ttfamily float Player\+::f\+Stepy = 0.\+0f\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Step of Y-\/moving of sprite. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00037}{37}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a6fc21598d1c2ae9d7c9e6ab1b02da384}\label{class_player_a6fc21598d1c2ae9d7c9e6ab1b02da384} 
+\index{Player@{Player}!nFrame@{nFrame}}
+\index{nFrame@{nFrame}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{nFrame}{nFrame}}
+{\footnotesize\ttfamily int Player\+::n\+Frame\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of frames of the animation. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00025}{25}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a66c68d5dea2643cce7c2d6cd3c8bfbf9}\label{class_player_a66c68d5dea2643cce7c2d6cd3c8bfbf9} 
+\index{Player@{Player}!nPoints@{nPoints}}
+\index{nPoints@{nPoints}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{nPoints}{nPoints}}
+{\footnotesize\ttfamily int Player\+::n\+Points = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Points number of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00045}{45}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_aef9bc2f9828b74693b3c4d1b3cc29103}\label{class_player_aef9bc2f9828b74693b3c4d1b3cc29103} 
+\index{Player@{Player}!SStickSprite@{SStickSprite}}
+\index{SStickSprite@{SStickSprite}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SStickSprite}{SStickSprite}}
+{\footnotesize\ttfamily sf\+::\+Sprite Player\+::\+SStick\+Sprite\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sprite of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00021}{21}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a2334685710727ff07b5d5719a7014811}\label{class_player_a2334685710727ff07b5d5719a7014811} 
+\index{Player@{Player}!stc\_nHeight@{stc\_nHeight}}
+\index{stc\_nHeight@{stc\_nHeight}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{stc\_nHeight}{stc\_nHeight}}
+{\footnotesize\ttfamily int static const Player\+::stc\+\_\+n\+Height = 60\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Height of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00029}{29}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ada26bfaa51366502df6e910f3fb89bd6}\label{class_player_ada26bfaa51366502df6e910f3fb89bd6} 
+\index{Player@{Player}!stc\_nTs@{stc\_nTs}}
+\index{stc\_nTs@{stc\_nTs}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{stc\_nTs}{stc\_nTs}}
+{\footnotesize\ttfamily int static const Player\+::stc\+\_\+n\+Ts = 50\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Side of block and point. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00031}{31}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a6e558a5578de3a4fc30b1782963b9e94}\label{class_player_a6e558a5578de3a4fc30b1782963b9e94} 
+\index{Player@{Player}!stc\_nWidth@{stc\_nWidth}}
+\index{stc\_nWidth@{stc\_nWidth}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{stc\_nWidth}{stc\_nWidth}}
+{\footnotesize\ttfamily int static const Player\+::stc\+\_\+n\+Width = 54\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Width of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00028}{28}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a9bc957f64845a3df8d743eb7254e835c}\label{class_player_a9bc957f64845a3df8d743eb7254e835c} 
+\index{Player@{Player}!StickAnim@{StickAnim}}
+\index{StickAnim@{StickAnim}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{StickAnim}{StickAnim}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_animator}{Animator}} Player\+::\+Stick\+Anim = \mbox{\hyperlink{class_animator}{Animator}}(\mbox{\hyperlink{class_player_aef9bc2f9828b74693b3c4d1b3cc29103}{SStick\+Sprite}})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Animation of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00022}{22}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ab38c690cd65425e1dee361c54bc81bb5}\label{class_player_ab38c690cd65425e1dee361c54bc81bb5} 
+\index{Player@{Player}!StrTexture@{StrTexture}}
+\index{StrTexture@{StrTexture}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{StrTexture}{StrTexture}}
+{\footnotesize\ttfamily sf\+::\+String Player\+::\+Str\+Texture\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Texture of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00024}{24}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_ae4e68afd8a6045720e657adb5fe51f8f}\label{class_player_ae4e68afd8a6045720e657adb5fe51f8f} 
+\index{Player@{Player}!TTimeUpdate@{TTimeUpdate}}
+\index{TTimeUpdate@{TTimeUpdate}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{TTimeUpdate}{TTimeUpdate}}
+{\footnotesize\ttfamily sf\+::\+Time Player\+::\+TTime\+Update\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update time. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00041}{41}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a27a764cb44d5ccfb5d44dfed5d6ac071}\label{class_player_a27a764cb44d5ccfb5d44dfed5d6ac071} 
+\index{Player@{Player}!vecMap@{vecMap}}
+\index{vecMap@{vecMap}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{vecMap}{vecMap}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+String$>$\& Player\+::vec\+Map\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Map of the level. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00047}{47}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+\Hypertarget{class_player_a4b19d5b8d1ea3edda70c8f892d6f626b}\label{class_player_a4b19d5b8d1ea3edda70c8f892d6f626b} 
+\index{Player@{Player}!WWindow@{WWindow}}
+\index{WWindow@{WWindow}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{WWindow}{WWindow}}
+{\footnotesize\ttfamily sf\+::\+Render\+Window\& Player\+::\+WWindow\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Window of the game. 
+
+
+
+Definition at line \mbox{\hyperlink{_player_8h_source_l00020}{20}} of file \mbox{\hyperlink{_player_8h_source}{Player.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Player.\+h\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/sources/Player.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,44 @@
+/** \page UML
+
+ 
+
+<h2>Class</h2>
+
+<p>
+  \image html class.png
+</p>
+
+<h2>re-Class</h2>
+
+<p>
+  \image html re-class.png
+</p>
+
+<h2>Activity</h2>
+
+<p>
+  \image html activity.png
+</p>
+
+<h2>Sequence</h2>
+
+<p>
+  \image html sequence.png
+</p>
+
+<h2>State</h2>
+
+<p>
+  \image html state.png
+</p>
+
+<h2>Use case</h2>
+
+<p>
+  \image html use_case.png
+</p>
+
+ 
+
+*/
+

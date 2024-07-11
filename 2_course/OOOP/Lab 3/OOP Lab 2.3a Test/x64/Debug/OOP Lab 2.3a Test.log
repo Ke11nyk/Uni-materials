@@ -1,0 +1,5 @@
+﻿test.obj : error LNK2005: "class std::vector<int,class std::allocator<int> > __cdecl merge(class std::vector<int,class std::allocator<int> > const &,class std::vector<int,class std::allocator<int> > const &)" (?merge@@YA?AV?$vector@HV?$allocator@H@std@@@std@@AEBV12@0@Z) already defined in OOP Lab 2.3a.obj
+test.obj : error LNK2005: "class std::vector<int,class std::allocator<int> > __cdecl merge_sort_serial(class std::vector<int,class std::allocator<int> > const &)" (?merge_sort_serial@@YA?AV?$vector@HV?$allocator@H@std@@@std@@AEBV12@@Z) already defined in OOP Lab 2.3a.obj
+test.obj : error LNK2005: "class std::vector<int,class std::allocator<int> > __cdecl merge_sort_parallel(class std::vector<int,class std::allocator<int> > const &)" (?merge_sort_parallel@@YA?AV?$vector@HV?$allocator@H@std@@@std@@AEBV12@@Z) already defined in OOP Lab 2.3a.obj
+test.obj : error LNK2005: main already defined in OOP Lab 2.3a.obj
+D:\Uni materials\2 course\OOP\Lab 3\OOP Lab 2.3a\x64\Debug\OOP Lab 2.3a Test.exe : fatal error LNK1169: one or more multiply defined symbols found

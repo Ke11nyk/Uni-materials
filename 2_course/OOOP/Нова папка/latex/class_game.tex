@@ -1,0 +1,558 @@
+\doxysection{Game Class Reference}
+\hypertarget{class_game}{}\label{class_game}\index{Game@{Game}}
+
+
+This is the main class of the program.  
+
+
+
+
+{\ttfamily \#include $<$Game.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_a5b2ccbfd689aad9d9b5f23b1ab8ce662}{create\+Window}} ()
+\begin{DoxyCompactList}\small\item\em The method that create window with parameters from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a71f21c663674014bb8087b5367292cc0}{mainloop}} ()
+\begin{DoxyCompactList}\small\item\em The method that show main window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_abb4939c0fb4e7507c8bcbc53aebde6f4}{set\+Width}} (int n\+Value)
+\item 
+int \mbox{\hyperlink{class_game_a009fd047c0faeeeb5c57e4d5e93208ac}{get\+Width}} ()
+\item 
+void \mbox{\hyperlink{class_game_aea7b7172e11e859b30a5c625db40b300}{set\+Height}} (int n\+Value)
+\item 
+int \mbox{\hyperlink{class_game_ab6d48e5ef16d80cb52e220fc2860e62a}{get\+Height}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_a79ecc49d452cac5d39a0043b6dcd0330}{Init\+Text}} (sf\+::\+Text \&Txt\+Mtext, float f\+Xpos, float f\+Ypos, const sf\+::\+String Str\+Str, int n\+Size\+Font, sf\+::\+Color Col\+Menu\+Text\+Color, int n\+Bord, sf\+::\+Color Col\+Border\+Color)
+\begin{DoxyCompactList}\small\item\em The method that sets up the text that will be displayed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_ae3632f873fe31266379675bb8a2d9328}{Read\+Values}} (\mbox{\hyperlink{struct_settings_values}{Settings\+Values}} \&setting\+Values, std\+::string s\+Name\+File)
+\begin{DoxyCompactList}\small\item\em The method that reads settings values from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a6bf5d10fb619e732fdbe6ad6fdd4ed01}{Write\+Values}} (const \mbox{\hyperlink{struct_settings_values}{Settings\+Values}} setting\+Values, const std\+::string \&s\+Name\+File)
+\begin{DoxyCompactList}\small\item\em The method that write settings values to file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a6d43bd51d8ee24d826bd225ab8c3c0e1}{Clear\+Values}} (std\+::string s\+Name\+File)
+\begin{DoxyCompactList}\small\item\em The method that delete values in file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a17446a595ba9812446bac5c2e13d4ed1}{Settings\+Window}} (sf\+::\+Text \&Txt\+Settings, \mbox{\hyperlink{class_game_menu}{Game\+Menu}} \&my\+Menu)
+\begin{DoxyCompactList}\small\item\em The method that sets up title, background and menu of the settings windows. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a20fcf1eca7a12b03ef61ec711f9a01c4}{Settings}} ()
+\begin{DoxyCompactList}\small\item\em The method that show settings window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a3ad61ba67bd3be549be564b7b4bf29dc}{Settings\+Language}} ()
+\begin{DoxyCompactList}\small\item\em The method that show language settings window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a4123a6ff744ef808876e0ce1d61d6c2e}{Settings\+Skin}} ()
+\begin{DoxyCompactList}\small\item\em The method that show skin settings window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_ac0c77c49a5deb787f7a148fbf76329be}{Settings\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em The method that show screen settings window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a28a6e660c4af4d57725c585219ddff29}{About\+Game}} ()
+\begin{DoxyCompactList}\small\item\em The method that show about game window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_asset_manager}{Asset\+Manager}} \mbox{\hyperlink{class_game_abf73b361ec226eb5816e8727e0c9f591}{manager}}
+\begin{DoxyCompactList}\small\item\em A single copy of the asset manager. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_settings_values}{Settings\+Values}} \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settings\+Values}}
+\begin{DoxyCompactList}\small\item\em Struct for saving settings values. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+String $>$ \mbox{\hyperlink{class_game_a4b3331a738f472c33cdcdee181b90227}{vec\+Titles}}
+\begin{DoxyCompactList}\small\item\em Vector of titles. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+String $>$ \mbox{\hyperlink{class_game_aacf01a4f6e4473a9e90b208db8955967}{vec\+About}}
+\begin{DoxyCompactList}\small\item\em Vector with about game text. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+String $>$ \mbox{\hyperlink{class_game_ab26196d267f1645ed2edcee1dfb7b884}{vec\+Background}}
+\begin{DoxyCompactList}\small\item\em Vector of background sources. \end{DoxyCompactList}\item 
+sf\+::\+Render\+Window \mbox{\hyperlink{class_game_a03fda07e26d164eae6597e959677cad7}{WWin}}
+\begin{DoxyCompactList}\small\item\em Window of the game. \end{DoxyCompactList}\item 
+sf\+::\+Rectangle\+Shape \mbox{\hyperlink{class_game_aa613ae098db3598a0acfd80bb9ddf73e}{RSBackground}}
+\begin{DoxyCompactList}\small\item\em Background of the window. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_a63c9c11048ed956f0a3f13805cc5593f}{n\+Width}} = sf\+::\+Video\+Mode\+::get\+Desktop\+Mode().width
+\begin{DoxyCompactList}\small\item\em Width of the window. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}{n\+Height}} = sf\+::\+Video\+Mode\+::get\+Desktop\+Mode().height
+\begin{DoxyCompactList}\small\item\em Height of the window. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_aea206fbaae8ec0592913539160d30ff6}{n\+Bg\+Width}} = settings\+Values.\+get\+Width()
+\begin{DoxyCompactList}\small\item\em Width of the background. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_ab08d4ff255eac881d514e3465973788d}{n\+Bg\+Height}} = settings\+Values.\+get\+Height()
+\begin{DoxyCompactList}\small\item\em Height of the background. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the main class of the program. 
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00017}{17}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_a28a6e660c4af4d57725c585219ddff29}\label{class_game_a28a6e660c4af4d57725c585219ddff29} 
+\index{Game@{Game}!AboutGame@{AboutGame}}
+\index{AboutGame@{AboutGame}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{AboutGame()}{AboutGame()}}
+{\footnotesize\ttfamily void Game\+::\+About\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that show about game window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00450}{450}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a6d43bd51d8ee24d826bd225ab8c3c0e1}\label{class_game_a6d43bd51d8ee24d826bd225ab8c3c0e1} 
+\index{Game@{Game}!ClearValues@{ClearValues}}
+\index{ClearValues@{ClearValues}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{ClearValues()}{ClearValues()}}
+{\footnotesize\ttfamily void Game\+::\+Clear\+Values (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that delete values in file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\+Name\+File} & The file where values will be deleted\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_a6d43bd51d8ee24d826bd225ab8c3c0e1}{ClearValues}}(\textcolor{stringliteral}{"{}source/values.txt"{}});}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00101}{101}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a5b2ccbfd689aad9d9b5f23b1ab8ce662}\label{class_game_a5b2ccbfd689aad9d9b5f23b1ab8ce662} 
+\index{Game@{Game}!createWindow@{createWindow}}
+\index{createWindow@{createWindow}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{createWindow()}{createWindow()}}
+{\footnotesize\ttfamily void Game\+::create\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that create window with parameters from file. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00138}{138}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_ab6d48e5ef16d80cb52e220fc2860e62a}\label{class_game_ab6d48e5ef16d80cb52e220fc2860e62a} 
+\index{Game@{Game}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int Game\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00087}{87}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a009fd047c0faeeeb5c57e4d5e93208ac}\label{class_game_a009fd047c0faeeeb5c57e4d5e93208ac} 
+\index{Game@{Game}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int Game\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00077}{77}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a79ecc49d452cac5d39a0043b6dcd0330}\label{class_game_a79ecc49d452cac5d39a0043b6dcd0330} 
+\index{Game@{Game}!InitText@{InitText}}
+\index{InitText@{InitText}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{InitText()}{InitText()}}
+{\footnotesize\ttfamily void Game\+::\+Init\+Text (\begin{DoxyParamCaption}\item[{sf\+::\+Text \&}]{Txt\+Mtext,  }\item[{float}]{f\+Xpos,  }\item[{float}]{f\+Ypos,  }\item[{const sf\+::\+String}]{Str\+Str,  }\item[{int}]{n\+Size\+Font,  }\item[{sf\+::\+Color}]{Col\+Menu\+Text\+Color,  }\item[{int}]{n\+Bord,  }\item[{sf\+::\+Color}]{Col\+Border\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that sets up the text that will be displayed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Txt\+Mtext} & The text that will be setted up \\
+\hline
+{\em f\+Xpos} & The position of the text on X-\/coordinates \\
+\hline
+{\em f\+Ypos} & The position of the text on Y-\/coordinates \\
+\hline
+{\em Str\+Str} & The text content \\
+\hline
+{\em n\+Size\+Font} & The size of the text font \\
+\hline
+{\em Col\+Menu\+Text\+Color} & The color of the text \\
+\hline
+{\em n\+Bord} & The thickness of the text border \\
+\hline
+{\em Col\+Border\+Color} & The color of the text border\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{TxtTitle.setFont(AssetManager::GetFont(FONTH));}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_a79ecc49d452cac5d39a0043b6dcd0330}{InitText}}(TxtTitle,\ 200,\ 50,\ \textcolor{stringliteral}{"{}Title"{}},\ 200,\ sf::Color::White,\ 20,\ sf::Color::Black);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a71f21c663674014bb8087b5367292cc0}\label{class_game_a71f21c663674014bb8087b5367292cc0} 
+\index{Game@{Game}!mainloop@{mainloop}}
+\index{mainloop@{mainloop}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{mainloop()}{mainloop()}}
+{\footnotesize\ttfamily void Game\+::mainloop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that show main window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00161}{161}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_ae3632f873fe31266379675bb8a2d9328}\label{class_game_ae3632f873fe31266379675bb8a2d9328} 
+\index{Game@{Game}!ReadValues@{ReadValues}}
+\index{ReadValues@{ReadValues}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{ReadValues()}{ReadValues()}}
+{\footnotesize\ttfamily void Game\+::\+Read\+Values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_settings_values}{Settings\+Values}} \&}]{setting\+Values,  }\item[{std\+::string}]{s\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that reads settings values from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em setting\+Values} & The struct in which values will be saved \\
+\hline
+{\em s\+Name\+File} & The file with values\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{struct_settings_values}{SettingsValues}}\ \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}};}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_ae3632f873fe31266379675bb8a2d9328}{ReadValues}}(\mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}},\ \textcolor{stringliteral}{"{}source/values.txt"{}});}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00062}{62}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_aea7b7172e11e859b30a5c625db40b300}\label{class_game_aea7b7172e11e859b30a5c625db40b300} 
+\index{Game@{Game}!setHeight@{setHeight}}
+\index{setHeight@{setHeight}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setHeight()}{setHeight()}}
+{\footnotesize\ttfamily void Game\+::set\+Height (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00082}{82}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a20fcf1eca7a12b03ef61ec711f9a01c4}\label{class_game_a20fcf1eca7a12b03ef61ec711f9a01c4} 
+\index{Game@{Game}!Settings@{Settings}}
+\index{Settings@{Settings}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}}
+{\footnotesize\ttfamily void Game\+::\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that show settings window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00251}{251}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a3ad61ba67bd3be549be564b7b4bf29dc}\label{class_game_a3ad61ba67bd3be549be564b7b4bf29dc} 
+\index{Game@{Game}!SettingsLanguage@{SettingsLanguage}}
+\index{SettingsLanguage@{SettingsLanguage}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{SettingsLanguage()}{SettingsLanguage()}}
+{\footnotesize\ttfamily void Game\+::\+Settings\+Language (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that show language settings window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00299}{299}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_ac0c77c49a5deb787f7a148fbf76329be}\label{class_game_ac0c77c49a5deb787f7a148fbf76329be} 
+\index{Game@{Game}!SettingsScreen@{SettingsScreen}}
+\index{SettingsScreen@{SettingsScreen}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{SettingsScreen()}{SettingsScreen()}}
+{\footnotesize\ttfamily void Game\+::\+Settings\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that show screen settings window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00395}{395}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a4123a6ff744ef808876e0ce1d61d6c2e}\label{class_game_a4123a6ff744ef808876e0ce1d61d6c2e} 
+\index{Game@{Game}!SettingsSkin@{SettingsSkin}}
+\index{SettingsSkin@{SettingsSkin}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{SettingsSkin()}{SettingsSkin()}}
+{\footnotesize\ttfamily void Game\+::\+Settings\+Skin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that show skin settings window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00347}{347}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_a17446a595ba9812446bac5c2e13d4ed1}\label{class_game_a17446a595ba9812446bac5c2e13d4ed1} 
+\index{Game@{Game}!SettingsWindow@{SettingsWindow}}
+\index{SettingsWindow@{SettingsWindow}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{SettingsWindow()}{SettingsWindow()}}
+{\footnotesize\ttfamily void Game\+::\+Settings\+Window (\begin{DoxyParamCaption}\item[{sf\+::\+Text \&}]{Txt\+Settings,  }\item[{\mbox{\hyperlink{class_game_menu}{Game\+Menu}} \&}]{my\+Menu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that sets up title, background and menu of the settings windows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Txt\+Settings} & The title which will be displayed on the window \\
+\hline
+{\em my\+Menu} & The menu which will be displayed on the window\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sf::Text\ TxtSettings;}
+\DoxyCodeLine{std::vector<sf::String>\ vecNameMenu\{\ \textcolor{stringliteral}{"{}Stick"{}},\ \textcolor{stringliteral}{"{}Man"{}},\ \textcolor{stringliteral}{"{}To\ settings"{}}\ \};}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_menu}{GameMenu}}\ myMenu(\mbox{\hyperlink{class_game_a03fda07e26d164eae6597e959677cad7}{WWin}},\ 950,\ 350,\ 100,\ 120,\ vecNameMenu);}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_a17446a595ba9812446bac5c2e13d4ed1}{SettingsWindow}}(TxtSettings,\ myMenu);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00232}{232}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+\Hypertarget{class_game_abb4939c0fb4e7507c8bcbc53aebde6f4}\label{class_game_abb4939c0fb4e7507c8bcbc53aebde6f4} 
+\index{Game@{Game}!setWidth@{setWidth}}
+\index{setWidth@{setWidth}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{setWidth()}{setWidth()}}
+{\footnotesize\ttfamily void Game\+::set\+Width (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00072}{72}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a6bf5d10fb619e732fdbe6ad6fdd4ed01}\label{class_game_a6bf5d10fb619e732fdbe6ad6fdd4ed01} 
+\index{Game@{Game}!WriteValues@{WriteValues}}
+\index{WriteValues@{WriteValues}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{WriteValues()}{WriteValues()}}
+{\footnotesize\ttfamily void Game\+::\+Write\+Values (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_settings_values}{Settings\+Values}}}]{setting\+Values,  }\item[{const std\+::string \&}]{s\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that write settings values to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em setting\+Values} & The struct in which values are saved \\
+\hline
+{\em s\+Name\+File} & The file where values will be saved\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{struct_settings_values}{SettingsValues}}\ \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}};}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_a6bf5d10fb619e732fdbe6ad6fdd4ed01}{WriteValues}}(\mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}},\ \textcolor{stringliteral}{"{}source/values.txt"{}});}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_8cpp_source_l00118}{118}} of file \mbox{\hyperlink{_game_8cpp_source}{Game.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_abf73b361ec226eb5816e8727e0c9f591}\label{class_game_abf73b361ec226eb5816e8727e0c9f591} 
+\index{Game@{Game}!manager@{manager}}
+\index{manager@{manager}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{manager}{manager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_asset_manager}{Asset\+Manager}} Game\+::manager\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+A single copy of the asset manager. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00019}{19}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_ab08d4ff255eac881d514e3465973788d}\label{class_game_ab08d4ff255eac881d514e3465973788d} 
+\index{Game@{Game}!nBgHeight@{nBgHeight}}
+\index{nBgHeight@{nBgHeight}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{nBgHeight}{nBgHeight}}
+{\footnotesize\ttfamily int Game\+::n\+Bg\+Height = settings\+Values.\+get\+Height()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of the background. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00049}{49}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_aea206fbaae8ec0592913539160d30ff6}\label{class_game_aea206fbaae8ec0592913539160d30ff6} 
+\index{Game@{Game}!nBgWidth@{nBgWidth}}
+\index{nBgWidth@{nBgWidth}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{nBgWidth}{nBgWidth}}
+{\footnotesize\ttfamily int Game\+::n\+Bg\+Width = settings\+Values.\+get\+Width()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Width of the background. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00048}{48}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}\label{class_game_af9eaa7eacbd7e2d15535f7e7bba68979} 
+\index{Game@{Game}!nHeight@{nHeight}}
+\index{nHeight@{nHeight}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{nHeight}{nHeight}}
+{\footnotesize\ttfamily int Game\+::n\+Height = sf\+::\+Video\+Mode\+::get\+Desktop\+Mode().height\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00045}{45}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a63c9c11048ed956f0a3f13805cc5593f}\label{class_game_a63c9c11048ed956f0a3f13805cc5593f} 
+\index{Game@{Game}!nWidth@{nWidth}}
+\index{nWidth@{nWidth}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{nWidth}{nWidth}}
+{\footnotesize\ttfamily int Game\+::n\+Width = sf\+::\+Video\+Mode\+::get\+Desktop\+Mode().width\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Width of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00044}{44}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_aa613ae098db3598a0acfd80bb9ddf73e}\label{class_game_aa613ae098db3598a0acfd80bb9ddf73e} 
+\index{Game@{Game}!RSBackground@{RSBackground}}
+\index{RSBackground@{RSBackground}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{RSBackground}{RSBackground}}
+{\footnotesize\ttfamily sf\+::\+Rectangle\+Shape Game\+::\+RSBackground\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Background of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00041}{41}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_ae50862815027150cd1aa51db191b4e61}\label{class_game_ae50862815027150cd1aa51db191b4e61} 
+\index{Game@{Game}!settingsValues@{settingsValues}}
+\index{settingsValues@{settingsValues}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{settingsValues}{settingsValues}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_settings_values}{Settings\+Values}} Game\+::settings\+Values\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Struct for saving settings values. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00022}{22}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_aacf01a4f6e4473a9e90b208db8955967}\label{class_game_aacf01a4f6e4473a9e90b208db8955967} 
+\index{Game@{Game}!vecAbout@{vecAbout}}
+\index{vecAbout@{vecAbout}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{vecAbout}{vecAbout}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+String$>$ Game\+::vec\+About\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{\textcolor{stringliteral}{"{}A\ game\ about\ a\ stickman\ who\ needs\ to\ get\ to\ the\ door\ by\ \(\backslash\)njumping\ on\ platforms.\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ Originally\ implemented\ in\ Python,\ the\ \(\backslash\)ncurrent\ implementation\ is\ in\ C++\ using\ the\ SFML\ library.\ \(\backslash\)n\(\backslash\)n\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{Currently,\ a\ static\ level\ is\ implemented.\ \(\backslash\)nRandomization\ of\ levels,\ endless\ mode\ are\ planned.\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \(\backslash\)n\(\backslash\)nMade\ by\ Artem\ Verbytskyi\ as\ part\ of\ a\ project\ for\ OOOP\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)nCopyright\ ©\ 2023\ by\ Ke11nyk"{}},\ L\textcolor{stringliteral}{"{}Гра про стікмена,\ якому потрібно дістатися до дверей,\ \(\backslash\)nстрибаючи по платформам\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ Спочатку реалізовано\ на Python,\ \(\backslash\)nпоточна реалізація\ на C++\ з використанням бібліотеки SFML.\ \(\backslash\)n\(\backslash\)n\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{На\ даний момент\ реалізований статичний\ рівень.\ \(\backslash\)nПланується\ рандомізація\ рівнів, нескінченний режим. \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \(\backslash\)n\(\backslash\)nВиконано\ Артемом Вербицьким\ в рамках проекту для\ ОООП\ \(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)nCopyright\ ©\ 2023\ by\ Ke11nyk"{}}\ \}}
+
+\end{DoxyCode}
+
+
+Vector with about game text. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00027}{27}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_ab26196d267f1645ed2edcee1dfb7b884}\label{class_game_ab26196d267f1645ed2edcee1dfb7b884} 
+\index{Game@{Game}!vecBackground@{vecBackground}}
+\index{vecBackground@{vecBackground}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{vecBackground}{vecBackground}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+String$>$ Game\+::vec\+Background\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{\ \textcolor{stringliteral}{"{}source/images/background.png"{}}\ ,\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}source/images/settings.png"{}}\ ,\ \textcolor{stringliteral}{"{}source/images/about(1).png"{}},\ \textcolor{stringliteral}{"{}source/images/level1(1).png"{}}\ \}}
+
+\end{DoxyCode}
+
+
+Vector of background sources. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00036}{36}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a4b3331a738f472c33cdcdee181b90227}\label{class_game_a4b3331a738f472c33cdcdee181b90227} 
+\index{Game@{Game}!vecTitles@{vecTitles}}
+\index{vecTitles@{vecTitles}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{vecTitles}{vecTitles}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+String$>$ Game\+::vec\+Titles\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{\ \textcolor{stringliteral}{"{}Run\ to\ exit"{}},\ L\textcolor{stringliteral}{"{}Біжи до виходу"{}},\ \textcolor{stringliteral}{"{}Start"{}},\ L\textcolor{stringliteral}{"{}Старт"{}},\ \textcolor{stringliteral}{"{}Settings"{}},\ L\textcolor{stringliteral}{"{}Налаштування"{}},\ \textcolor{stringliteral}{"{}About\ game"{}},\ L\textcolor{stringliteral}{"{}Про гру"{}},\ \textcolor{stringliteral}{"{}Exit"{}},\ L\textcolor{stringliteral}{"{}Вихід"{}},\ \textcolor{stringliteral}{"{}English"{}},\ \textcolor{stringliteral}{"{}English"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ \textcolor{stringliteral}{"{}To\ menu"{}},\ L\textcolor{stringliteral}{"{}До\ меню"{}},\ \textcolor{stringliteral}{"{}Language"{}},\ L\textcolor{stringliteral}{"{}Мова"{}},\ \textcolor{stringliteral}{"{}Character"{}},\ L\textcolor{stringliteral}{"{}Персонаж"{}},\ \textcolor{stringliteral}{"{}Stickman"{}},\ L\textcolor{stringliteral}{"{}Стікмен"{}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Man"{}},\ L\textcolor{stringliteral}{"{}Поц"{}},\ \textcolor{stringliteral}{"{}To\ settings"{}},\ L\textcolor{stringliteral}{"{}До\ налаштувань"{}},\ \textcolor{stringliteral}{"{}Points:\ "{}},\ L\textcolor{stringliteral}{"{}Очки:\ "{}},\ \textcolor{stringliteral}{"{}Time:\ "{}},\ L\textcolor{stringliteral}{"{}Час: "{}},\ \textcolor{stringliteral}{"{}Screen"{}},\ L\textcolor{stringliteral}{"{}Екран"{}},\ \textcolor{stringliteral}{"{}Fullscreen"{}},\ L\textcolor{stringliteral}{"{}Повний екран"{}},\ \textcolor{stringliteral}{"{}level"{}},\ L\textcolor{stringliteral}{"{}рівень"{}},}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Біжи до виходу"{}},\ \ L\textcolor{stringliteral}{"{}Старт"{}},\ L\textcolor{stringliteral}{"{}Налаштування"{}},\ L\textcolor{stringliteral}{"{}Про гру"{}},\ L\textcolor{stringliteral}{"{}Вихід"{}},\ \textcolor{stringliteral}{"{}English"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ L\textcolor{stringliteral}{"{}До\ меню"{}},\ L\textcolor{stringliteral}{"{}Мова"{}},\ L\textcolor{stringliteral}{"{}Персонаж"{}},\ L\textcolor{stringliteral}{"{}Стікмен"{}},\ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Поц"{}},\ L\textcolor{stringliteral}{"{}До\ налаштувань"{}},\ L\textcolor{stringliteral}{"{}Очки:\ "{}},\ L\textcolor{stringliteral}{"{}Час: "{}},\ L\textcolor{stringliteral}{"{}Екран"{}},\ L\textcolor{stringliteral}{"{}Повний екран"{}},\ L\textcolor{stringliteral}{"{}рівень"{}}\}}
+
+\end{DoxyCode}
+
+
+Vector of titles. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00023}{23}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+\Hypertarget{class_game_a03fda07e26d164eae6597e959677cad7}\label{class_game_a03fda07e26d164eae6597e959677cad7} 
+\index{Game@{Game}!WWin@{WWin}}
+\index{WWin@{WWin}!Game@{Game}}
+\doxysubsubsection{\texorpdfstring{WWin}{WWin}}
+{\footnotesize\ttfamily sf\+::\+Render\+Window Game\+::\+WWin\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Window of the game. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_8h_source_l00040}{40}} of file \mbox{\hyperlink{_game_8h_source}{Game.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Game.\+h\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/sources/Game.\+cpp\end{DoxyCompactItemize}

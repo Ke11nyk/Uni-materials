@@ -1,0 +1,67 @@
+\doxysection{Asset\+Manager.\+cpp}
+\hypertarget{_asset_manager_8cpp_source}{}\label{_asset_manager_8cpp_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/sources/AssetManager.cpp@{D:/Uni materials/2 course/OOP/Project OOP/source/sources/AssetManager.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}../headers/AssetManager.h"{}}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00003}00003\ \mbox{\hyperlink{class_asset_manager}{AssetManager}}*\ \mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{AssetManager::stcInstance}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00008}\mbox{\hyperlink{class_asset_manager_a750ae7b39b633fbb6594443aa3ca704b}{00008}}\ \mbox{\hyperlink{class_asset_manager_a750ae7b39b633fbb6594443aa3ca704b}{AssetManager::AssetManager}}()}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00010}00010\ \ \ \ \ assert(\mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{stcInstance}}\ ==\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00011}00011\ \ \ \ \ \mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{stcInstance}}\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00012}00012\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00014}00014\ sf::Texture\&\ AssetManager::GetTexture(std::string\ \textcolor{keyword}{const}\&\ sFilename)}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{auto}\&\ texMap\ =\ \mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{stcInstance}}-\/>\mbox{\hyperlink{class_asset_manager_ac400eef481a37c2329a0811418a382d0}{sTextures}};}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{auto}\ pairFound\ =\ texMap.find(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (pairFound\ !=\ texMap.end())}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00020}00020\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pairFound-\/>second;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ texture\ =\ texMap[sFilename];}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00026}00026\ \ \ \ \ \ \ \ \ texture.loadFromFile(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ texture;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00032}00032\ sf::SoundBuffer\&\ AssetManager::GetSoundBuffer(std::string\ \textcolor{keyword}{const}\&\ sFilename)}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{auto}\&\ bufferMap\ =\ \mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{stcInstance}}-\/>\mbox{\hyperlink{class_asset_manager_aebe36f695fce9b3ec31a285c44fc2a3f}{sSoundBuffer}};}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{auto}\ pairFound\ =\ bufferMap.find(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (pairFound\ !=\ bufferMap.end())}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pairFound-\/>second;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00042}00042\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ buffer\ =\ bufferMap[sFilename];}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ buffer.loadFromFile(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ buffer;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00049}00049\ sf::Font\&\ AssetManager::GetFont(std::string\ \textcolor{keyword}{const}\&\ sFilename)}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keyword}{auto}\&\ fontMap\ =\ \mbox{\hyperlink{class_asset_manager_a4f68a6efec0f8e23d3f00fdc296e3e0d}{stcInstance}}-\/>\mbox{\hyperlink{class_asset_manager_a64973122e22e6bb812b4a5f679e82d62}{sFonts}};}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keyword}{auto}\ pairFound\ =\ fontMap.find(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (pairFound\ !=\ fontMap.end())}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pairFound-\/>second;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ font\ =\ fontMap[sFilename];}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ font.loadFromFile(sFilename);}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ font;}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_asset_manager_8cpp_source_l00064}00064\ \}}
+
+\end{DoxyCode}

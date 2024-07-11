@@ -1,0 +1,74 @@
+\doxysection{Animator.\+h}
+\hypertarget{_animator_8h_source}{}\label{_animator_8h_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/headers/Animator.h@{D:/Uni materials/2 course/OOP/Project OOP/source/headers/Animator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include<vector>}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include<list>}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}AssetManager.h"{}}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00011}\mbox{\hyperlink{class_animator}{00011}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animator}{Animator}}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00013}00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00017}\mbox{\hyperlink{struct_animator_1_1_animation}{00017}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_animator_1_1_animation}{Animation}}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00019}\mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{00019}}\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{sName}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00020}\mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{00020}}\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{sTextureName}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00021}\mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{00021}}\ \ \ \ \ \ \ \ \ std::vector<sf::IntRect>\ \mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{vecFrames}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00022}\mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{00022}}\ \ \ \ \ \ \ \ \ sf::Time\ \mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00023}\mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{00023}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{bLooping}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation}{Animation}}(std::string\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{sName}},\ std::string\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{sTextureName}},}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Time\ \textcolor{keyword}{const}\&\ \mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{bLooping}})\ :\mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{sName}}(\mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{sName}}),\ \mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{sTextureName}}(\mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{sTextureName}}),}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}}(\mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}}),\ \mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{bLooping}}(\mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{bLooping}})}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00028}00028\ \ \ \ \ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00037}\mbox{\hyperlink{struct_animator_1_1_animation_a3540528cb30f083bfc230dead2c122b0}{00037}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{struct_animator_1_1_animation_a3540528cb30f083bfc230dead2c122b0}{AddFrames}}(sf::Vector2i\ \textcolor{keyword}{const}\&\ iStartFrom,}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2i\ \textcolor{keyword}{const}\&\ iFrameSize,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ nFrames,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ nTraccia)}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00039}00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ sf::Vector2i\ iCurrent\ =\ iStartFrom;}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ t\ =\ 0;\ t\ <\ nTraccia;\ t++)\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ nFrames;\ i++)}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{vecFrames}}.push\_back(sf::IntRect(iCurrent.x,\ iCurrent.y,\ iFrameSize.x,\ iFrameSize.y));\ \textcolor{comment}{//\ Picture\ parameters\ with\ animation\ frames}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iCurrent.x\ +=\ iFrameSize.x;\ \textcolor{comment}{//\ We\ move\ through\ the\ animation\ frames\ in\ the\ current\ line}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iCurrent.y\ +=\ iFrameSize.y;}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ iCurrent.x\ =\ iStartFrom.x;}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00050}00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00051}00051\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{class_animator_aa8d46060aae0db3babe5e6db85e6279c}{Animator}}(sf::Sprite\&\ \mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}});\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00055}00055\ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}\&\ CreateAnimation(std::string\ \textcolor{keyword}{const}\&\ sName,}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00056}00056\ \ \ \ \ \ \ \ \ std::string\ \textcolor{keyword}{const}\&\ sTextureName,\ sf::Time\ \textcolor{keyword}{const}\&\ TDuration,\ \textcolor{keywordtype}{bool}\ bLoop\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_aa52e6608bcc7e6d0d680843da8db983a}{Update}}(sf::Time\ \textcolor{keyword}{const}\&\ TDt);\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{SwitchAnimation}}(std::string\ \textcolor{keyword}{const}\&\ sName);\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00062}00062\ \ \ \ \ std::string\ \mbox{\hyperlink{class_animator_ac8ac25bf21b250548bfb605c14844a12}{GetCurrentAnimationName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_a91402fd025ecd9ed1986f596e65e7068}{Restart}}();}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00066}00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ getEndAnim()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00067}00067\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{bEndAnim}};}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00072}00072\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00073}00073\ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}*\ \mbox{\hyperlink{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}{FindAnimation}}(std::string\ \textcolor{keyword}{const}\&\ sName);}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00074}00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{SwitchAnimation}}(\mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}*\ aniAnimation);}
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00077}\mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{00077}}\ \ \ \ \ sf::Sprite\&\ \mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00078}\mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{00078}}\ \ \ \ \ sf::Time\ \mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrentTime}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00079}\mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{00079}}\ \ \ \ \ std::list<Animator::Animation>\ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00080}\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{00080}}\ \ \ \ \ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}*\ \mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00081}\mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{00081}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{bEndAnim}}\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{\Hypertarget{_animator_8h_source_l00082}00082\ \};}
+
+\end{DoxyCode}

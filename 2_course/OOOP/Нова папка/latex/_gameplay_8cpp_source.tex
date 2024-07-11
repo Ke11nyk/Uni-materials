@@ -1,0 +1,360 @@
+\doxysection{Gameplay.\+cpp}
+\hypertarget{_gameplay_8cpp_source}{}\label{_gameplay_8cpp_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/sources/Gameplay.cpp@{D:/Uni materials/2 course/OOP/Project OOP/source/sources/Gameplay.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}../headers/Gameplay.h"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#define\ VALUES\ "{}source/values.txt"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00004}00004\ \textcolor{preprocessor}{\#define\ FONTH\ "{}source/fontes/Gilroy-\/Heavy.woff"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#define\ FONTM\ "{}source/fontes/Gilroy-\/Medium.woff"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#define\ BACKGROUND\ "{}source/images/level(1).png"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#define\ EXIT\ "{}source/images/exit.png"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#define\ LEVEL\ "{}source/maps/level"{}}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00010}00010\ Gameplay::Gameplay(sf::RenderWindow\&\ WWindow)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00011}00011\ \ \ \ \ :WWin(WWindow)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00030}\mbox{\hyperlink{class_gameplay_a83624fa65de04448360d1d13326404cb}{00030}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a83624fa65de04448360d1d13326404cb}{Gameplay::InitText}}(sf::Text\&\ TxtMtext,\ \textcolor{keywordtype}{float}\ fXpos,\ \textcolor{keywordtype}{float}\ fYpos,\ \textcolor{keyword}{const}\ sf::String\ StrStr,}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordtype}{int}\ nSizeFont,\ sf::Color\ ColMenuTextColor,\ \textcolor{keywordtype}{int}\ nBord,\ sf::Color\ ColBorderColor)\ \textcolor{comment}{//\ text\ formatting\ }}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00032}00032\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00033}00033\ \ \ \ \ TxtMtext.setCharacterSize(nSizeFont);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00034}00034\ \ \ \ \ TxtMtext.setPosition(fXpos,\ fYpos);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00035}00035\ \ \ \ \ TxtMtext.setString(StrStr);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00036}00036\ \ \ \ \ TxtMtext.setFillColor(ColMenuTextColor);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00037}00037\ \ \ \ \ TxtMtext.setOutlineThickness(nBord);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00038}00038\ \ \ \ \ TxtMtext.setOutlineColor(ColBorderColor);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00040}00040\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00042}00042\ \textcolor{comment}{//\ drawing\ elements\ on\ window}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00043}00043\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{size\_t}\ I\ =\ 0,\ \textcolor{keyword}{typename}...\ Tp>}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00044}00044\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ std::enable\_if<I\ ==\ \textcolor{keyword}{sizeof}...(Tp),\ \textcolor{keywordtype}{void}>::type}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00045}00045\ WinDraw(sf::RenderWindow\&\ WWin,\ std::tuple<Tp...>\&\ t)\ \{\}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00047}00047\ \textcolor{keyword}{template}\ <\textcolor{keywordtype}{size\_t}\ I\ =\ 0,\ \textcolor{keyword}{typename}...\ Tp>}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00048}00048\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ std::enable\_if\ <\ I\ <\ \textcolor{keyword}{sizeof}...(Tp),\ \textcolor{keywordtype}{void}>::type}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00049}00049\ \ \ \ \ WinDraw(sf::RenderWindow\&\ WWin,\ std::tuple<Tp...>\&\ t)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00050}00050\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00051}00051\ \ \ \ \ WWin.draw(std::get<I>(t));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00052}00052\ \ \ \ \ WinDraw<I\ +\ 1,\ Tp...>(WWin,\ t);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00053}00053\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00060}\mbox{\hyperlink{class_gameplay_a49e052b6f04ca3c3e94671d4504712c5}{00060}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a49e052b6f04ca3c3e94671d4504712c5}{Gameplay::Input}}(\mbox{\hyperlink{class_player}{Player}}\&\ stick,\ \textcolor{keywordtype}{bool}\&\ bGameplayState)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00061}00061\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00062}00062\ \ \ \ \ sf::Event\ EEvent;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.pollEvent(EEvent))}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ if\ (event.type\ ==\ sf::Event::Closed)\ mainloop();}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.type\ ==\ sf::Event::KeyPressed)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((EEvent.key.code\ ==\ sf::Keyboard::Escape)\ \&\&\ ((getPreEx())\ ||\ (getEndLevel())))\ \mbox{\hyperlink{class_gameplay_a5718c31610b3267c208e0210eb400370}{bGameplayState}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.key.code\ ==\ sf::Keyboard::Escape)\ setPreEx(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.key.code\ ==\ sf::Keyboard::Space)\ setPreEx(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00073}00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ stick.\mbox{\hyperlink{class_player_a2ac2f99669c81870a4416d29250ad1f0}{Keys}}(EEvent);\ \textcolor{comment}{//\ Player\ sprite\ control}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00077}00077\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00084}\mbox{\hyperlink{class_gameplay_abd03d248dcafc3171796ef595694db8d}{00084}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_abd03d248dcafc3171796ef595694db8d}{Gameplay::Update}}(sf::Time\ \textcolor{keyword}{const}\&\ TDeltaTime,\ \mbox{\hyperlink{class_player}{Player}}\&\ stick)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00086}00086\ \ \ \ \ stick.\mbox{\hyperlink{class_player_a9656a421d7eeb7221344408a07730adc}{Update}}(TDeltaTime);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00088}00088\ \ \ \ \ \mbox{\hyperlink{class_gameplay_acd08d9ec6dd88ff9bcb0239f3e3108ad}{TTm}}\ +=\ TDeltaTime;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_gameplay_acd08d9ec6dd88ff9bcb0239f3e3108ad}{TTm}}\ >\ sf::milliseconds(2))}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00090}00090\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ setPoints(stick.getPoints());}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00093}00093\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_acd08d9ec6dd88ff9bcb0239f3e3108ad}{TTm}}\ =\ sf::milliseconds(0);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00094}00094\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00095}00095\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00104}\mbox{\hyperlink{class_gameplay_aa9e3a449ae4294a5d99dbac50f21c99f}{00104}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_aa9e3a449ae4294a5d99dbac50f21c99f}{Gameplay::Camera}}(\mbox{\hyperlink{class_player}{Player}}\&\ stick,\ std::vector<sf::String>\ vecTileMap)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00105}00105\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00106}00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (stick.getStick().getPosition().x\ >\ 960\ \&\&\ stick.getStick().getPosition().x\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[0].getSize()\ *\ getTs()\ -\/\ 960)\ \textcolor{comment}{//\ must\ be\ edited}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00107}00107\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ setOffsetX(stick.getStick().getPosition().x\ -\/\ 960);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ stick.setOffsetX(stick.getStick().getPosition().x\ -\/\ 960);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{if}\ (stick.getStick().getPosition().y\ >\ 540\ \&\&\ stick.getStick().getPosition().y\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}.size()\ *\ getTs()\ -\/\ 560)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00114}00114\ \ \ \ \ \ \ \ \ setOffsetY(stick.getStick().getPosition().y\ -\/\ 540);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ stick.setOffsetY(stick.getStick().getPosition().y\ -\/\ 540);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00116}00116\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00117}00117\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00124}\mbox{\hyperlink{class_gameplay_a68e59a734f73ba561d401f32df58f6d9}{00124}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a68e59a734f73ba561d401f32df58f6d9}{Gameplay::DrawMap}}(std::vector<sf::String>\ vecTileMap,\ \textcolor{keywordtype}{int}\ nSize)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00125}00125\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00126}00126\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a7d2881223064411f01d52714734b46fe}{SPlat}}.setTexture(AssetManager::GetTexture(\mbox{\hyperlink{class_gameplay_a7ece65da36104740adc4165a3ea350d6}{vecTexture}}[nSize]));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00127}00127\ \ \ \ \ \mbox{\hyperlink{class_gameplay_af88d8d6057aeb0fa8fc1e7fe93c1a23d}{SDoor}}.setTexture(AssetManager::GetTexture(\mbox{\hyperlink{class_gameplay_a7ece65da36104740adc4165a3ea350d6}{vecTexture}}[2\ +\ nSize]));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00128}00128\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00129}00129\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}.size();\ i++)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i].getSize();\ j++)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00131}00131\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i][j]\ ==\ \textcolor{charliteral}{'A'})\ \textcolor{comment}{//\ blocks}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a7d2881223064411f01d52714734b46fe}{SPlat}}.setTextureRect(sf::IntRect(0,\ 0,\ getTs(),\ getTs()));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i][j]\ ==\ \textcolor{charliteral}{'o'})\ \textcolor{comment}{//\ points}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a7d2881223064411f01d52714734b46fe}{SPlat}}.setTextureRect(sf::IntRect(getTs(),\ 0,\ getTs(),\ getTs()));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i][j]\ ==\ \textcolor{charliteral}{'\ '})\ ||\ (\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i][j]\ ==\ \textcolor{charliteral}{'D'}))\ \textcolor{comment}{//\ nothing\ or\ door}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a7d2881223064411f01d52714734b46fe}{SPlat}}.setPosition(j\ *\ getTs()\ -\/\ getOffsetX(),\ i\ *\ getTs()\ -\/\ getOffsetY());}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(\mbox{\hyperlink{class_gameplay_a7d2881223064411f01d52714734b46fe}{SPlat}});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00141}00141\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}.size();\ i++)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i].getSize();\ j++)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}[i][j]\ ==\ \textcolor{charliteral}{'D'}))\ \textcolor{comment}{//\ door}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!getDoorOpened())}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_af88d8d6057aeb0fa8fc1e7fe93c1a23d}{SDoor}}.setTextureRect(sf::IntRect(0,\ 0,\ getTs(),\ 80\ -\/\ nSize\ *\ 40));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (getDoorOpened())}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_af88d8d6057aeb0fa8fc1e7fe93c1a23d}{SDoor}}.setTextureRect(sf::IntRect(getTs(),\ 0,\ getTs(),\ 80\ -\/\ nSize\ *\ 40));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ setEndLevel(\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00154}00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_af88d8d6057aeb0fa8fc1e7fe93c1a23d}{SDoor}}.setPosition(j\ *\ getTs()\ -\/\ getOffsetX(),\ i\ *\ getTs()\ +\ 20\ -\/\ nSize\ *\ 10\ -\/\ getOffsetY());}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(\mbox{\hyperlink{class_gameplay_af88d8d6057aeb0fa8fc1e7fe93c1a23d}{SDoor}});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00161}00161\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00168}\mbox{\hyperlink{class_gameplay_a6f8e3f78b1a41f684c3c13140d05533e}{00168}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a6f8e3f78b1a41f684c3c13140d05533e}{Gameplay::ReadMap}}(std::vector<sf::String>\&\ vecTileMap,\ \textcolor{keywordtype}{int}\ nLevel)\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00169}00169\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00170}00170\ \ \ \ \ std::ifstream\ file(LEVEL\ +\ std::to\_string(nLevel)\ +\ \textcolor{stringliteral}{"{}.txt"{}});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00171}00171\ \ \ \ \ std::string\ SS;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00173}00173\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ exit(33);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00175}00175\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}.clear();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00177}00177\ \ \ \ \ \textcolor{keywordflow}{while}\ (!file.eof())}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00178}00178\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00179}00179\ \ \ \ \ \ \ \ \ std::getline(file,\ SS);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}}.push\_back(SS);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00181}00181\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00182}00182\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00183}00183\ \ \ \ \ file.close();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00184}00184\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00198}\mbox{\hyperlink{class_gameplay_a849c1c117daf7e0adc4e787bf1051a36}{00198}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a849c1c117daf7e0adc4e787bf1051a36}{Gameplay::ReadValues}}(\mbox{\hyperlink{struct_settings_values}{SettingsValues}}\&\ settingValues,\ std::string\ sFileName)\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00199}00199\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00200}00200\ \ \ \ \ std::ifstream\ file(sFileName);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00201}00201\ \ \ \ \ \textcolor{keywordtype}{int}\ nNum;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00202}00202\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00203}00203\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ exit(33);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00204}00204\ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00205}00205\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00206}00206\ \ \ \ \ \textcolor{keywordtype}{int}\ nValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00207}00207\ \ \ \ \ \textcolor{keywordtype}{float}\ fValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00208}00208\ \ \ \ \ \textcolor{keywordtype}{bool}\ bValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00209}00209\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00210}00210\ \ \ \ \ file\ >>\ nValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00211}00211\ \ \ \ \ settingValues.setLanguage(nValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00212}00212\ \ \ \ \ file\ >>\ nValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00213}00213\ \ \ \ \ settingValues.setSkin(nValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00214}00214\ \ \ \ \ file\ >>\ nValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00215}00215\ \ \ \ \ settingValues.setWidth(nValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00216}00216\ \ \ \ \ file\ >>\ nValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00217}00217\ \ \ \ \ settingValues.setHeight(nValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00218}00218\ \ \ \ \ file\ >>\ fValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00219}00219\ \ \ \ \ settingValues.setSettingTitle(fValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00220}00220\ \ \ \ \ file\ >>\ fValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00221}00221\ \ \ \ \ settingValues.setTitle(fValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00222}00222\ \ \ \ \ file\ >>\ bValue;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00223}00223\ \ \ \ \ settingValues.setFullscreen(bValue);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00225}00225\ \ \ \ \ file.close();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00226}00226\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00227}00227\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00231}\mbox{\hyperlink{class_gameplay_a93391c564aaae5fffc8a1c74aa4cec05}{00231}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a93391c564aaae5fffc8a1c74aa4cec05}{Gameplay::LevelMenu}}()}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00232}00232\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00233}00233\ \ \ \ \ std::vector<sf::String>\ vecNameMenu\{\ \textcolor{stringliteral}{"{}1\ "{}}\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00234}00234\ \ \ \ \ \textcolor{stringliteral}{"{}2\ "{}}\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],\ \textcolor{stringliteral}{"{}3\ "{}}\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00235}00235\ \ \ \ \ \textcolor{stringliteral}{"{}4\ "{}}\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],\ \textcolor{stringliteral}{"{}5\ "{}}\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()]\ \};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00236}00236\ \ \ \ \ \mbox{\hyperlink{class_game_menu}{GameMenu}}\ myMenu(\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}},\ 300,\ 250,\ 100,\ 120,\ vecNameMenu);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00237}00237\ \ \ \ \ sf::RectangleShape\ RSPanel;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00238}00238\ \ \ \ \ sf::Text\ TxtExit;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00239}00239\ \ \ \ \ \textcolor{keywordtype}{bool}\ bMap\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00240}00240\ \ \ \ \ \textcolor{keywordtype}{int}\ nStart\ =\ 1,\ nEnd\ =\ 6;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00242}00242\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a849c1c117daf7e0adc4e787bf1051a36}{ReadValues}}(\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}},\ VALUES);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00243}00243\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a6f8e3f78b1a41f684c3c13140d05533e}{ReadMap}}(\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ 1);\ \ \textcolor{comment}{//\ assign\ a\ first-\/level\ map}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00245}00245\ \ \ \ \ \textcolor{comment}{//\ background}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00246}00246\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}}.setSize(sf::Vector2f(\mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}},\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00247}00247\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}}.setTexture(\&AssetManager::GetTexture(\mbox{\hyperlink{class_gameplay_ae129b966fef8dfa875099e173514dbf3}{vecBackground}}[0]));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00248}00248\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00249}00249\ \ \ \ \ \textcolor{comment}{//\ menu}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00250}00250\ \ \ \ \ myMenu.\mbox{\hyperlink{class_game_menu_ac99690a72b14959c889626364c0f0252}{setColorTextMenu}}(sf::Color::White,\ sf::Color::Red,\ sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00251}00251\ \ \ \ \ myMenu.\mbox{\hyperlink{class_game_menu_adfbc691fc305d2a148b0836f27d9910b}{AlignMenu}}(2);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00252}00252\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00253}00253\ \ \ \ \ \textcolor{comment}{//\ background\ of\ map}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00254}00254\ \ \ \ \ RSPanel.setSize(sf::Vector2f(1240,\ 540));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00255}00255\ \ \ \ \ RSPanel.setPosition(sf::Vector2f(650,\ 270));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00256}00256\ \ \ \ \ RSPanel.setTexture(\&AssetManager::GetTexture(BACKGROUND));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00257}00257\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00258}00258\ \ \ \ \ \textcolor{comment}{//\ exit\ tip}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00259}00259\ \ \ \ \ TxtExit.setFont(AssetManager::GetFont(FONTH));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00260}00260\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a83624fa65de04448360d1d13326404cb}{InitText}}(TxtExit,\ 50,\ 50,\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[2\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],\ 50,\ sf::Color::Magenta,\ 5,\ sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00262}00262\ \ \ \ \ setTs(25);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00263}00263\ \ \ \ \ setOffsetX(-\/650);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00264}00264\ \ \ \ \ setOffsetY(-\/270);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00265}00265\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00266}00266\ \ \ \ \ std::tuple<sf::RectangleShape,\ sf::Text>\ tDrawElements(\mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}},\ TxtExit);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00267}00267\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00268}00268\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.isOpen())}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00269}00269\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ sf::Event\ EEvent;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00271}00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.pollEvent(EEvent))}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00272}00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00273}00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((EEvent.type\ ==\ sf::Event::KeyPressed)\ \&\&\ (EEvent.key.code\ ==\ sf::Keyboard::Escape))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00274}00274\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.type\ ==\ sf::Event::KeyReleased)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.key.code\ ==\ sf::Keyboard::Up)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ myMenu.\mbox{\hyperlink{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}{MoveUp}}();\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a6f8e3f78b1a41f684c3c13140d05533e}{ReadMap}}(\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ myMenu.getSelectedMenuNumber()\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00282}00282\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.key.code\ ==\ sf::Keyboard::Down)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((myMenu.getSelectedMenuNumber()\ ==\ nEnd\ +\ 1)\ \&\&\ (nEnd\ +\ 1\ <\ 6))}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nStart++;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ nEnd++;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ myMenu.\mbox{\hyperlink{class_game_menu_a075e875bf72864c84d867eea122e5dd0}{MoveDown}}();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a6f8e3f78b1a41f684c3c13140d05533e}{ReadMap}}(\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ myMenu.getSelectedMenuNumber()\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00294}00294\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (EEvent.key.code\ ==\ sf::Keyboard::Return)\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0d1b4b5d7e0f63655b6f6374a9919952}{Level}}();\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00301}00301\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00302}00302\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00303}00303\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.clear();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00304}00304\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00305}00305\ \ \ \ \ \ \ \ \ WinDraw(\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}},\ tDrawElements);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bMap)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00308}00308\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(RSPanel);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a68e59a734f73ba561d401f32df58f6d9}{DrawMap}}(\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ 1);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00311}00311\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00313}00313\ \ \ \ \ \ \ \ \ myMenu.\mbox{\hyperlink{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}{Draw}}();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00315}00315\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.display();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00316}00316\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00317}00317\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00318}00318\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00322}\mbox{\hyperlink{class_gameplay_a0d1b4b5d7e0f63655b6f6374a9919952}{00322}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a0d1b4b5d7e0f63655b6f6374a9919952}{Gameplay::Level}}()}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00323}00323\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00324}00324\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a5718c31610b3267c208e0210eb400370}{bGameplayState}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00325}00325\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}\ stick\ =\ \mbox{\hyperlink{class_player}{Player}}(\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}},\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ \mbox{\hyperlink{class_gameplay_aeeed2f079e71732682f7b75635014a8f}{vecSkin}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getSkin()],\ 3\ +\ 2\ *\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getSkin());}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00326}00326\ \ \ \ \ sf::Clock\ CClock,\ CTimer;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00327}00327\ \ \ \ \ \textcolor{keywordtype}{bool}\ bTimer\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00328}00328\ \ \ \ \ \textcolor{keywordtype}{int}\ nStart\ =\ CClock.getElapsedTime().asSeconds(),\ nFinish;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00329}00329\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00330}00330\ \ \ \ \ \textcolor{comment}{//\ player}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00331}00331\ \ \ \ \ stick.setTexture(\mbox{\hyperlink{class_gameplay_aeeed2f079e71732682f7b75635014a8f}{vecSkin}}[\mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getSkin()]);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00333}00333\ \ \ \ \ \textcolor{comment}{//\ background}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00334}00334\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}}.setSize(sf::Vector2f(\mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}},\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00335}00335\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}}.setTexture(\&AssetManager::GetTexture(\mbox{\hyperlink{class_gameplay_ae129b966fef8dfa875099e173514dbf3}{vecBackground}}[3]));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00336}00336\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00337}00337\ \ \ \ \ setTs(50);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00338}00338\ \ \ \ \ setOffsetX(0);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00339}00339\ \ \ \ \ setOffsetY(0);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00340}00340\ \ \ \ \ setPreEx(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00341}00341\ \ \ \ \ setEndLevel(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00342}00342\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00343}00343\ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.isOpen())}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00344}00344\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00345}00345\ \ \ \ \ \ \ \ \ sf::Time\ TDt\ =\ CClock.restart();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00346}00346\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00347}00347\ \ \ \ \ \ \ \ \ setDoorOpened(stick.getDoorOpened());}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00348}00348\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00349}00349\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a49e052b6f04ca3c3e94671d4504712c5}{Input}}(stick,\ \mbox{\hyperlink{class_gameplay_a5718c31610b3267c208e0210eb400370}{bGameplayState}});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00350}00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_gameplay_a5718c31610b3267c208e0210eb400370}{bGameplayState}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00351}00351\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((!\mbox{\hyperlink{class_gameplay_a5a4ca08543f96ee47b85bb4bf2d7b0a7}{bPreEx}})\ \&\&\ (!\mbox{\hyperlink{class_gameplay_a0946a2d05666af2194c3d6d4e5cfad57}{bEndLevel}}))\ \mbox{\hyperlink{class_gameplay_abd03d248dcafc3171796ef595694db8d}{Update}}(TDt,\ stick);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00352}00352\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00353}00353\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.clear();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00354}00354\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00355}00355\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ drawStick\ =\ stick.getStick();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00356}00356\ \ \ \ \ \ \ \ \ std::tuple<sf::RectangleShape,\ sf::Sprite>\ tDrawElements(\mbox{\hyperlink{class_gameplay_a1064e2ff5747b3ca9f0136675ce0e752}{RSBackground}},\ drawStick);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00357}00357\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00358}00358\ \ \ \ \ \ \ \ \ WinDraw(\mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}},\ tDrawElements);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00359}00359\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00360}00360\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_aa9e3a449ae4294a5d99dbac50f21c99f}{Camera}}(stick,\ \mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}});}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00361}00361\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a68e59a734f73ba561d401f32df58f6d9}{DrawMap}}(\mbox{\hyperlink{class_gameplay_a67f7fdf2e1c8dc566c8cfdd0315b9e22}{vecTileMap}},\ 0);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00362}00362\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (getPreEx())\ \mbox{\hyperlink{class_gameplay_a82f5de7693f00455b4473d163db3f41d}{PreExit}}();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (getEndLevel())\ \mbox{\hyperlink{class_gameplay_aa0b718596f9607524c534227db64714f}{EndOfTheLevel}}(nStart,\ nFinish,\ CTimer,\ bTimer);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00366}00366\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.display();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00367}00367\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00368}00368\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00373}\mbox{\hyperlink{class_gameplay_a82f5de7693f00455b4473d163db3f41d}{00373}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_a82f5de7693f00455b4473d163db3f41d}{Gameplay::PreExit}}()}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00374}00374\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00375}00375\ \ \ \ \ sf::RectangleShape\ RSPanel;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00376}00376\ \ \ \ \ sf::Text\ TxtExit;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00377}00377\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00378}00378\ \ \ \ \ \textcolor{comment}{//\ exit\ panel}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00379}00379\ \ \ \ \ RSPanel.setSize(sf::Vector2f(800,\ 400));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00380}00380\ \ \ \ \ RSPanel.setPosition(sf::Vector2f(\mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}}\ /\ 2\ -\/\ 400,\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}\ /\ 2\ -\/\ 200));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00381}00381\ \ \ \ \ RSPanel.setTexture(\&AssetManager::GetTexture(EXIT));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00382}00382\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00383}00383\ \ \ \ \ \textcolor{comment}{//\ text\ on\ exit\ panel}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00384}00384\ \ \ \ \ TxtExit.setFont(AssetManager::GetFont(FONTH));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00385}00385\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a83624fa65de04448360d1d13326404cb}{InitText}}(TxtExit,\ \mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}}\ /\ 2\ -\/\ 360,\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}\ /\ 2\ -\/\ 170,\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[4\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],\ 50,\ sf::Color::White,\ 5,\ sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00386}00386\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00387}00387\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(RSPanel);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00388}00388\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(TxtExit);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00389}00389\ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00398}\mbox{\hyperlink{class_gameplay_aa0b718596f9607524c534227db64714f}{00398}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_gameplay_aa0b718596f9607524c534227db64714f}{Gameplay::EndOfTheLevel}}(\textcolor{keywordtype}{int}\ nStart,\ \textcolor{keywordtype}{int}\&\ nFinish,\ sf::Clock\ CTimer,\ \textcolor{keywordtype}{bool}\&\ bTimer)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00399}00399\ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00400}00400\ \ \ \ \ sf::RectangleShape\ RSPanel;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00401}00401\ \ \ \ \ sf::Text\ TxtExit;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00402}00402\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00403}00403\ \ \ \ \ \textcolor{comment}{//\ exit\ panel}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00404}00404\ \ \ \ \ RSPanel.setSize(sf::Vector2f(800,\ 400));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00405}00405\ \ \ \ \ RSPanel.setPosition(sf::Vector2f(\mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}}\ /\ 2\ -\/\ 400,\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}\ /\ 2\ -\/\ 200));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00406}00406\ \ \ \ \ RSPanel.setTexture(\&AssetManager::GetTexture(EXIT));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00407}00407\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00408}00408\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00409}00409\ \ \ \ \ \textcolor{keywordflow}{if}\ (!bTimer)}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00410}00410\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00411}00411\ \ \ \ \ \ \ \ \ nFinish\ =\ CTimer.getElapsedTime().asSeconds();}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00412}00412\ \ \ \ \ \ \ \ \ bTimer\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00413}00413\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00414}00414\ \ \ \ \ \textcolor{keywordtype}{int}\ nTime\ =\ nFinish\ -\/\ nStart;}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00415}00415\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00416}00416\ \ \ \ \ \textcolor{comment}{//\ text\ on\ exit\ panel}}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00417}00417\ \ \ \ \ TxtExit.setFont(AssetManager::GetFont(FONTH));}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00418}00418\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a83624fa65de04448360d1d13326404cb}{InitText}}(TxtExit,\ \mbox{\hyperlink{class_gameplay_a26472eb7f123e1dad76847f5f7564608}{nBgWidth}}\ /\ 2\ -\/\ 360,\ \mbox{\hyperlink{class_gameplay_a5885c6d2968bb369500fe7b57a358aa4}{nBgHeight}}\ /\ 2\ -\/\ 170,\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[6\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()]\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00419}00419\ \ \ \ \ \ \ \ \ +\ std::to\_string(getPoints())\ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[8\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()]\ +\ std::to\_string(nTime\ /\ 60)\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00420}00420\ \ \ \ \ \ \ \ \ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[10\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()]\ +\ std::to\_string(nTime\ -\/\ nTime\ /\ 60\ *\ 60)\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00421}00421\ \ \ \ \ \ \ \ \ +\ \mbox{\hyperlink{class_gameplay_a00c86e7361ceae72ca184db1cec31dbd}{vecTitles}}[12\ +\ \mbox{\hyperlink{class_gameplay_a11c9663826ab2210367ae6314077c88b}{settingsValues}}.getLanguage()],\ 50,\ sf::Color::White,\ 5,\ sf::Color::Black);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00423}00423\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(RSPanel);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00424}00424\ \ \ \ \ \mbox{\hyperlink{class_gameplay_a0151d74211a9ea834a3a44902346821d}{WWin}}.draw(TxtExit);}
+\DoxyCodeLine{\Hypertarget{_gameplay_8cpp_source_l00425}00425\ \}}
+
+\end{DoxyCode}

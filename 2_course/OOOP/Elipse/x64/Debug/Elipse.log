@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\Навчання\2 курс\Прога\Elipse\main.cpp(118,28): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+D:\Навчання\2 курс\Прога\Elipse\main.cpp(119,28): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
+  Elipse.vcxproj -> D:\Навчання\2 курс\Прога\Elipse\x64\Debug\Elipse.exe

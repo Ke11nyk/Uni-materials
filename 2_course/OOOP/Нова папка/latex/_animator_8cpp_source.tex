@@ -1,0 +1,86 @@
+\doxysection{Animator.\+cpp}
+\hypertarget{_animator_8cpp_source}{}\label{_animator_8cpp_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/sources/Animator.cpp@{D:/Uni materials/2 course/OOP/Project OOP/source/sources/Animator.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}../headers/Animator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00007}\mbox{\hyperlink{class_animator_aa8d46060aae0db3babe5e6db85e6279c}{00007}}\ \mbox{\hyperlink{class_animator_aa8d46060aae0db3babe5e6db85e6279c}{Animator::Animator}}(sf::Sprite\&\ SSprite)\ :\ aniCurrentAnimation(nullptr),\ SSprite(SSprite)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00008}00008\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00010}00010\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00012}00012\ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}\&\ Animator::CreateAnimation(std::string\ \textcolor{keyword}{const}\&\ sName,\ std::string\ \textcolor{keyword}{const}\&\ sTextureName,\ sf::Time\ \textcolor{keyword}{const}\&\ TDuration,\ \textcolor{keywordtype}{bool}\ bLoop)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00015}00015\ \ \ \ \ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}}.emplace\_back(sName,\ sTextureName,\ TDuration,\ bLoop);}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{comment}{//\ if\ we\ don't\ have\ a\ next\ animation,\ we\ use\ the\ current\ animation}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}\ ==\ \textcolor{keyword}{nullptr})\ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{SwitchAnimation}}(\&\mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}}.back());}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00020}00020\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}}.back();}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00021}00021\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00034}\mbox{\hyperlink{class_animator_a73efe59aa24ae86538ed0622a6364844}{00034}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{Animator::SwitchAnimation}}(\mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}*\ aniAnimation)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{comment}{//\ Change\ the\ texture\ of\ the\ animation\ }}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{keywordflow}{if}\ (aniAnimation\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}}.setTexture(AssetManager::GetTexture(aniAnimation-\/>\mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{sTextureName}}));}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00040}00040\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00042}00042\ \ \ \ \ \mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}\ =\ aniAnimation;}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00043}00043\ \ \ \ \ \mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrentTime}}\ =\ sf::Time::Zero;\ \textcolor{comment}{//\ Reset\ time}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00044}00044\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00050}\mbox{\hyperlink{class_animator_aa52e6608bcc7e6d0d680843da8db983a}{00050}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_aa52e6608bcc7e6d0d680843da8db983a}{Animator::Update}}(sf::Time\ \textcolor{keyword}{const}\&\ TDt)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00051}00051\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00052}00052\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}\ ==\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00054}00054\ \ \ \ \ \mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrentTime}}\ +=\ TDt;}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{float}\ scaledTime\ =\ (\mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrentTime}}.asSeconds()\ /\ \mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}-\/>\mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}}.asSeconds());}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keyword}{auto}\ numFrames\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}-\/>\mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{vecFrames}}.size());}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{auto}\ currentFrame\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(scaledTime\ *\ numFrames);}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}-\/>\mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{bLooping}})\ currentFrame\ \%=\ numFrames;}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentFrame\ >=\ numFrames)\ \{\ currentFrame\ =\ numFrames\ -\/\ 1;\ \mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{bEndAnim}}\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00064}00064\ \ \ \ \ \mbox{\hyperlink{class_animator_a81bee303fed6445bdba48fbdeb31f164}{SSprite}}.setTextureRect(\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}-\/>\mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{vecFrames}}[currentFrame]);}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00066}00066\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00073}\mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{00073}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{Animator::SwitchAnimation}}(std::string\ \textcolor{keyword}{const}\&\ sName)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keyword}{auto}\ animation\ =\ \mbox{\hyperlink{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}{FindAnimation}}(sName);}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00076}00076\ \ \ \ \ \textcolor{keywordflow}{if}\ (animation\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00077}00077\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_animator_a5943c73a80eebcde875948102ace7dce}{SwitchAnimation}}(animation);}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00082}00082\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00089}\mbox{\hyperlink{class_animator_ac8ac25bf21b250548bfb605c14844a12}{00089}}\ std::string\ \mbox{\hyperlink{class_animator_ac8ac25bf21b250548bfb605c14844a12}{Animator::GetCurrentAnimationName}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00090}00090\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}\ !=\ \textcolor{keyword}{nullptr})\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_animator_ad80289d06e499c43a5e6835fda6cb7d0}{aniCurrentAnimation}}-\/>\mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{sName}};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00093}00093\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00098}\mbox{\hyperlink{class_animator_a91402fd025ecd9ed1986f596e65e7068}{00098}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animator_a91402fd025ecd9ed1986f596e65e7068}{Animator::Restart}}()}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00099}00099\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00100}00100\ \ \ \ \ \mbox{\hyperlink{class_animator_a955b3725b3722be8dd68eacf8f438f3c}{TCurrentTime}}\ =\ sf::Time::Zero;\ \textcolor{comment}{//\ Reset\ time}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00101}00101\ \ \ \ \ \mbox{\hyperlink{class_animator_a0d7dd2ab48861770116d6cc9f673da7d}{bEndAnim}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00102}00102\ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00109}\mbox{\hyperlink{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}{00109}}\ \mbox{\hyperlink{struct_animator_1_1_animation}{Animator::Animation}}*\ \mbox{\hyperlink{class_animator_a13a1044b0c82452a88a9c00b9e5aae40}{Animator::FindAnimation}}(std::string\ \textcolor{keyword}{const}\&\ sName)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00110}00110\ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}}.begin();\ it\ !=\ \mbox{\hyperlink{class_animator_a4f825bb8dc53b63aab8572984e7d043e}{lAnimations}}.end();\ ++it)}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00112}00112\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it-\/>sName\ ==\ sName)\ \textcolor{keywordflow}{return}\ \&*it;}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00114}00114\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00116}00116\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{\Hypertarget{_animator_8cpp_source_l00117}00117\ \}}
+
+\end{DoxyCode}

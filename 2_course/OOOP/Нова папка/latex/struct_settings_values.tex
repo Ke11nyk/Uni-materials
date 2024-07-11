@@ -1,0 +1,340 @@
+\doxysection{Settings\+Values Struct Reference}
+\hypertarget{struct_settings_values}{}\label{struct_settings_values}\index{SettingsValues@{SettingsValues}}
+
+
+This is the struct to save settings values.  
+
+
+
+
+{\ttfamily \#include $<$Settings\+Values.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{struct_settings_values_a15818da396d1ce60bc8eaf325e64a308}{get\+Language}} ()
+\item 
+int \mbox{\hyperlink{struct_settings_values_a5631b9b8e5727fae8809df7486cbf2c3}{get\+Skin}} ()
+\item 
+int \mbox{\hyperlink{struct_settings_values_ae9743fb943fc0645029d998c069defac}{get\+Width}} ()
+\item 
+int \mbox{\hyperlink{struct_settings_values_a3c8ad0ee335d941b28a82a595c7cb745}{get\+Height}} ()
+\item 
+float \mbox{\hyperlink{struct_settings_values_ad468964d4c92785ba208d8a80d4be402}{get\+Setting\+Title}} ()
+\item 
+float \mbox{\hyperlink{struct_settings_values_a1c60a43ae4e459047be88f38564d36d6}{get\+Title}} ()
+\item 
+bool \mbox{\hyperlink{struct_settings_values_a45c1493112fb2789391be6fef3eedf3a}{get\+Fullscreen}} ()
+\item 
+void \mbox{\hyperlink{struct_settings_values_a7fa9d15213b324b85dba1183c192acee}{set\+Language}} (int n\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_a109946711bac5038dc6dfe310a642d92}{set\+Skin}} (int n\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_a19f347e114b523bbbe95b81bbfd2399e}{set\+Width}} (int n\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_aaf03fe806d3b3be3faf92b858de56032}{set\+Height}} (int n\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_a804247818d12268db36d53d7ea23135d}{set\+Setting\+Title}} (float f\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_ab50fd3d575cc48ba9d914c65ba758cd1}{set\+Title}} (float f\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_a160c7f4d64f2a0b152b178be4bbeeb83}{set\+Fullscreen}} (bool b\+Value)
+\item 
+void \mbox{\hyperlink{struct_settings_values_ae80767bb026d79675db961505cef666c}{set\+Language\+Values}} (int \mbox{\hyperlink{struct_settings_values_a769e322869b7672b84aa188ba9e01e7d}{n\+Language}}, float f\+Settingtitle, float \mbox{\hyperlink{struct_settings_values_ab28d7aadbea4f9622703541e7a58ee29}{f\+Title}})
+\item 
+void \mbox{\hyperlink{struct_settings_values_adc839a5b4c5deeb6d6b20ec510f1137a}{set\+Screen\+Values}} (int \mbox{\hyperlink{struct_settings_values_a01ff6ba00be94adfe9ab435191e6d25d}{n\+Width}}, int \mbox{\hyperlink{struct_settings_values_ad81796052ebd988a386c742ab2e8ada7}{n\+Height}}, bool \mbox{\hyperlink{struct_settings_values_a87e4123baba9d8f49fac2d72cfbe4d20}{b\+Fullscreen}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{struct_settings_values_a769e322869b7672b84aa188ba9e01e7d}{n\+Language}} = 0
+\begin{DoxyCompactList}\small\item\em Language of the game. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_settings_values_aaa339fcebc330b16331da2a090d5adf8}{n\+Skin}} = 0
+\begin{DoxyCompactList}\small\item\em Skin of the player. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_settings_values_a01ff6ba00be94adfe9ab435191e6d25d}{n\+Width}} = 1920
+\begin{DoxyCompactList}\small\item\em Width of the window. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{struct_settings_values_ad81796052ebd988a386c742ab2e8ada7}{n\+Height}} = 1080
+\begin{DoxyCompactList}\small\item\em Height of the window. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_settings_values_a32c773227f5e3b27540e7f43ea52a7f4}{f\+Setting\+Title}} = 573
+\begin{DoxyCompactList}\small\item\em X-\/position of the settings title. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{struct_settings_values_ab28d7aadbea4f9622703541e7a58ee29}{f\+Title}} = 469.\+5
+\begin{DoxyCompactList}\small\item\em X-\/position of the main title. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_settings_values_a87e4123baba9d8f49fac2d72cfbe4d20}{b\+Fullscreen}} = 0
+\begin{DoxyCompactList}\small\item\em State of the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the struct to save settings values. 
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00006}{6}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_settings_values_a45c1493112fb2789391be6fef3eedf3a}\label{struct_settings_values_a45c1493112fb2789391be6fef3eedf3a} 
+\index{SettingsValues@{SettingsValues}!getFullscreen@{getFullscreen}}
+\index{getFullscreen@{getFullscreen}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getFullscreen()}{getFullscreen()}}
+{\footnotesize\ttfamily bool Settings\+Values\+::get\+Fullscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00033}{33}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a3c8ad0ee335d941b28a82a595c7cb745}\label{struct_settings_values_a3c8ad0ee335d941b28a82a595c7cb745} 
+\index{SettingsValues@{SettingsValues}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int Settings\+Values\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00018}{18}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a15818da396d1ce60bc8eaf325e64a308}\label{struct_settings_values_a15818da396d1ce60bc8eaf325e64a308} 
+\index{SettingsValues@{SettingsValues}!getLanguage@{getLanguage}}
+\index{getLanguage@{getLanguage}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getLanguage()}{getLanguage()}}
+{\footnotesize\ttfamily int Settings\+Values\+::get\+Language (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00003}{3}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_ad468964d4c92785ba208d8a80d4be402}\label{struct_settings_values_ad468964d4c92785ba208d8a80d4be402} 
+\index{SettingsValues@{SettingsValues}!getSettingTitle@{getSettingTitle}}
+\index{getSettingTitle@{getSettingTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getSettingTitle()}{getSettingTitle()}}
+{\footnotesize\ttfamily float Settings\+Values\+::get\+Setting\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00023}{23}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a5631b9b8e5727fae8809df7486cbf2c3}\label{struct_settings_values_a5631b9b8e5727fae8809df7486cbf2c3} 
+\index{SettingsValues@{SettingsValues}!getSkin@{getSkin}}
+\index{getSkin@{getSkin}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getSkin()}{getSkin()}}
+{\footnotesize\ttfamily int Settings\+Values\+::get\+Skin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00008}{8}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a1c60a43ae4e459047be88f38564d36d6}\label{struct_settings_values_a1c60a43ae4e459047be88f38564d36d6} 
+\index{SettingsValues@{SettingsValues}!getTitle@{getTitle}}
+\index{getTitle@{getTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getTitle()}{getTitle()}}
+{\footnotesize\ttfamily float Settings\+Values\+::get\+Title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00028}{28}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_ae9743fb943fc0645029d998c069defac}\label{struct_settings_values_ae9743fb943fc0645029d998c069defac} 
+\index{SettingsValues@{SettingsValues}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int Settings\+Values\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00013}{13}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a160c7f4d64f2a0b152b178be4bbeeb83}\label{struct_settings_values_a160c7f4d64f2a0b152b178be4bbeeb83} 
+\index{SettingsValues@{SettingsValues}!setFullscreen@{setFullscreen}}
+\index{setFullscreen@{setFullscreen}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setFullscreen()}{setFullscreen()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Fullscreen (\begin{DoxyParamCaption}\item[{bool}]{b\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00069}{69}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_aaf03fe806d3b3be3faf92b858de56032}\label{struct_settings_values_aaf03fe806d3b3be3faf92b858de56032} 
+\index{SettingsValues@{SettingsValues}!setHeight@{setHeight}}
+\index{setHeight@{setHeight}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setHeight()}{setHeight()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Height (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00054}{54}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a7fa9d15213b324b85dba1183c192acee}\label{struct_settings_values_a7fa9d15213b324b85dba1183c192acee} 
+\index{SettingsValues@{SettingsValues}!setLanguage@{setLanguage}}
+\index{setLanguage@{setLanguage}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setLanguage()}{setLanguage()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Language (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00039}{39}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_ae80767bb026d79675db961505cef666c}\label{struct_settings_values_ae80767bb026d79675db961505cef666c} 
+\index{SettingsValues@{SettingsValues}!setLanguageValues@{setLanguageValues}}
+\index{setLanguageValues@{setLanguageValues}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setLanguageValues()}{setLanguageValues()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Language\+Values (\begin{DoxyParamCaption}\item[{int}]{n\+Language,  }\item[{float}]{f\+Settingtitle,  }\item[{float}]{f\+Title }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00074}{74}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_adc839a5b4c5deeb6d6b20ec510f1137a}\label{struct_settings_values_adc839a5b4c5deeb6d6b20ec510f1137a} 
+\index{SettingsValues@{SettingsValues}!setScreenValues@{setScreenValues}}
+\index{setScreenValues@{setScreenValues}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setScreenValues()}{setScreenValues()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Screen\+Values (\begin{DoxyParamCaption}\item[{int}]{n\+Width,  }\item[{int}]{n\+Height,  }\item[{bool}]{b\+Fullscreen }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00081}{81}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a804247818d12268db36d53d7ea23135d}\label{struct_settings_values_a804247818d12268db36d53d7ea23135d} 
+\index{SettingsValues@{SettingsValues}!setSettingTitle@{setSettingTitle}}
+\index{setSettingTitle@{setSettingTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setSettingTitle()}{setSettingTitle()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Setting\+Title (\begin{DoxyParamCaption}\item[{float}]{f\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00059}{59}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a109946711bac5038dc6dfe310a642d92}\label{struct_settings_values_a109946711bac5038dc6dfe310a642d92} 
+\index{SettingsValues@{SettingsValues}!setSkin@{setSkin}}
+\index{setSkin@{setSkin}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setSkin()}{setSkin()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Skin (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00044}{44}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_ab50fd3d575cc48ba9d914c65ba758cd1}\label{struct_settings_values_ab50fd3d575cc48ba9d914c65ba758cd1} 
+\index{SettingsValues@{SettingsValues}!setTitle@{setTitle}}
+\index{setTitle@{setTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setTitle()}{setTitle()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Title (\begin{DoxyParamCaption}\item[{float}]{f\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00064}{64}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+\Hypertarget{struct_settings_values_a19f347e114b523bbbe95b81bbfd2399e}\label{struct_settings_values_a19f347e114b523bbbe95b81bbfd2399e} 
+\index{SettingsValues@{SettingsValues}!setWidth@{setWidth}}
+\index{setWidth@{setWidth}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{setWidth()}{setWidth()}}
+{\footnotesize\ttfamily void Settings\+Values\+::set\+Width (\begin{DoxyParamCaption}\item[{int}]{n\+Value }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8cpp_source_l00049}{49}} of file \mbox{\hyperlink{_settings_values_8cpp_source}{Settings\+Values.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_settings_values_a87e4123baba9d8f49fac2d72cfbe4d20}\label{struct_settings_values_a87e4123baba9d8f49fac2d72cfbe4d20} 
+\index{SettingsValues@{SettingsValues}!bFullscreen@{bFullscreen}}
+\index{bFullscreen@{bFullscreen}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{bFullscreen}{bFullscreen}}
+{\footnotesize\ttfamily bool Settings\+Values\+::b\+Fullscreen = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+State of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00015}{15}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_a32c773227f5e3b27540e7f43ea52a7f4}\label{struct_settings_values_a32c773227f5e3b27540e7f43ea52a7f4} 
+\index{SettingsValues@{SettingsValues}!fSettingTitle@{fSettingTitle}}
+\index{fSettingTitle@{fSettingTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{fSettingTitle}{fSettingTitle}}
+{\footnotesize\ttfamily float Settings\+Values\+::f\+Setting\+Title = 573\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X-\/position of the settings title. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00013}{13}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_ab28d7aadbea4f9622703541e7a58ee29}\label{struct_settings_values_ab28d7aadbea4f9622703541e7a58ee29} 
+\index{SettingsValues@{SettingsValues}!fTitle@{fTitle}}
+\index{fTitle@{fTitle}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{fTitle}{fTitle}}
+{\footnotesize\ttfamily float Settings\+Values\+::f\+Title = 469.\+5\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X-\/position of the main title. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00014}{14}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_ad81796052ebd988a386c742ab2e8ada7}\label{struct_settings_values_ad81796052ebd988a386c742ab2e8ada7} 
+\index{SettingsValues@{SettingsValues}!nHeight@{nHeight}}
+\index{nHeight@{nHeight}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{nHeight}{nHeight}}
+{\footnotesize\ttfamily int Settings\+Values\+::n\+Height = 1080\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Height of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00012}{12}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_a769e322869b7672b84aa188ba9e01e7d}\label{struct_settings_values_a769e322869b7672b84aa188ba9e01e7d} 
+\index{SettingsValues@{SettingsValues}!nLanguage@{nLanguage}}
+\index{nLanguage@{nLanguage}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{nLanguage}{nLanguage}}
+{\footnotesize\ttfamily int Settings\+Values\+::n\+Language = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Language of the game. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00009}{9}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_aaa339fcebc330b16331da2a090d5adf8}\label{struct_settings_values_aaa339fcebc330b16331da2a090d5adf8} 
+\index{SettingsValues@{SettingsValues}!nSkin@{nSkin}}
+\index{nSkin@{nSkin}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{nSkin}{nSkin}}
+{\footnotesize\ttfamily int Settings\+Values\+::n\+Skin = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Skin of the player. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00010}{10}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+\Hypertarget{struct_settings_values_a01ff6ba00be94adfe9ab435191e6d25d}\label{struct_settings_values_a01ff6ba00be94adfe9ab435191e6d25d} 
+\index{SettingsValues@{SettingsValues}!nWidth@{nWidth}}
+\index{nWidth@{nWidth}!SettingsValues@{SettingsValues}}
+\doxysubsubsection{\texorpdfstring{nWidth}{nWidth}}
+{\footnotesize\ttfamily int Settings\+Values\+::n\+Width = 1920\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Width of the window. 
+
+
+
+Definition at line \mbox{\hyperlink{_settings_values_8h_source_l00011}{11}} of file \mbox{\hyperlink{_settings_values_8h_source}{Settings\+Values.\+h}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Settings\+Values.\+h\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/sources/Settings\+Values.\+cpp\end{DoxyCompactItemize}

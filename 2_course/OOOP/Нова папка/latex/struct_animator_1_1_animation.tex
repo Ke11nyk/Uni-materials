@@ -1,0 +1,157 @@
+\doxysection{Animator\+::Animation Struct Reference}
+\hypertarget{struct_animator_1_1_animation}{}\label{struct_animator_1_1_animation}\index{Animator::Animation@{Animator::Animation}}
+
+
+This is the struct to create animations.  
+
+
+
+
+{\ttfamily \#include $<$Animator.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_animator_1_1_animation_a35418fb713f10cdbaf06aedbd7fe44f0}{Animation}} (std\+::string const \&\mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{s\+Name}}, std\+::string const \&\mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{s\+Texture\+Name}}, sf\+::\+Time const \&\mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}}, bool \mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{b\+Looping}})
+\item 
+void \mbox{\hyperlink{struct_animator_1_1_animation_a3540528cb30f083bfc230dead2c122b0}{Add\+Frames}} (sf\+::\+Vector2i const \&i\+Start\+From, sf\+::\+Vector2i const \&i\+Frame\+Size, unsigned int n\+Frames, unsigned int n\+Traccia)
+\begin{DoxyCompactList}\small\item\em The method that switches animation frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}{s\+Name}}
+\begin{DoxyCompactList}\small\item\em Name of the animation. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}{s\+Texture\+Name}}
+\begin{DoxyCompactList}\small\item\em Name of the texture. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+Int\+Rect $>$ \mbox{\hyperlink{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}{vec\+Frames}}
+\begin{DoxyCompactList}\small\item\em Frames of the animation. \end{DoxyCompactList}\item 
+sf\+::\+Time \mbox{\hyperlink{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}{TDuration}}
+\begin{DoxyCompactList}\small\item\em The animation frame playback time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}{b\+Looping}}
+\begin{DoxyCompactList}\small\item\em The animation is looped or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the struct to create animations. 
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00017}{17}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_animator_1_1_animation_a35418fb713f10cdbaf06aedbd7fe44f0}\label{struct_animator_1_1_animation_a35418fb713f10cdbaf06aedbd7fe44f0} 
+\index{Animator::Animation@{Animator::Animation}!Animation@{Animation}}
+\index{Animation@{Animation}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{Animation()}{Animation()}}
+{\footnotesize\ttfamily Animator\+::\+Animation\+::\+Animation (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{s\+Name,  }\item[{std\+::string const \&}]{s\+Texture\+Name,  }\item[{sf\+::\+Time const \&}]{TDuration,  }\item[{bool}]{b\+Looping }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00025}{25}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_animator_1_1_animation_a3540528cb30f083bfc230dead2c122b0}\label{struct_animator_1_1_animation_a3540528cb30f083bfc230dead2c122b0} 
+\index{Animator::Animation@{Animator::Animation}!AddFrames@{AddFrames}}
+\index{AddFrames@{AddFrames}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{AddFrames()}{AddFrames()}}
+{\footnotesize\ttfamily void Animator\+::\+Animation\+::\+Add\+Frames (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2i const \&}]{i\+Start\+From,  }\item[{sf\+::\+Vector2i const \&}]{i\+Frame\+Size,  }\item[{unsigned int}]{n\+Frames,  }\item[{unsigned int}]{n\+Traccia }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The method that switches animation frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\+Start\+From} & The coordinates of the upper left corner of the starting frame \\
+\hline
+{\em i\+Frame\+Size} & The size of the frame \\
+\hline
+{\em n\+Frames} & The number of the frames \\
+\hline
+{\em n\+Traccia} & The number of the lines of the frames \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00037}{37}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f}\label{struct_animator_1_1_animation_a6e8631814e12df949a3c8c63bc74d22f} 
+\index{Animator::Animation@{Animator::Animation}!bLooping@{bLooping}}
+\index{bLooping@{bLooping}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{bLooping}{bLooping}}
+{\footnotesize\ttfamily bool Animator\+::\+Animation\+::b\+Looping}
+
+
+
+The animation is looped or not. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00023}{23}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8}\label{struct_animator_1_1_animation_a52be1019026a2629efe45cdd9b66c7c8} 
+\index{Animator::Animation@{Animator::Animation}!sName@{sName}}
+\index{sName@{sName}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{sName}{sName}}
+{\footnotesize\ttfamily std\+::string Animator\+::\+Animation\+::s\+Name}
+
+
+
+Name of the animation. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00019}{19}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879}\label{struct_animator_1_1_animation_a051f1c8636e7efbb5ca728eb0447f879} 
+\index{Animator::Animation@{Animator::Animation}!sTextureName@{sTextureName}}
+\index{sTextureName@{sTextureName}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{sTextureName}{sTextureName}}
+{\footnotesize\ttfamily std\+::string Animator\+::\+Animation\+::s\+Texture\+Name}
+
+
+
+Name of the texture. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00020}{20}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d}\label{struct_animator_1_1_animation_ad96cef36287b7812e62adf33fceed38d} 
+\index{Animator::Animation@{Animator::Animation}!TDuration@{TDuration}}
+\index{TDuration@{TDuration}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{TDuration}{TDuration}}
+{\footnotesize\ttfamily sf\+::\+Time Animator\+::\+Animation\+::\+TDuration}
+
+
+
+The animation frame playback time. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00022}{22}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+\Hypertarget{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7}\label{struct_animator_1_1_animation_acd5881f1dee4244f13ff6a43725016e7} 
+\index{Animator::Animation@{Animator::Animation}!vecFrames@{vecFrames}}
+\index{vecFrames@{vecFrames}!Animator::Animation@{Animator::Animation}}
+\doxysubsubsection{\texorpdfstring{vecFrames}{vecFrames}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+Int\+Rect$>$ Animator\+::\+Animation\+::vec\+Frames}
+
+
+
+Frames of the animation. 
+
+
+
+Definition at line \mbox{\hyperlink{_animator_8h_source_l00021}{21}} of file \mbox{\hyperlink{_animator_8h_source}{Animator.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Animator.\+h\end{DoxyCompactItemize}

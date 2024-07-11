@@ -1,0 +1,28 @@
+@startuml 11ActivityDiagram
+start
+:Start Tracking Task;
+if (Is Integrated with External System?) then (yes)
+  :Use Integration to Track;
+else (no)
+  :Manually Input Task Details;
+endif
+:Stop Tracking Task;
+:Calculate Task Duration;
+if (Is Part of a Group?) then (yes)
+  :Add to Group Total;
+endif
+:View Individual Task Time;
+:View Group Activity Times;
+stop
+@enduml
+
+
+
+
+
+
+
+
+
+
+

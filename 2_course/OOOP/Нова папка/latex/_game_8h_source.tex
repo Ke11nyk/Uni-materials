@@ -1,0 +1,94 @@
+\doxysection{Game.\+h}
+\hypertarget{_game_8h_source}{}\label{_game_8h_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/headers/Game.h@{D:/Uni materials/2 course/OOP/Project OOP/source/headers/Game.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00001}00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}SFML/Graphics.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <SFML/Audio.hpp>}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ "{}GameMenu.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include\ "{}AssetManager.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include\ "{}Animator.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ "{}Player.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include\ "{}SettingsValues.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include\ "{}Gameplay.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00011}00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00012}00012\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00017}\mbox{\hyperlink{class_game}{00017}}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game}{Game}}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00019}\mbox{\hyperlink{class_game_abf73b361ec226eb5816e8727e0c9f591}{00019}}\ \ \ \ \ \mbox{\hyperlink{class_asset_manager}{AssetManager}}\ \mbox{\hyperlink{class_game_abf73b361ec226eb5816e8727e0c9f591}{manager}};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00021}00021\ \ \ \ \ \textcolor{comment}{//\ settings}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00022}\mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{00022}}\ \ \ \ \ \mbox{\hyperlink{struct_settings_values}{SettingsValues}}\ \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00023}\mbox{\hyperlink{class_game_a4b3331a738f472c33cdcdee181b90227}{00023}}\ \ \ \ \ std::vector<sf::String>\ \mbox{\hyperlink{class_game_a4b3331a738f472c33cdcdee181b90227}{vecTitles}}\ =\ \{\ \textcolor{stringliteral}{"{}Run\ to\ exit"{}},\ L\textcolor{stringliteral}{"{}Біжи до виходу"{}},\ \textcolor{stringliteral}{"{}Start"{}},\ L\textcolor{stringliteral}{"{}Старт"{}},\ \textcolor{stringliteral}{"{}Settings"{}},\ L\textcolor{stringliteral}{"{}Налаштування"{}},\ \textcolor{stringliteral}{"{}About\ game"{}},\ L\textcolor{stringliteral}{"{}Про гру"{}},\ \textcolor{stringliteral}{"{}Exit"{}},\ L\textcolor{stringliteral}{"{}Вихід"{}},\ \textcolor{stringliteral}{"{}English"{}},\ \textcolor{stringliteral}{"{}English"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ \textcolor{stringliteral}{"{}To\ menu"{}},\ L\textcolor{stringliteral}{"{}До\ меню"{}},\ \textcolor{stringliteral}{"{}Language"{}},\ L\textcolor{stringliteral}{"{}Мова"{}},\ \textcolor{stringliteral}{"{}Character"{}},\ L\textcolor{stringliteral}{"{}Персонаж"{}},\ \textcolor{stringliteral}{"{}Stickman"{}},\ L\textcolor{stringliteral}{"{}Стікмен"{}},\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Man"{}},\ L\textcolor{stringliteral}{"{}Поц"{}},\ \textcolor{stringliteral}{"{}To\ settings"{}},\ L\textcolor{stringliteral}{"{}До\ налаштувань"{}},\ \textcolor{stringliteral}{"{}Points:\ "{}},\ L\textcolor{stringliteral}{"{}Очки:\ "{}},\ \textcolor{stringliteral}{"{}Time:\ "{}},\ L\textcolor{stringliteral}{"{}Час: "{}},\ \textcolor{stringliteral}{"{}Screen"{}},\ L\textcolor{stringliteral}{"{}Екран"{}},\ \textcolor{stringliteral}{"{}Fullscreen"{}},\ L\textcolor{stringliteral}{"{}Повний екран"{}},\ \textcolor{stringliteral}{"{}level"{}},\ L\textcolor{stringliteral}{"{}рівень"{}},}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Біжи до виходу"{}},\ \ L\textcolor{stringliteral}{"{}Старт"{}},\ L\textcolor{stringliteral}{"{}Налаштування"{}},\ L\textcolor{stringliteral}{"{}Про гру"{}},\ L\textcolor{stringliteral}{"{}Вихід"{}},\ \textcolor{stringliteral}{"{}English"{}},\ L\textcolor{stringliteral}{"{}Українська"{}},\ L\textcolor{stringliteral}{"{}До\ меню"{}},\ L\textcolor{stringliteral}{"{}Мова"{}},\ L\textcolor{stringliteral}{"{}Персонаж"{}},\ L\textcolor{stringliteral}{"{}Стікмен"{}},\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00026}00026\ \ \ \ \ \ \ \ \ L\textcolor{stringliteral}{"{}Поц"{}},\ L\textcolor{stringliteral}{"{}До\ налаштувань"{}},\ L\textcolor{stringliteral}{"{}Очки:\ "{}},\ L\textcolor{stringliteral}{"{}Час: "{}},\ L\textcolor{stringliteral}{"{}Екран"{}},\ L\textcolor{stringliteral}{"{}Повний екран"{}},\ L\textcolor{stringliteral}{"{}рівень"{}}\};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00027}\mbox{\hyperlink{class_game_aacf01a4f6e4473a9e90b208db8955967}{00027}}\ \ \ \ \ std::vector<sf::String>\ \mbox{\hyperlink{class_game_aacf01a4f6e4473a9e90b208db8955967}{vecAbout}}\ =\ \{\textcolor{stringliteral}{"{}A\ game\ about\ a\ stickman\ who\ needs\ to\ get\ to\ the\ door\ by\ \(\backslash\)njumping\ on\ platforms.\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00028}00028\ \textcolor{stringliteral}{\ Originally\ implemented\ in\ Python,\ the\ \(\backslash\)ncurrent\ implementation\ is\ in\ C++\ using\ the\ SFML\ library.\ \(\backslash\)n\(\backslash\)n\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00029}00029\ \textcolor{stringliteral}{Currently,\ a\ static\ level\ is\ implemented.\ \(\backslash\)nRandomization\ of\ levels,\ endless\ mode\ are\ planned.\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00030}00030\ \textcolor{stringliteral}{\ \ \ \ \(\backslash\)n\(\backslash\)nMade\ by\ Artem\ Verbytskyi\ as\ part\ of\ a\ project\ for\ OOOP\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00031}00031\ \textcolor{stringliteral}{\ \ \ \ \(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)nCopyright\ ©\ 2023\ by\ Ke11nyk"{}},\ L\textcolor{stringliteral}{"{}Гра про стікмена,\ якому потрібно дістатися до дверей,\ \(\backslash\)nстрибаючи по платформам\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00032}00032\ \textcolor{stringliteral}{\ \ Спочатку реалізовано\ на Python,\ \(\backslash\)nпоточна реалізація\ на C++\ з використанням бібліотеки SFML.\ \(\backslash\)n\(\backslash\)n\(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00033}00033\ \textcolor{stringliteral}{На\ даний момент\ реалізований статичний\ рівень.\ \(\backslash\)nПланується\ рандомізація\ рівнів, нескінченний режим. \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00034}00034\ \textcolor{stringliteral}{\ \ \ \ \ \(\backslash\)n\(\backslash\)nВиконано\ Артемом Вербицьким\ в рамках проекту для\ ОООП\ \(\backslash\)}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00035}00035\ \textcolor{stringliteral}{\ \ \ \ \ \(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)n\(\backslash\)nCopyright\ ©\ 2023\ by\ Ke11nyk"{}}\ \};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00036}\mbox{\hyperlink{class_game_ab26196d267f1645ed2edcee1dfb7b884}{00036}}\ \ \ \ \ std::vector<sf::String>\ \mbox{\hyperlink{class_game_ab26196d267f1645ed2edcee1dfb7b884}{vecBackground}}\ =\ \{\ \textcolor{stringliteral}{"{}source/images/background.png"{}}\ ,\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00037}00037\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}source/images/settings.png"{}}\ ,\ \textcolor{stringliteral}{"{}source/images/about(1).png"{}},\ \textcolor{stringliteral}{"{}source/images/level1(1).png"{}}\ \};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00038}00038\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//\ window}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00040}\mbox{\hyperlink{class_game_a03fda07e26d164eae6597e959677cad7}{00040}}\ \ \ \ \ sf::RenderWindow\ \mbox{\hyperlink{class_game_a03fda07e26d164eae6597e959677cad7}{WWin}};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00041}\mbox{\hyperlink{class_game_aa613ae098db3598a0acfd80bb9ddf73e}{00041}}\ \ \ \ \ sf::RectangleShape\ \mbox{\hyperlink{class_game_aa613ae098db3598a0acfd80bb9ddf73e}{RSBackground}};\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ size\ of\ window}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00044}\mbox{\hyperlink{class_game_a63c9c11048ed956f0a3f13805cc5593f}{00044}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_a63c9c11048ed956f0a3f13805cc5593f}{nWidth}}\ =\ sf::VideoMode::getDesktopMode().width;\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00045}\mbox{\hyperlink{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}{00045}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}{nHeight}}\ =\ sf::VideoMode::getDesktopMode().height;\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00047}00047\ \ \ \ \ \textcolor{comment}{//\ size\ of\ background}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00048}\mbox{\hyperlink{class_game_aea206fbaae8ec0592913539160d30ff6}{00048}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_aea206fbaae8ec0592913539160d30ff6}{nBgWidth}}\ =\ \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}}.getWidth();\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00049}\mbox{\hyperlink{class_game_ab08d4ff255eac881d514e3465973788d}{00049}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_ab08d4ff255eac881d514e3465973788d}{nBgHeight}}\ =\ \mbox{\hyperlink{class_game_ae50862815027150cd1aa51db191b4e61}{settingsValues}}.getHeight();\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00052}00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a79ecc49d452cac5d39a0043b6dcd0330}{InitText}}(sf::Text\&\ TxtMtext,\ \textcolor{keywordtype}{float}\ fXpos,\ \textcolor{keywordtype}{float}\ fYpos,\ \textcolor{keyword}{const}\ sf::String\ StrStr,\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nSizeFont,\ sf::Color\ ColMenuTextColor,\ \textcolor{keywordtype}{int}\ nBord,\ sf::Color\ ColBorderColor);}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00054}00054\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_ae3632f873fe31266379675bb8a2d9328}{ReadValues}}(\mbox{\hyperlink{struct_settings_values}{SettingsValues}}\&\ settingValues,\ std::string\ sNameFile);}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00055}00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a6bf5d10fb619e732fdbe6ad6fdd4ed01}{WriteValues}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_settings_values}{SettingsValues}}\ settingValues,\ \textcolor{keyword}{const}\ std::string\&\ sNameFile);}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00056}00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a6d43bd51d8ee24d826bd225ab8c3c0e1}{ClearValues}}(std::string\ sNameFile);}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00058}00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a17446a595ba9812446bac5c2e13d4ed1}{SettingsWindow}}(sf::Text\&\ TxtSettings,\ \mbox{\hyperlink{class_game_menu}{GameMenu}}\&\ myMenu);}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00059}00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a20fcf1eca7a12b03ef61ec711f9a01c4}{Settings}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00060}00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a3ad61ba67bd3be549be564b7b4bf29dc}{SettingsLanguage}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00061}00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a4123a6ff744ef808876e0ce1d61d6c2e}{SettingsSkin}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00062}00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_ac0c77c49a5deb787f7a148fbf76329be}{SettingsScreen}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00064}00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a28a6e660c4af4d57725c585219ddff29}{AboutGame}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00066}00066\ \ \ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00067}00067\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a5b2ccbfd689aad9d9b5f23b1ab8ce662}{createWindow}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00069}00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a71f21c663674014bb8087b5367292cc0}{mainloop}}();}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00070}00070\ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00072}00072\ \ \ \ \ \textcolor{keywordtype}{void}\ setWidth(\textcolor{keywordtype}{int}\ nValue)}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00073}00073\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a63c9c11048ed956f0a3f13805cc5593f}{nWidth}}\ =\ nValue;}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00077}00077\ \ \ \ \ \textcolor{keywordtype}{int}\ getWidth()}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00078}00078\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00079}00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_game_a63c9c11048ed956f0a3f13805cc5593f}{nWidth}};}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00080}00080\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00081}00081\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00082}00082\ \ \ \ \ \textcolor{keywordtype}{void}\ setHeight(\textcolor{keywordtype}{int}\ nValue)}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00084}00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}{nHeight}}\ =\ nValue;}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00085}00085\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00087}00087\ \ \ \ \ \textcolor{keywordtype}{int}\ getHeight()}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00088}00088\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_game_af9eaa7eacbd7e2d15535f7e7bba68979}{nHeight}};}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00090}00090\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_8h_source_l00091}00091\ \};}
+
+\end{DoxyCode}

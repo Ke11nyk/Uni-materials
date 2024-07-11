@@ -1,0 +1,150 @@
+\doxysection{Game\+Menu.\+cpp}
+\hypertarget{_game_menu_8cpp_source}{}\label{_game_menu_8cpp_source}\index{D:/Uni materials/2 course/OOP/Project OOP/source/sources/GameMenu.cpp@{D:/Uni materials/2 course/OOP/Project OOP/source/sources/GameMenu.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}../headers/GameMenu.h"{}}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00003}00003\ \textcolor{preprocessor}{\#define\ FONT\ "{}source/fontes/Gilroy-\/Heavy.woff"{}}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00026}\mbox{\hyperlink{class_game_menu_a8b648e1afda00816309127ef3b7df16e}{00026}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a8b648e1afda00816309127ef3b7df16e}{GameMenu::setInitText}}(sf::Text\&\ TxtText,\ \textcolor{keyword}{const}\ sf::String\&\ StrStr,\ \textcolor{keywordtype}{float}\ fXpos,\ \textcolor{keywordtype}{float}\ fYpos)\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00027}00027\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00028}00028\ \ \ \ \ TxtText.setString(StrStr);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00029}00029\ \ \ \ \ TxtText.setFont(\mbox{\hyperlink{class_game_menu_a5a1df3385c139cd764d68d47c1231841}{FFont}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00030}00030\ \ \ \ \ TxtText.setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00031}00031\ \ \ \ \ TxtText.setCharacterSize(\mbox{\hyperlink{class_game_menu_a52780524eede1a189b3a64fee1b0370a}{nSizeFont}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00032}00032\ \ \ \ \ TxtText.setPosition(fXpos,\ fYpos);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00033}00033\ \ \ \ \ TxtText.setOutlineThickness(3);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00034}00034\ \ \ \ \ TxtText.setOutlineColor(\mbox{\hyperlink{class_game_menu_abd6bd0874c589f829dd73e9110ac3433}{ColBorderColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00041}\mbox{\hyperlink{class_game_menu_adfbc691fc305d2a148b0836f27d9910b}{00041}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_adfbc691fc305d2a148b0836f27d9910b}{GameMenu::AlignMenu}}(\textcolor{keywordtype}{int}\ nPosX)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00042}00042\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordtype}{float}\ fNullx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (nPosX)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ fNullx\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ fNullx\ =\ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].getLocalBounds().width;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ fNullx\ =\ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].getLocalBounds().width\ /\ 2;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].setPosition(\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].getPosition().x\ -\/\ fNullx,\ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].getPosition().y);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00064}00064\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00065}00065\ \ \ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00066}00066\ GameMenu::GameMenu(sf::RenderWindow\&\ WWindow,\ \textcolor{keywordtype}{float}\ fMenux,\ \textcolor{keywordtype}{float}\ fMenuy,\ \textcolor{keywordtype}{int}\ nSizeFont,\ \textcolor{keywordtype}{int}\ nStep,\ std::vector<sf::String>\ vecName)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00067}00067\ \ \ \ \ :WMywindow(WWindow),\ fMenuX(fMenux),\ fMenuY(fMenuy),\ nSizeFont(nSizeFont),\ nMenuStep(nStep)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00068}00068\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{class_game_menu_a5a1df3385c139cd764d68d47c1231841}{FFont}}.loadFromFile(FONT))\ exit(32);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}}\ =\ vecName.size();}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00071}00071\ \ \ \ \ sf::Text\ TxtText;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00072}00072\ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}.assign(\mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}},\ TxtText);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0,\ fYpos\ =\ \mbox{\hyperlink{class_game_menu_a95f0d001784f3860b960c0bd8ffe4d3f}{fMenuY}},\ fXpos\ =\ \mbox{\hyperlink{class_game_menu_ab98ae31a5f50f4e9437ad037bbc37bfb}{fMenuX}};\ i\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}};\ i++,\ fYpos\ +=\ \mbox{\hyperlink{class_game_menu_a814e1b5f46fe02424c58e36b03282ab8}{nMenuStep}})}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_a8b648e1afda00816309127ef3b7df16e}{setInitText}}(\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i],\ vecName[i],\ fXpos,\ fYpos);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00077}00077\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00078}00078\ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00079}00079\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00084}\mbox{\hyperlink{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}{00084}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}{GameMenu::MoveUp}}()}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00085}00085\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00086}00086\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00088}00088\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ >=\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ +\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00091}00091\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00093}00093\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00094}00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[0].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00095}00095\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ =\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}}\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00098}00098\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00105}\mbox{\hyperlink{class_game_menu_a0cd6b159aa538735a43c0b32fdf0b1df}{00105}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}{GameMenu::MoveUp}}(\textcolor{keywordtype}{int}\ nStart,\ \textcolor{keywordtype}{int}\ nEnd)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00106}00106\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00107}00107\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00109}00109\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ >=\ nStart)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ +\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00113}00113\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00114}00114\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00115}00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ =\ nEnd\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00117}00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00119}00119\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00124}\mbox{\hyperlink{class_game_menu_a075e875bf72864c84d867eea122e5dd0}{00124}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a075e875bf72864c84d867eea122e5dd0}{GameMenu::MoveDown}}()}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00125}00125\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00126}00126\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}++;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00128}00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}})\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00129}00129\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ -\/\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00131}00131\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00132}00132\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00133}00133\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}}\ -\/\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00136}00136\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00137}00137\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00139}00139\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00140}00140\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00146}\mbox{\hyperlink{class_game_menu_ad302c0c92458ede1fc5d0e3133e7e070}{00146}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a075e875bf72864c84d867eea122e5dd0}{GameMenu::MoveDown}}(\textcolor{keywordtype}{int}\ nStart,\ \textcolor{keywordtype}{int}\ nEnd)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00147}00147\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00148}00148\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}++;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00150}00150\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ <\ nEnd)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ -\/\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00152}00152\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[nEnd\ -\/\ 1].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}\ =\ nStart;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00158}00158\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00159}00159\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00161}00161\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00162}00162\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00166}\mbox{\hyperlink{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}{00166}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}{GameMenu::Draw}}()}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00167}00167\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00168}00168\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}};\ i++)\ \mbox{\hyperlink{class_game_menu_a6334f48fe8720056bfa055dde6126541}{WMywindow}}.draw(\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i]);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00169}00169\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00176}\mbox{\hyperlink{class_game_menu_af02792164d12f5d631c6731438c89907}{00176}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}{GameMenu::Draw}}(\textcolor{keywordtype}{int}\ nStart,\ \textcolor{keywordtype}{int}\ nEnd)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00177}00177\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00178}00178\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ nStart;\ i\ <\ nEnd;\ i++)\ \mbox{\hyperlink{class_game_menu_a6334f48fe8720056bfa055dde6126541}{WMywindow}}.draw(\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i]);}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00179}00179\ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00187}\mbox{\hyperlink{class_game_menu_ac99690a72b14959c889626364c0f0252}{00187}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_menu_ac99690a72b14959c889626364c0f0252}{GameMenu::setColorTextMenu}}(sf::Color\ ColMenuColor,\ sf::Color\ ColChosenColor,\ sf::Color\ ColBordColor)}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00188}00188\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00189}00189\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}}\ =\ ColMenuColor;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00190}00190\ \ \ \ \ \mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}}\ =\ ColChosenColor;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00191}00191\ \ \ \ \ \mbox{\hyperlink{class_game_menu_abd6bd0874c589f829dd73e9110ac3433}{ColBorderColor}}\ =\ ColBordColor;}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00193}00193\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}};\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].setFillColor(\mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{ColMenuTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i].setOutlineColor(\mbox{\hyperlink{class_game_menu_abd6bd0874c589f829dd73e9110ac3433}{ColBorderColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00196}00196\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00198}00198\ \ \ \ \ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[\mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{nMainMenuSelected}}].setFillColor(\mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{ColchosenTextColor}});}
+\DoxyCodeLine{\Hypertarget{_game_menu_8cpp_source_l00199}00199\ \}}
+
+\end{DoxyCode}

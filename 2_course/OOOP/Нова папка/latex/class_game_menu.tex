@@ -1,0 +1,466 @@
+\doxysection{Game\+Menu Class Reference}
+\hypertarget{class_game_menu}{}\label{class_game_menu}\index{GameMenu@{GameMenu}}
+
+
+This is the class to create menu.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Menu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_menu_ae199eab787725e48024232993dd2056b}{Game\+Menu}} (sf\+::\+Render\+Window \&WWindow, float f\+Menux, float f\+Menuy, int \mbox{\hyperlink{class_game_menu_a52780524eede1a189b3a64fee1b0370a}{n\+Size\+Font}}, int n\+Step, std\+::vector$<$ sf\+::\+String $>$ vec\+Name)
+\item 
+void \mbox{\hyperlink{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}{Draw}} ()
+\begin{DoxyCompactList}\small\item\em The method that draws menu options. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_af02792164d12f5d631c6731438c89907}{Draw}} (int n\+Start, int n\+End)
+\begin{DoxyCompactList}\small\item\em The method that draws menu options. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}{Move\+Up}} ()
+\begin{DoxyCompactList}\small\item\em The method that moves up through the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_a0cd6b159aa538735a43c0b32fdf0b1df}{Move\+Up}} (int n\+Start, int n\+End)
+\begin{DoxyCompactList}\small\item\em The method that moves up through the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_a075e875bf72864c84d867eea122e5dd0}{Move\+Down}} ()
+\begin{DoxyCompactList}\small\item\em The method that moves down through the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_ad302c0c92458ede1fc5d0e3133e7e070}{Move\+Down}} (int n\+Start, int n\+End)
+\begin{DoxyCompactList}\small\item\em The method that moves down through the menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_ac99690a72b14959c889626364c0f0252}{set\+Color\+Text\+Menu}} (sf\+::\+Color Col\+Menu\+Color, sf\+::\+Color Col\+Chosen\+Color, sf\+::\+Color Col\+Bord\+Color)
+\begin{DoxyCompactList}\small\item\em The method that changes the color of the menu option. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_menu_adfbc691fc305d2a148b0836f27d9910b}{Align\+Menu}} (int n\+PosX)
+\begin{DoxyCompactList}\small\item\em The method that chooses placement of menu items. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_menu_adeacdd0406e1186c106630a6f27f5a1c}{get\+Selected\+Menu\+Number}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_menu_a8b648e1afda00816309127ef3b7df16e}{set\+Init\+Text}} (sf\+::\+Text \&Txt\+Text, const sf\+::\+String \&Str\+Str, float f\+Xpos, float f\+Ypos)
+\begin{DoxyCompactList}\small\item\em The method that sets up the text that will be displayed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_game_menu_ab98ae31a5f50f4e9437ad037bbc37bfb}{f\+MenuX}}
+\begin{DoxyCompactList}\small\item\em X-\/coordinates of menu. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_menu_a95f0d001784f3860b960c0bd8ffe4d3f}{f\+MenuY}}
+\begin{DoxyCompactList}\small\item\em Y-\/coordinates of menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_menu_a814e1b5f46fe02424c58e36b03282ab8}{n\+Menu\+Step}}
+\begin{DoxyCompactList}\small\item\em Distance between menu options. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{n\+Max\+Menu}}
+\begin{DoxyCompactList}\small\item\em Number of options. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_menu_a52780524eede1a189b3a64fee1b0370a}{n\+Size\+Font}}
+\begin{DoxyCompactList}\small\item\em Font size. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_menu_a7788db9f849148af27321a507f2fe8f3}{n\+Main\+Menu\+Selected}}
+\begin{DoxyCompactList}\small\item\em Selected option. \end{DoxyCompactList}\item 
+sf\+::\+Font \mbox{\hyperlink{class_game_menu_a5a1df3385c139cd764d68d47c1231841}{FFont}}
+\begin{DoxyCompactList}\small\item\em Font. \end{DoxyCompactList}\item 
+std\+::vector$<$ sf\+::\+Text $>$ \mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vec\+Main\+Menu}}
+\begin{DoxyCompactList}\small\item\em Titles of options. \end{DoxyCompactList}\item 
+sf\+::\+Color \mbox{\hyperlink{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}{Col\+Menu\+Text\+Color}} = sf\+::\+Color\+::\+White
+\begin{DoxyCompactList}\small\item\em Color of the options\textquotesingle{} titles. \end{DoxyCompactList}\item 
+sf\+::\+Color \mbox{\hyperlink{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}{Colchosen\+Text\+Color}} = sf\+::\+Color\+::\+Yellow
+\begin{DoxyCompactList}\small\item\em Color of chosen option. \end{DoxyCompactList}\item 
+sf\+::\+Color \mbox{\hyperlink{class_game_menu_abd6bd0874c589f829dd73e9110ac3433}{Col\+Border\+Color}} = sf\+::\+Color\+::\+Black
+\begin{DoxyCompactList}\small\item\em Color of border of options. \end{DoxyCompactList}\item 
+sf\+::\+Render\+Window \& \mbox{\hyperlink{class_game_menu_a6334f48fe8720056bfa055dde6126541}{WMywindow}}
+\begin{DoxyCompactList}\small\item\em Window where menu will be displayed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the class to create menu. 
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00009}{9}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_game_menu_ae199eab787725e48024232993dd2056b}\label{class_game_menu_ae199eab787725e48024232993dd2056b} 
+\index{GameMenu@{GameMenu}!GameMenu@{GameMenu}}
+\index{GameMenu@{GameMenu}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{GameMenu()}{GameMenu()}}
+{\footnotesize\ttfamily Game\+Menu\+::\+Game\+Menu (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{WWindow,  }\item[{float}]{f\+Menux,  }\item[{float}]{f\+Menuy,  }\item[{int}]{n\+Size\+Font,  }\item[{int}]{n\+Step,  }\item[{std\+::vector$<$ sf\+::\+String $>$}]{vec\+Name }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00066}{66}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_menu_adfbc691fc305d2a148b0836f27d9910b}\label{class_game_menu_adfbc691fc305d2a148b0836f27d9910b} 
+\index{GameMenu@{GameMenu}!AlignMenu@{AlignMenu}}
+\index{AlignMenu@{AlignMenu}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{AlignMenu()}{AlignMenu()}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Align\+Menu (\begin{DoxyParamCaption}\item[{int}]{n\+PosX }\end{DoxyParamCaption})}
+
+
+
+The method that chooses placement of menu items. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+PosX} & The position that will be chosen \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00041}{41}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_a225cf180b763220f8ff5b562bc77db1d}\label{class_game_menu_a225cf180b763220f8ff5b562bc77db1d} 
+\index{GameMenu@{GameMenu}!Draw@{Draw}}
+\index{Draw@{Draw}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that draws menu options. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00166}{166}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_af02792164d12f5d631c6731438c89907}\label{class_game_menu_af02792164d12f5d631c6731438c89907} 
+\index{GameMenu@{GameMenu}!Draw@{Draw}}
+\index{Draw@{Draw}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Draw (\begin{DoxyParamCaption}\item[{int}]{n\+Start,  }\item[{int}]{n\+End }\end{DoxyParamCaption})}
+
+
+
+The method that draws menu options. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Start} & Start position of the menu \\
+\hline
+{\em n\+End} & Final position of the menu \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00176}{176}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_adeacdd0406e1186c106630a6f27f5a1c}\label{class_game_menu_adeacdd0406e1186c106630a6f27f5a1c} 
+\index{GameMenu@{GameMenu}!getSelectedMenuNumber@{getSelectedMenuNumber}}
+\index{getSelectedMenuNumber@{getSelectedMenuNumber}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{getSelectedMenuNumber()}{getSelectedMenuNumber()}}
+{\footnotesize\ttfamily int Game\+Menu\+::get\+Selected\+Menu\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00045}{45}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a075e875bf72864c84d867eea122e5dd0}\label{class_game_menu_a075e875bf72864c84d867eea122e5dd0} 
+\index{GameMenu@{GameMenu}!MoveDown@{MoveDown}}
+\index{MoveDown@{MoveDown}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{MoveDown()}{MoveDown()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Move\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that moves down through the menu. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00124}{124}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_ad302c0c92458ede1fc5d0e3133e7e070}\label{class_game_menu_ad302c0c92458ede1fc5d0e3133e7e070} 
+\index{GameMenu@{GameMenu}!MoveDown@{MoveDown}}
+\index{MoveDown@{MoveDown}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{MoveDown()}{MoveDown()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Move\+Down (\begin{DoxyParamCaption}\item[{int}]{n\+Start,  }\item[{int}]{n\+End }\end{DoxyParamCaption})}
+
+
+
+The method that moves down through the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Start} & Start position of the menu \\
+\hline
+{\em n\+End} & Final position of the menu \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00146}{146}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_a6483cd93b61744a7692b5594efa9d82e}\label{class_game_menu_a6483cd93b61744a7692b5594efa9d82e} 
+\index{GameMenu@{GameMenu}!MoveUp@{MoveUp}}
+\index{MoveUp@{MoveUp}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{MoveUp()}{MoveUp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Move\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The method that moves up through the menu. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00084}{84}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_a0cd6b159aa538735a43c0b32fdf0b1df}\label{class_game_menu_a0cd6b159aa538735a43c0b32fdf0b1df} 
+\index{GameMenu@{GameMenu}!MoveUp@{MoveUp}}
+\index{MoveUp@{MoveUp}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{MoveUp()}{MoveUp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Game\+Menu\+::\+Move\+Up (\begin{DoxyParamCaption}\item[{int}]{n\+Start,  }\item[{int}]{n\+End }\end{DoxyParamCaption})}
+
+
+
+The method that moves up through the menu. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+Start} & Start position of the menu \\
+\hline
+{\em n\+End} & Final position of the menu \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00105}{105}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_ac99690a72b14959c889626364c0f0252}\label{class_game_menu_ac99690a72b14959c889626364c0f0252} 
+\index{GameMenu@{GameMenu}!setColorTextMenu@{setColorTextMenu}}
+\index{setColorTextMenu@{setColorTextMenu}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{setColorTextMenu()}{setColorTextMenu()}}
+{\footnotesize\ttfamily void Game\+Menu\+::set\+Color\+Text\+Menu (\begin{DoxyParamCaption}\item[{sf\+::\+Color}]{Col\+Menu\+Color,  }\item[{sf\+::\+Color}]{Col\+Chosen\+Color,  }\item[{sf\+::\+Color}]{Col\+Bord\+Color }\end{DoxyParamCaption})}
+
+
+
+The method that changes the color of the menu option. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Col\+Menu\+Color} & Color of the options\textquotesingle{} titles \\
+\hline
+{\em Col\+Chosen\+Color} & Color of chosen option \\
+\hline
+{\em Col\+Bord\+Color} & Color of border of options \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00187}{187}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+\Hypertarget{class_game_menu_a8b648e1afda00816309127ef3b7df16e}\label{class_game_menu_a8b648e1afda00816309127ef3b7df16e} 
+\index{GameMenu@{GameMenu}!setInitText@{setInitText}}
+\index{setInitText@{setInitText}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{setInitText()}{setInitText()}}
+{\footnotesize\ttfamily void Game\+Menu\+::set\+Init\+Text (\begin{DoxyParamCaption}\item[{sf\+::\+Text \&}]{Txt\+Text,  }\item[{const sf\+::\+String \&}]{Str\+Str,  }\item[{float}]{f\+Xpos,  }\item[{float}]{f\+Ypos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The method that sets up the text that will be displayed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Txt\+Mtext} & The text that will be setted up \\
+\hline
+{\em f\+Xpos} & The position of the text on X-\/coordinates \\
+\hline
+{\em f\+Ypos} & The position of the text on Y-\/coordinates \\
+\hline
+{\em Str\+Str} & The text content \\
+\hline
+{\em n\+Size\+Font} & The size of the text font \\
+\hline
+{\em Col\+Menu\+Text\+Color} & The color of the text \\
+\hline
+{\em n\+Bord} & The thickness of the text border \\
+\hline
+{\em Col\+Border\+Color} & The color of the text border\\
+\hline
+\end{DoxyParams}
+{\bfseries{Example using}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}}\ =\ vecName.size();}
+\DoxyCodeLine{sf::Text\ TxtText;}
+\DoxyCodeLine{\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}.assign(\mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}},\ TxtText);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0,\ fYpos\ =\ 200,\ fXpos\ =\ 300;\ i\ <\ \mbox{\hyperlink{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}{nMaxMenu}};\ i++,\ fYpos\ +=\ 50)}
+\DoxyCodeLine{\ \ \ \mbox{\hyperlink{class_game_menu_a8b648e1afda00816309127ef3b7df16e}{setInitText}}(\mbox{\hyperlink{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}{vecMainMenu}}[i],\ vecName[i],\ fXpos,\ fYpos);}
+
+\end{DoxyCode}
+ 
+
+Definition at line \mbox{\hyperlink{_game_menu_8cpp_source_l00026}{26}} of file \mbox{\hyperlink{_game_menu_8cpp_source}{Game\+Menu.\+cpp}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_game_menu_abd6bd0874c589f829dd73e9110ac3433}\label{class_game_menu_abd6bd0874c589f829dd73e9110ac3433} 
+\index{GameMenu@{GameMenu}!ColBorderColor@{ColBorderColor}}
+\index{ColBorderColor@{ColBorderColor}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{ColBorderColor}{ColBorderColor}}
+{\footnotesize\ttfamily sf\+::\+Color Game\+Menu\+::\+Col\+Border\+Color = sf\+::\+Color\+::\+Black\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Color of border of options. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00022}{22}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868}\label{class_game_menu_a1e3ac5fd47196d83c9346a0a309dc868} 
+\index{GameMenu@{GameMenu}!ColchosenTextColor@{ColchosenTextColor}}
+\index{ColchosenTextColor@{ColchosenTextColor}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{ColchosenTextColor}{ColchosenTextColor}}
+{\footnotesize\ttfamily sf\+::\+Color Game\+Menu\+::\+Colchosen\+Text\+Color = sf\+::\+Color\+::\+Yellow\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Color of chosen option. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00021}{21}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9}\label{class_game_menu_a549e35fcfddaa91294237e1e7c07d2c9} 
+\index{GameMenu@{GameMenu}!ColMenuTextColor@{ColMenuTextColor}}
+\index{ColMenuTextColor@{ColMenuTextColor}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{ColMenuTextColor}{ColMenuTextColor}}
+{\footnotesize\ttfamily sf\+::\+Color Game\+Menu\+::\+Col\+Menu\+Text\+Color = sf\+::\+Color\+::\+White\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Color of the options\textquotesingle{} titles. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00020}{20}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a5a1df3385c139cd764d68d47c1231841}\label{class_game_menu_a5a1df3385c139cd764d68d47c1231841} 
+\index{GameMenu@{GameMenu}!FFont@{FFont}}
+\index{FFont@{FFont}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{FFont}{FFont}}
+{\footnotesize\ttfamily sf\+::\+Font Game\+Menu\+::\+FFont\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Font. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00017}{17}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_ab98ae31a5f50f4e9437ad037bbc37bfb}\label{class_game_menu_ab98ae31a5f50f4e9437ad037bbc37bfb} 
+\index{GameMenu@{GameMenu}!fMenuX@{fMenuX}}
+\index{fMenuX@{fMenuX}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{fMenuX}{fMenuX}}
+{\footnotesize\ttfamily float Game\+Menu\+::f\+MenuX\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+X-\/coordinates of menu. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00011}{11}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a95f0d001784f3860b960c0bd8ffe4d3f}\label{class_game_menu_a95f0d001784f3860b960c0bd8ffe4d3f} 
+\index{GameMenu@{GameMenu}!fMenuY@{fMenuY}}
+\index{fMenuY@{fMenuY}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{fMenuY}{fMenuY}}
+{\footnotesize\ttfamily float Game\+Menu\+::f\+MenuY\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Y-\/coordinates of menu. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00012}{12}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a7788db9f849148af27321a507f2fe8f3}\label{class_game_menu_a7788db9f849148af27321a507f2fe8f3} 
+\index{GameMenu@{GameMenu}!nMainMenuSelected@{nMainMenuSelected}}
+\index{nMainMenuSelected@{nMainMenuSelected}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{nMainMenuSelected}{nMainMenuSelected}}
+{\footnotesize\ttfamily int Game\+Menu\+::n\+Main\+Menu\+Selected\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Selected option. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00016}{16}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_ae338fec3edef1574e01afcf3e2834a79}\label{class_game_menu_ae338fec3edef1574e01afcf3e2834a79} 
+\index{GameMenu@{GameMenu}!nMaxMenu@{nMaxMenu}}
+\index{nMaxMenu@{nMaxMenu}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{nMaxMenu}{nMaxMenu}}
+{\footnotesize\ttfamily int Game\+Menu\+::n\+Max\+Menu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Number of options. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00014}{14}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a814e1b5f46fe02424c58e36b03282ab8}\label{class_game_menu_a814e1b5f46fe02424c58e36b03282ab8} 
+\index{GameMenu@{GameMenu}!nMenuStep@{nMenuStep}}
+\index{nMenuStep@{nMenuStep}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{nMenuStep}{nMenuStep}}
+{\footnotesize\ttfamily int Game\+Menu\+::n\+Menu\+Step\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Distance between menu options. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00013}{13}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a52780524eede1a189b3a64fee1b0370a}\label{class_game_menu_a52780524eede1a189b3a64fee1b0370a} 
+\index{GameMenu@{GameMenu}!nSizeFont@{nSizeFont}}
+\index{nSizeFont@{nSizeFont}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{nSizeFont}{nSizeFont}}
+{\footnotesize\ttfamily int Game\+Menu\+::n\+Size\+Font\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Font size. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00015}{15}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b}\label{class_game_menu_aa4c28a70ea176c2c71de0fcfc911ac5b} 
+\index{GameMenu@{GameMenu}!vecMainMenu@{vecMainMenu}}
+\index{vecMainMenu@{vecMainMenu}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{vecMainMenu}{vecMainMenu}}
+{\footnotesize\ttfamily std\+::vector$<$sf\+::\+Text$>$ Game\+Menu\+::vec\+Main\+Menu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Titles of options. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00018}{18}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+\Hypertarget{class_game_menu_a6334f48fe8720056bfa055dde6126541}\label{class_game_menu_a6334f48fe8720056bfa055dde6126541} 
+\index{GameMenu@{GameMenu}!WMywindow@{WMywindow}}
+\index{WMywindow@{WMywindow}!GameMenu@{GameMenu}}
+\doxysubsubsection{\texorpdfstring{WMywindow}{WMywindow}}
+{\footnotesize\ttfamily sf\+::\+Render\+Window\& Game\+Menu\+::\+WMywindow\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Window where menu will be displayed. 
+
+
+
+Definition at line \mbox{\hyperlink{_game_menu_8h_source_l00024}{24}} of file \mbox{\hyperlink{_game_menu_8h_source}{Game\+Menu.\+h}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/headers/Game\+Menu.\+h\item 
+D\+:/\+Uni materials/2 course/\+OOP/\+Project OOP/source/sources/Game\+Menu.\+cpp\end{DoxyCompactItemize}
