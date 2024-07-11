@@ -1,0 +1,21 @@
+body
+{
+	font-family: sans-serif;
+}
+.container
+{
+	width: 100%;
+	margin: 0 auto;
+	display: inline-block;
+	position: absolute;
+	top: 0px; left: 450px;
+}
+.block
+{
+	margin: 0.5em;
+	float: left;
+}
+.block img
+{
+	height: 25em;
+}

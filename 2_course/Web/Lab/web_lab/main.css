@@ -1,0 +1,415 @@
+body{
+    margin: 0;
+    background: url("https://www.krqe.com/wp-content/uploads/sites/12/2022/08/Shiprock.png?w=876&h=493&crop=1") no-repeat 100% 100%;
+    background-attachment: fixed;
+    background-size: 110%;
+} 
+
+
+
+@media screen and (min-width:450px) and (max-width: 1450px) {
+    body{
+        margin: 0;
+        background: url("https://r1.ilikewallpaper.net/iphone-12-pro-max-wallpapers/download-121806/new-mexico.jpg") no-repeat 100% 100%;
+        background-position-y: -100px;
+        background-attachment: fixed;
+        background-size: 100%;
+    } 
+}
+
+@media screen and (max-width: 450px) {
+    body{
+        margin: 0;
+        background: url("https://r1.ilikewallpaper.net/iphone-12-pro-max-wallpapers/download-121806/new-mexico.jpg") no-repeat 100% 100%;
+        background-attachment: fixed;
+        background-size: 100%;
+    } 
+}
+
+.main{
+    margin-right: 0;
+    margin-left: 0;
+    height: auto;
+}
+@media screen and (min-width: 1200px) and (max-width: 1300px) {
+    .main {
+        background-size: 130%;
+    }
+}
+@media screen and (min-width: 1080px) and (max-width: 1200px) {
+    .main {
+        background-size: 150%;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1080px) {
+    .main {
+        background-size: 170%;
+    }
+}
+@media screen and (min-width: 845px) and (max-width: 960px) {
+    .main {
+        background-size: 190%;
+    }
+}
+@media screen and (min-width: 720px) and (max-width: 845px) {
+    .main {
+        background-size: 210%;
+    }
+}
+@media screen and (min-width: 605px) and (max-width: 720px) {
+    .main {
+        background-size: 230%;
+    }
+}
+@media screen and (max-width: 605px) {
+    .main {
+        background-size: 300%;
+    }
+}
+
+header{
+    background-color: rgb(242, 242, 164);
+}
+
+.header_block{
+    height: 150px;
+}
+
+@media screen and (max-width: 720px) {
+    .header_block {
+        height: 300px;
+    }
+}
+
+.right_block{
+    float: left;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+.logo{
+    float: left;
+    width: auto;
+    height: 125px;
+    box-shadow:10px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.logo_text{
+    margin-left: 15px;
+    margin-top: 15px;
+    float: right;
+}
+
+.left_block{
+    float: right;
+    margin-right: 5%;
+    line-height: 18px;
+}
+
+.contacts_text{
+    font-size: 24px;
+}
+
+.contacts_ref{
+    font-size: 18px;
+    margin-left: 30%;
+    text-decoration: underline;
+    color: black;
+    font-stretch: expanded;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contacts_ref:hover {
+    font-weight: bolder;
+    text-shadow: #0000004e 0 0 12px;
+}
+
+.menu_ref{
+    margin-left: 0;
+    text-decoration: none;
+    font-size: 22px;
+    color: white;
+}
+
+.card a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card a:hover{
+    text-shadow: #00000093 0 0 12px;;
+}
+
+.menu_ref:hover {
+    font-weight: bolder;
+    text-shadow: #ffffff 0 0 12px;
+}
+
+.menu_body{
+    align-self: center;
+} 
+
+.menu_body ul, .menu_body li{
+    display: inline-block;
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+    height: auto;
+    background-color: rgb(43, 42, 35);
+}
+
+.header_block , .menu_body{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.central{
+    background-color: beige;
+    height: auto;
+    width: 75%;
+    margin-left: 12.5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.central_content{
+    display: flex;
+    flex-direction: row;
+    /* height: 100%; */
+}
+
+.sidebar{
+    width: 15%;
+    /* height: 100%; */
+}
+
+.content_wrapper{
+    margin-left: auto;
+    margin-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 5%;
+    width: 75%;
+    border-bottom: 2px solid black;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 2em;
+}
+
+
+.sep{
+    display: none;
+}
+
+@media screen and (max-width: 700px) {
+    .central_content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sep{
+        display:unset;
+    }
+    .sidebar{
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+    }
+    .sidebar ul, .sidebar li{
+        display: inline-block;
+    }
+
+    .content{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 920px) {
+
+    .content{
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+.card{
+    width: 200px;
+    height: 250px;
+    background-color: rgb(190, 190, 156);
+    text-align: center;
+}
+
+
+
+.card_img{
+    width: 60%;
+    height: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+
+}
+
+.card_img img{
+    height: 100%;
+    border: 2px solid rgb(27, 21, 21);
+    box-shadow: 0 0 7px 7px rgba(0, 0, 0, 0.4);
+}
+
+
+.sub_menu{
+    display: flex;
+    height: 25px;
+    background-color: beige;
+
+}
+
+.sub_menu .menu_body .menu_ref, .sub_menu .menu_body span{
+    margin-left: 0;
+    text-decoration: underline;
+    font-size: 1em;
+    color: rgb(0, 0, 0);
+}
+
+.sub_menu .menu_body{
+    align-self: normal;
+} 
+
+.sub_menu .menu_body span{
+    text-decoration: none;
+}
+
+.sub_menu .menu_body .menu_ref:hover {
+    font-weight: bolder;
+    text-shadow: #00000082 0 0 12px;
+}
+
+.items_menu{
+    padding-left: 10%;
+}
+
+.sidebar .menu_ref{
+    color: rgb(0, 0, 0);
+    font-size: 0.8em;
+}
+
+
+.sidebar .menu_ref:hover {
+    font-weight: bolder;
+    text-shadow: #00000082 0 0 12px;
+}
+
+.sidebar h3{
+    color: rgb(0, 0, 0);
+    font-size: 0.8em;
+}
+
+.side_ref{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.side_ref:hover{
+    font-weight: bolder;
+    text-shadow: #00000082 0 0 12px;
+}
+
+
+.lower{
+
+    width: 75%;
+    margin-left: 15%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 4%;
+}
+.lower div{
+    width: 48%;
+}
+
+
+.pagination_holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination a.active {
+    background-color: rgb(19, 21, 24);
+    color: white;
+}
+  
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+
+
+.footer_div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+    line-height: 0.8em;
+    font-size: 0.8em;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+@media screen and (max-width: 420px){
+    .footer_div{
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+}
+
+.footer_wrapper{
+    height: auto;
+    background-color: rgb(32, 30, 20);
+}
+
+.footer_ref, .footer_div p{
+    text-decoration: none;
+    color: rgb(241, 241, 222);
+}
+
+.footer_ref{
+    font-size: 0.8em;
+}
+
+.footer_ref:hover{
+    font-weight: bolder;
+    text-shadow: #f0f0f082 0 0 12px;
+}
+
+.footer_div ul{
+    color: rgb(241, 241, 222); ;
+}
+
+.footer_right{
+    margin-left: auto;
+}
+.footer_left{
+    margin-right: auto;
+}

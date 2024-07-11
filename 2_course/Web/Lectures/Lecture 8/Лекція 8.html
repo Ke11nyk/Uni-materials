@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лекція 8</title>
+    <style>
+        .wrapper {
+            width: 50%;
+            margin: 50px 25% 0 25%;
+        }
+
+        hr.marg {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .block {
+            background-color: orange;
+        }
+
+        .grid {
+            display: grid;
+            column-gap: 70px;
+            row-gap: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            column-gap: 70px;
+            row-gap: 30px;
+        }
+
+        .grid-container1 {
+            display: grid;
+            grid-template-areas:
+                ". d d d"
+                "b b . a"
+                "c c c e";
+            column-gap: 70px;
+            row-gap: 30px;
+        }
+
+        .grid-container2 {
+            display: grid;
+            grid-template-areas:
+                "b d d a"
+                "b . . a"
+                "b c . ."
+                "b c . e";
+            column-gap: 70px;
+            row-gap: 30px;
+        }
+
+        .grid-a {
+            grid-area: a;
+            background-color: orange;
+        }
+
+        .grid-b {
+            grid-area: b;
+            background-color: orange;
+        }
+
+        .grid-c {
+            grid-area: c;
+            background-color: orange;
+        }
+
+        .grid-d {
+            grid-area: d;
+            background-color: orange;
+        }
+
+        .grid-e {
+            grid-area: e;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="grid">
+            <div class="block" style="grid-column-start: 1; grid-column-end: 1; grid-row-start: 1; grid-row-end: 1">1</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 1; grid-row-start: 1; grid-row-end: 1">2</div>
+            <div class="block" style="grid-column-start: 3; grid-column-end: span 1; grid-row-start: 1; grid-row-end: 1">3</div>
+            <div class="block" style="grid-column-start: 1; grid-column-end: span 1; grid-row-start: 2; grid-row-end: 2">4</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 1; grid-row-start: 2; grid-row-end: 2">5</div>
+            <div class="block" style="grid-column-start: 3; grid-column-end: span 1; grid-row-start: 2; grid-row-end: 2">6</div>
+            <div class="block" style="grid-column-start: 1; grid-column-end: span 1; grid-row-start: 3; grid-row-end: 3">7</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 1; grid-row-start: 3; grid-row-end: 3">8</div>
+            <div class="block" style="grid-column-start: 3; grid-column-end: span 1; grid-row-start: 3; grid-row-end: 3">9</div>
+        </div>
+
+        <hr class="marg">
+
+        <div class="grid-container">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+        </div>
+    </div>
+
+    <hr class="marg">
+
+    <div class="wrapper">
+        <div class="grid">
+            <div class="block" style="grid-column-start: 4; grid-column-end: 5; grid-row-start: 2; grid-row-end: 3">1</div>
+            <div class="block" style="grid-column-start: 1; grid-column-end: span 2; grid-row-start: 2; grid-row-end: 3">2</div>
+            <div class="block" style="grid-column-start: 1; grid-column-end: span 3; grid-row-start: 3; grid-row-end: 4">3</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 3; grid-row-start: 1; grid-row-end: 2">4</div>
+            <div class="block" style="grid-column-start: 4; grid-column-end: span 1; grid-row-start: 3; grid-row-end: 4">5</div>
+        </div>
+
+        <hr class="marg">
+
+        <div class="grid">
+            <div class="block" style="grid-column-start: 4; grid-column-end: 5; grid-row-start: 1; grid-row-end: 3">1</div>
+            <div class="block" style="grid-column-start: 1; grid-column-end: 2; grid-row-start: 1; grid-row-end: 5">2</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 1; grid-row-start: 3; grid-row-end: 5">3</div>
+            <div class="block" style="grid-column-start: 2; grid-column-end: span 2; grid-row-start: 1; grid-row-end: 2">4</div>
+            <div class="block" style="grid-column-start: 4; grid-column-end: span 1; grid-row-start: 4; grid-row-end: 5">5</div>
+        </div>
+    </div>
+
+    <hr class="marg">
+
+    <div class="wrapper">
+        <div class="grid-container1">
+            <div class="grid-a">1</div>
+            <div class="grid-b">2</div>
+            <div class="grid-c">3</div>
+            <div class="grid-d">4</div>
+            <div class="grid-e">5</div>
+        </div>
+
+        <hr class="marg">
+
+        <div class="grid-container2">
+            <div class="grid-a">1</div>
+            <div class="grid-b">2</div>
+            <div class="grid-c">3</div>
+            <div class="grid-d">4</div>
+            <div class="grid-e">5</div>
+        </div>
+    </div>
+</body>
+</html>

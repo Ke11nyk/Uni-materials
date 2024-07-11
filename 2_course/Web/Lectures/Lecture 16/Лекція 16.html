@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecture 16</title>
+</head>
+<body>
+    <script>
+        // Сценарій, який відображає дату, час і день тижня
+        window.onload = function() {
+            var currentDate = new Date();
+            var dayOfWeek = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
+            var dateString = "Дата: " + currentDate.getDate() + "/" + (currentDate.getMonth()+1) + "/" + currentDate.getFullYear();
+            var timeString = "Час: " + currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+            var dayString = "День тижня: " + dayOfWeek[currentDate.getDay()];
+            alert(dateString + "\n" + timeString + "\n" + dayString);
+        }
+
+        // Функція, яка додає нове поле в об'єкт
+        function addFieldToObject(obj, key, value) {
+            if (!obj.hasOwnProperty(key)) {
+                obj[key] = value;
+            }
+            return obj;
+        }
+
+        // Перебираємо і виводимо всі поля об'єкта за допомогою for...in
+        function printFieldsForIn(obj) {
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    console.log(key + ": " + obj[key]);
+                }
+            }
+        }
+
+        // Перебираємо і виводимо всі поля об'єкта за допомогою Object.keys()
+        function printFieldsObjectKeys(obj) {
+            Object.keys(obj).forEach(function(key) {
+                console.log(key + ": " + obj[key]);
+            });
+        }
+
+        var testObj = {name: "John", age: 30};
+        addFieldToObject(testObj, "city", "Kyiv");
+        addFieldToObject(testObj, "city", "Kharkiv");
+        console.log("Перебираємо за допомогою for...in:");
+        printFieldsForIn(testObj);
+        console.log("Перебираємо за допомогою Object.keys():");
+        printFieldsObjectKeys(testObj);
+    </script>
+</body>
+</html>

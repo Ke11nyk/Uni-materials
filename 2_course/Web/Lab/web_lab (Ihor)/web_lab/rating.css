@@ -1,0 +1,60 @@
+.ratings_wrapper{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+}
+
+.ratings_wrapper a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ratings_wrapper a:hover{
+    text-shadow: #00000093 0 0 12px;;
+}
+
+.rating_container{
+    border: 2px solid rgb(54, 49, 36);
+    box-shadow: 0 0 5px 3px rgba(67, 65, 59, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+    background: no-repeat center center;
+}
+
+.s1{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/09/Breaking-Bad-Sony-Pictures-Television.jpg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+.s2{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/10/Hector-in-BB.jpg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+.s3{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/04/Breaking-Bad.jpg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+.s4{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/07/breaking-bad-crawl-space.jpeg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+.s5_1{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/07/breaking-bad-gliding-all-over_1200x630.jpeg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+.s5_2{
+    background-image: url("https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/07/breaking-bad-felina_1200x630.jpeg?q=50&fit=crop&w=1500&dpr=1.5");
+}
+
+/* .rating_container h3, .rating_container p{
+    background-color: rgba(103, 104, 95, 0.4);
+} */
+
+.rating{
+    height: auto;
+    background-color: rgba(179, 181, 164, 0.5);
+    font-weight: bold;
+    padding: 5%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 3px rgba(186, 187, 180, 0.5);
+}

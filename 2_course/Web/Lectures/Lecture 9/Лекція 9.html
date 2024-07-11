@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 9</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+    .rounded-12px {
+    border-radius: 12px;
+    background-color: lightgrey;
+  }
+
+  .rounded-50percent {
+    border-radius: 50%;
+    background-color: darkgrey;
+  }
+
+  .plan-header {
+    text-align: center;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .basic { background-color: #28a745; }
+  .standard { background-color: #007bff; }
+  .premium { background-color: #dc3545; }
+  .price-tag {
+    font-size: 2em;
+    text-align: center;
+    padding: 20px 0;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .features {
+    padding: 5px 20px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+  }
+
+  .purchase-btn {
+    text-align: center;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+</style>
+</head>
+<body>
+<button type="button" class="btn rounded-12px">12px</button>
+<button type="button" class="btn rounded-50percent">50%</button>
+
+<div class="container">
+  <div div class="row">
+    <div class="col-md-4">
+      <div class="plan-header basic">Free plan</div>
+      <div class="price-tag">$ 0</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Dolor sit amet!</div>
+      <div class="purchase-btn">
+        <button type="button" class="btn btn-success" style="width: 100%">Purchase</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="plan-header standard">Standart plan</div>
+      <div class="price-tag">$ 99</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Dolor sit amet!</div>
+      <div class="purchase-btn">
+        <button type="button" class="btn btn-primary" style="width: 100%">Purchase</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="plan-header premium">Premium plan</div>
+      <div class="price-tag">$ 999</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Lorem ipsum</div>
+      <div class="features">Dolor sit amet!</div>
+      <div class="purchase-btn">
+        <button type="button" class="btn btn-danger" style="width: 100%">Purchase</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecture 15</title>
+</head>
+<body>
+    <button id="add">Додати</button>
+    <button id="remove">Вилучити</button>
+    <div id="inputContainer">
+        <input type="text" />
+    </div>
+
+    <script>
+        document.getElementById('add').addEventListener('click', function() {
+            var input = document.createElement('input');
+            input.type = 'text';
+            document.getElementById('inputContainer').appendChild(input);
+        });
+
+        document.getElementById('remove').addEventListener('click', function() {
+            var container = document.getElementById('inputContainer');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seminar 8</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        img {
+            max-width: 200px;
+            max-height: 150px;
+            margin-bottom: 10px;
+        }
+
+        .attraction {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .attraction img {
+            margin-right: 20px;
+        }
+
+        .attraction-info {
+            flex: 1;
+        }
+
+        .attraction-info h3 {
+            margin-top: 0;
+        }
+
+        .attraction-info p {
+            margin-bottom: 5px;
+        }
+
+        #total-cost {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Country Explorer</h1>
+    <form>
+        <label for="country">Select a country:</label>
+        <select id="country" onchange="displayCountryInfo()">
+            <option value="">-- Select a country --</option>
+            <option value="france">France</option>
+            <option value="italy">Italy</option>
+            <option value="spain">Spain</option>
+            <option value="germany">Germany</option>
+            <option value="uk">United Kingdom</option>
+        </select>
+
+        <div id="country-info">
+            <!-- Country information will be displayed here -->
+        </div>
+
+        <div id="total-cost">
+            <!-- Total cost of selected attractions will be displayed here -->
+        </div>
+    </form>
+
+    <script>
+        const countryData = {
+            france: {
+                flag: "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png",
+                attractions: [
+                    { name: "Eiffel Tower", photo: "https://fr.igotoworld.com/frontend/webcontent/websites/26/images/attractions/Eiffel-Tower/673_800x600_eiffel-tower.jpg", description: "A famous tower in Paris, France.", price: 25 },
+                    { name: "Louvre Museum", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/1200px-Louvre_Museum_Wikimedia_Commons.jpg", description: "The world's largest art museum in Paris, France.", price: 15 },
+                    { name: "Notre-Dame Cathedral", photo: "https://a.cdn-hotels.com/gdcs/production56/d414/88e843e8-e043-4b0f-b101-398d4c4ab7fe.jpg?impolicy=fcrop&w=800&h=533&q=medium", description: "A famous cathedral in Paris, France.", price: 10 }
+                ]
+            },
+            italy: {
+                flag: "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Flag_of_Italy.svg/1200px-Flag_of_Italy.svg.png",
+                attractions: [
+                    { name: "Colosseum", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg", description: "An iconic amphitheater in Rome, Italy.", price: 20 },
+                    { name: "Leaning Tower of Pisa", photo: "https://media.istockphoto.com/id/505051855/photo/leaning-tower-of-pisa-italy.jpg?s=612x612&w=0&k=20&c=pTO4rWAZ6DXFVtd_DRAR9wpHHDGFjBOdtwRVgfXHQDI=", description: "A famous leaning tower in Pisa, Italy.", price: 18 },
+                    { name: "Trevi Fountain", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg/800px-Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg", description: "A famous fountain in Rome, Italy.", price: 0 }
+                ]
+            },
+            spain: {
+                flag: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Flag_of_Spain.svg/1200px-Flag_of_Spain.svg.png",
+                attractions: [
+                    { name: "Sagrada Familia", photo: "https://cdn.britannica.com/15/194815-050-08B5E7D1/Nativity-facade-Sagrada-Familia-cathedral-Barcelona-Spain.jpg", description: "A famous church in Barcelona, Spain.", price: 25 },
+                    { name: "Alhambra", photo: "https://i.natgeofe.com/n/bb36ca23-b3b2-4145-b46c-4689de640057/STOCK_MM10093_REDUX_h_00000221016864.jpg?w=1440&h=958", description: "A historic palace and fortress complex in Granada, Spain.", price: 15 },
+                    { name: "Park Güell", photo: "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/27/60/bb.jpg", description: "A public park system designed by Antoni Gaudí in Barcelona, Spain.", price: 10 }
+                ]
+            },
+            germany: {
+                flag: "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png",
+                attractions: [
+                    { name: "Brandenburg Gate", photo: "https://upload.wikimedia.org/wikipedia/commons/8/80/Berlin_-_0266_-_16052015_-_Brandenburger_Tor.jpg", description: "A famous landmark in Berlin, Germany.", price: 20 },
+                    { name: "Neuschwanstein Castle", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/800px-Schloss_Neuschwanstein_2013.jpg", description: "A famous castle in Bavaria, Germany.", price: 18 },
+                    { name: "Cologne Cathedral", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/800px-Schloss_Neuschwanstein_2013.jpg", description: "A famous cathedral in Cologne, Germany.", price: 12 }
+                ]
+            },
+            uk: {
+                flag: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png",
+                attractions: [
+                    { name: "Buckingham Palace", photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Buckingham_Palace_UK.jpg/1200px-Buckingham_Palace_UK.jpg", description: "The official London residence of the UK's monarchs.", price: 30 },
+                    { name: "Big Ben", photo: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/63/f8/bb/big-ben.jpg?w=1200&h=1200&s=1&pcx=1033&pcy=310&pchk=v1_bf93e1170e1f1f8d4cea", description: "A famous clock tower in London, UK.", price: 0 },
+                    { name: "Stonehenge", photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAjmmut7ijGIWEm5jGLXAAHRiUs6fYud-3sOnxeZnSAQ&s", description: "A prehistoric monument in Wiltshire, UK.", price: 25 }
+                ]
+            }
+        };
+
+        let selectedAttractions = [];
+
+        function displayCountryInfo() {
+            const countrySelect = document.getElementById("country");
+            const selectedCountry = countrySelect.value;
+            const countryInfoDiv = document.getElementById("country-info");
+            const totalCostDiv = document.getElementById("total-cost");
+
+            countryInfoDiv.innerHTML = "";
+            totalCostDiv.innerHTML = "";
+
+            if (selectedCountry) {
+                const selectedCountryData = countryData[selectedCountry];
+                const flagImg = document.createElement("img");
+                flagImg.src = selectedCountryData.flag;
+                flagImg.alt = `${selectedCountry} flag`;
+                countryInfoDiv.appendChild(flagImg);
+
+                const attractionsDiv = document.createElement("div");
+                let totalCost = 0;
+
+                selectedCountryData.attractions.forEach(attraction => {
+                    const attractionDiv = document.createElement("div");
+                    const photoImg = document.createElement("img");
+                    photoImg.src = attraction.photo;
+                    photoImg.alt = attraction.name;
+                    attractionDiv.appendChild(photoImg);
+
+                    const nameHeading = document.createElement("h3");
+                    nameHeading.textContent = attraction.name;
+                    attractionDiv.appendChild(nameHeading);
+
+                    const descriptionPara = document.createElement("p");
+                    descriptionPara.textContent = attraction.description;
+                    attractionDiv.appendChild(descriptionPara);
+
+                    const pricePara = document.createElement("p");
+                    pricePara.textContent = `Price: $${attraction.price}`;
+                    attractionDiv.appendChild(pricePara);
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.value = attraction.name;
+                    checkbox.dataset.price = attraction.price;
+                    checkbox.checked = selectedAttractions.includes(attraction.name);
+                    checkbox.addEventListener("change", updateTotalCost);
+                    attractionDiv.appendChild(checkbox);
+
+                    attractionsDiv.appendChild(attractionDiv);
+                    totalCost += attraction.price;
+                });
+
+                countryInfoDiv.appendChild(attractionsDiv);
+
+                const totalCostHeading = document.createElement("h3");
+                totalCostHeading.textContent = `Total Cost: $${calculateTotalCost()}`;
+                totalCostDiv.appendChild(totalCostHeading);
+            }
+        }
+
+        function updateTotalCost(event) {
+            const checkbox = event.target;
+            const attractionName = checkbox.value;
+            const attractionPrice = parseInt(checkbox.dataset.price);
+
+            if (checkbox.checked) {
+                selectedAttractions.push(attractionName);
+            } else {
+                selectedAttractions = selectedAttractions.filter(name => name !== attractionName);
+            }
+
+            const totalCostHeading = document.querySelector("#total-cost h3");
+            totalCostHeading.textContent = `Total Cost: $${calculateTotalCost()}`;
+        }
+
+        function calculateTotalCost() {
+            let totalCost = 0;
+            for (const country in countryData) {
+                const countryAttractions = countryData[country].attractions;
+                for (const attraction of countryAttractions) {
+                    if (selectedAttractions.includes(attraction.name)) {
+                        totalCost += attraction.price;
+                    }
+                }
+            }
+            return totalCost;
+        }
+    </script>
+</body>
+</html>

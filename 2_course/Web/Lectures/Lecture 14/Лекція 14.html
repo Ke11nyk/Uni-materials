@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecture 14</title>
+</head>
+<body>
+    <script>
+        let array1 = [1, 2, 3, -1, 4, -3, 5, 0];
+        let array2 = [-1, 5, 6, 7, 8, 9, 0, -3, 10];
+        
+        // Завдання 1
+        let array3 = [...new Set(array1.concat(array2))];
+        console.log("Масив з унікальних елементів: ", array3);
+        
+        // Завдання 2
+        let evenNumbers = array3.filter(num => num > 0 && num % 2 == 0);
+        console.log("Парні числа з додатніх елементів масиву: ", evenNumbers);
+        
+        // Завдання 3
+        if (array3.includes(0)) {
+            console.log("Масив містить нуль");
+        }
+        
+        // Завдання 4
+        let index = array3.indexOf(5);
+        if (index != -1) {
+            console.log("Індекс елемента масиву, значення якого = 5: ", index);
+        }
+        
+        // Завдання 5
+        let product = array3.reduce((total, currentValue) => total * currentValue);
+        console.log("Добуток всіх елементів масиву: ", product);
+        
+        // Завдання 6
+        // a)
+        let sortedAlphabetically = [...array3].sort();
+        console.log("Елементи масиву в алфавітному порядку: ", sortedAlphabetically);
+        
+        // b)
+        let sortedNumerically = [...array3].sort((a, b) => Math.abs(a) - Math.abs(b));
+        console.log("Чисельний масив, відсортований без урахування знаку: ", sortedNumerically);
+    </script>
+</body>
+</html>

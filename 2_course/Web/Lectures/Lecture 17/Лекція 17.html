@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lecture 17</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gallery</h1>
+  <button onclick="gallery.serializeAll()">Serialize All</button>
+  <button onclick="gallery.serializeNamesOnly()">Serialize Names Only</button>
+  <button onclick="gallery.serializeWithoutEmptyNames()">Serialize Without Empty Names</button>
+
+  <script>
+    class Picture {
+      constructor(name, path, addedDate) {
+        this.name = name;
+        this.path = path;
+        this.addedDate = addedDate;
+      }
+    }
+
+    class Gallery {
+      constructor() {
+        this.pictures = [];
+      }
+
+      addPicture(name, path) {
+        const addedDate = new Date();
+        this.pictures.push(new Picture(name, path, addedDate));
+      }
+
+      serializeAll() {
+        const serializedData = JSON.stringify(this.pictures, this.replacer, 4);
+        console.log(serializedData);
+      }
+
+      serializeNamesOnly() {
+        const names = this.pictures.map(picture => picture.name);
+        const serializedData = JSON.stringify(names, null, 4);
+        console.log(serializedData);
+      }
+
+      serializeWithoutEmptyNames() {
+        const filteredPictures = this.pictures.filter(picture => picture.name !== '');
+        const serializedData = JSON.stringify(filteredPictures, this.replacer, 4);
+        console.log(serializedData);
+      }
+
+      replacer(key, value) {
+        if (key === 'addedDate' && value instanceof Date) {
+          return value.toISOString();
+        }
+        return value;
+      }
+    }
+
+    const gallery = new Gallery();
+    gallery.addPicture('Sunset', 'sunset.jpg');
+    gallery.addPicture('Beach', 'beach.png');
+    gallery.addPicture('', 'landscape.jpg');
+    gallery.addPicture('Mountains', 'mountains.png');
+  </script>
+</body>
+</html>

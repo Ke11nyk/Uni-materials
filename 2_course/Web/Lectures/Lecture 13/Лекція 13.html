@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лекція 13</title>
+    <script>
+        function calculate() {
+            var x1 = prompt("Введіть x1 для точки 1");
+            var y1 = prompt("Введіть y1 для точки 1");
+            var x2 = prompt("Введіть x2 для точки 2");
+            var y2 = prompt("Введіть y2 для точки 2");
+
+            var quadrant1 = getQuadrant(x1, y1);
+            var quadrant2 = getQuadrant(x2, y2);
+
+            var result = '';
+            if (quadrant1 == quadrant2) {
+                var distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                result = 'Відстань між точками: ' + distance.toFixed(2);
+            } else {
+                result = 'Точка 1 знаходиться ' + quadrant1 + ', а точка 2 - ' + quadrant2;
+            }
+
+            alert(result);
+        }
+
+        function getQuadrant(x, y) {
+            if (x > 0 && y > 0) return 'в чверті 1';
+            if (x < 0 && y > 0) return 'в чверті 2';
+            if (x < 0 && y < 0) return 'в чверті 3';
+            if (x > 0 && y < 0) return 'в чверті 4';
+            return 'на осі';
+        }
+
+        // Function Declaration
+        function fizzBuzzDeclaration() {
+            var n = prompt("Введіть число n");
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log('fizzbuzz');
+                } else if (i % 3 === 0) {
+                    console.log('fizz');
+                } else if (i % 5 === 0) {
+                    console.log('buzz');
+                } else {
+                    console.log(i);
+                }
+            }
+        }
+
+        // Function Expression
+        var fizzBuzzExpression = function() {
+            var n = prompt("Введіть число n");
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log('fizzbuzz');
+                } else if (i % 3 === 0) {
+                    console.log('fizz');
+                } else if (i % 5 === 0) {
+                    console.log('buzz');
+                } else {
+                    console.log(i);
+                }
+            }
+        };
+
+        // Arrow Function
+        var fizzBuzzArrow = () => {
+            var n = prompt("Введіть число n");
+            for (let i = 1; i <= n; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    console.log('fizzbuzz');
+                } else if (i % 3 === 0) {
+                    console.log('fizz');
+                } else if (i % 5 === 0) {
+                    console.log('buzz');
+                } else {
+                    console.log(i);
+                }
+            }
+        };
+
+        // Function Declaration
+        function costDeclaration() {
+            var grn = prompt("Введіть кількість гривень");
+            var kop = prompt("Введіть кількість копійок");
+            grn = Math.floor(parseInt(grn) + parseInt(kop / 100));
+            kop = kop % 100;
+
+            var grnWord = 'гривні';
+            if (grn % 10 === 1) {
+                grnWord = 'гривня';
+            } else if (grn % 10 >= 5 || grn % 10 === 0) {
+                grnWord = 'гривень';
+            }
+
+            var kopWord = 'копійки';
+            if (kop % 10 === 1) {
+                kopWord = 'копійка';
+            } else if (kop % 10 >= 5 || kop % 10 === 0) {
+                kopWord = 'копійок';
+            }
+
+            alert("Вартість замовлення: " + grn + " " + grnWord + " " + kop + " " + kopWord);
+        }
+
+        // Function Expression
+        var costExpression = function() {
+            var grn = prompt("Введіть кількість гривень");
+            var kop = prompt("Введіть кількість копійок");
+            grn = Math.floor(parseInt(grn) + parseInt(kop / 100));
+            kop = kop % 100;
+
+            var grnWord = 'гривні';
+            if (grn % 10 === 1) {
+                grnWord = 'гривня';
+            } else if (grn % 10 >= 5 || grn % 10 === 0) {
+                grnWord = 'гривень';
+            }
+
+            var kopWord = 'копійки';
+            if (kop % 10 === 1) {
+                kopWord = 'копійка';
+            } else if (kop % 10 >= 5 || kop % 10 === 0) {
+                kopWord = 'копійок';
+            }
+
+            alert("Вартість замовлення: " + grn + " " + grnWord + " " + kop + " " + kopWord);
+        };
+
+        // Arrow Function
+        var costArrow = () => {
+            var grn = prompt("Введіть кількість гривень");
+            var kop = prompt("Введіть кількість копійок");
+            grn = Math.floor(parseInt(grn) + parseInt(kop / 100));
+            kop = kop % 100;
+
+            var grnWord = 'гривні';
+            if (grn % 10 === 1) {
+                grnWord = 'гривня';
+            } else if (grn % 10 >= 5 || grn % 10 === 0) {
+                grnWord = 'гривень';
+            }
+
+            var kopWord = 'копійки';
+            if (kop % 10 === 1) {
+                kopWord = 'копійка';
+            } else if (kop % 10 >= 5 || kop % 10 === 0) {
+                kopWord = 'копійок';
+            }
+
+            alert("Вартість замовлення: " + grn + " " + grnWord + " " + kop + " " + kopWord);
+        };
+    </script>
+</head>
+<body>
+    <button onclick="calculate()">Розрахувати відстань між точками</button>
+    <button onclick="fizzBuzzDeclaration()">Виконати FizzBuzz (Function Declaration)</button>
+    <button onclick="fizzBuzzExpression()">Виконати FizzBuzz (Function Expression)</button>
+    <button onclick="fizzBuzzArrow()">Виконати FizzBuzz (Arrow Function)</button>
+    <button onclick="costDeclaration()">Розрахувати вартість замовлення (Function Declaration)</button>
+    <button onclick="costExpression()">Розрахувати вартість замовлення (Function Expression)</button>
+    <button onclick="costArrow()">Розрахувати вартість замовлення (Arrow Function)</button>
+</body>
+</html>

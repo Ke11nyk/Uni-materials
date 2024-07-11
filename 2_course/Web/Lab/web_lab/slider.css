@@ -1,0 +1,160 @@
+
+.slider_container{
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider_bar {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    position: relative;
+}
+@media screen and (min-width: 1200px) and (max-width: 1300px) {
+    .slider_container {
+      height: 45vh;
+    }
+}
+@media screen and (min-width: 1080px) and (max-width: 1200px) {
+    .slider_container {
+      height: 40vh;
+    }
+}
+@media screen and (min-width: 960px) and (max-width: 1080px) {
+    .slider_container {
+      height: 35vh;
+    }
+}
+@media screen and (min-width: 845px) and (max-width: 960px) {
+    .slider_container {
+      height: 30vh;
+    }
+}
+@media screen and (min-width: 720px) and (max-width: 845px) {
+    .slider_container {
+      height: 25vh;
+    }
+}
+@media screen and (min-width: 605px) and (max-width: 720px) {
+    .slider_container {
+      height: 20vh;
+    }
+}
+@media screen and (max-width: 605px) {
+    .slider_container {
+      height: 15vh;
+    }
+} 
+
+.sl1 .slide{
+    background: url("https://estaticos-cdn.elperiodico.com/clip/077bbab1-81cd-4589-b948-7965824b9bc0_alta-libre-aspect-ratio_default_0.jpg") no-repeat center center;
+    background-size: cover;
+}
+.sl2 .slide{
+    background: url("https://www.nme.com/wp-content/uploads/2018/11/breakingbad1-696x442.jpg") no-repeat center center;
+    background-size: cover;
+}
+.sl3 .slide{
+    background: url("https://www.usmagazine.com/wp-content/uploads/2020/08/Breaking-Bad-Where-Are-They-Now.jpg?w=1600&quality=86&strip=all") no-repeat center center;
+    background-size: cover;
+    background-position-y: 0;
+}
+.sl4 .slide{
+    background: url("https://www.rollingstone.com/wp-content/uploads/2022/04/TCDBRBA_EC027.jpg?w=1581&h=1054&crop=1") no-repeat center center;
+    background-size: cover;
+}
+.sl5 .slide{
+    background: url("https://www.rollingstone.com/wp-content/uploads/2018/06/in-appreciation-of-breaking-bad-c0c45f48-b5f4-4532-a1eb-171617bce3e3.jpg?w=1581&h=1054&crop=1") no-repeat center center;
+    background-size: cover;
+    background-position-y: 0;
+}
+.slide{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 0;
+    transition: 0.8s, opacity 0.6s, -webkit-filter 2.5s ease-out;
+
+}
+
+
+.slides, .slide_cover {
+    width: 100%;
+    height: 100%;
+}
+
+.slide_cover{
+    position: absolute;
+}
+
+.slides {
+    display: block;
+    align-items: center;
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 7px 20px rgba(254, 255, 219, 0.612);
+    position: relative;
+    overflow: hidden;
+}
+
+#sb1:checked ~ .slides .sl1 .slide,
+#sb2:checked ~ .slides .sl2 .slide,
+#sb3:checked ~ .slides .sl3 .slide,
+#sb4:checked ~ .slides .sl4 .slide,
+#sb5:checked ~ .slides .sl5 .slide {
+    opacity: 1;
+    z-index: 1;
+}
+
+.sbtn1, .sbtn2, .sbtn3, .sbtn4, .sbtn5{
+    position: absolute;
+    top: 92%;
+    z-index: 2;
+}
+
+.empty{
+    display: none;
+}
+
+.actual_buttons label {
+    display: block;
+    height: 10px;
+    width: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.5s;
+    background-color: rgb(255, 255, 255);
+} 
+
+.actual_buttons label:hover,
+#sb1:checked ~ .actual_buttons label:nth-of-type(1),
+#sb2:checked ~ .actual_buttons label:nth-of-type(2),
+#sb3:checked ~ .actual_buttons label:nth-of-type(3),
+#sb4:checked ~ .actual_buttons label:nth-of-type(4),
+#sb5:checked ~ .actual_buttons label:nth-of-type(5) {
+  opacity: 0.8;
+}
+
+.sbtn1{
+    /* left: 45%; */
+    margin-left: 30%;
+}
+.sbtn2{
+    /* left: 47.5%; */
+    margin-left: 40%;
+}
+.sbtn3{
+    /* left: 50%; */
+    margin-left: 50%;
+}
+.sbtn4{
+    /* left: 52.5%; */
+    margin-left: 60%;
+}
+.sbtn5{
+    /* left: 55%; */
+    margin-left: 70%;
+}

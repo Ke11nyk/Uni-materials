@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecture 18</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            background-color: white;
+        }
+        td.black {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <label for="rows">Rows:</label>
+    <input type="number" id="rows" value="5" min="1">
+
+    <label for="columns">Columns:</label>
+    <input type="number" id="columns" value="7" min="1">
+
+    <div><button onclick="createTable()">Create Table</button></div>
+    <br>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function createTable() {
+            const rows = document.getElementById("rows").value;
+            const columns = document.getElementById("columns").value;
+            let table = `<table>`;
+
+            for (let i = 0; i < rows; i++) {
+                table += `<tr>`;
+                for (let j = 0; j < columns; j++) {
+                    const isBlack = (i + j) % 2 === 0;
+                    table += `<td class="${isBlack ? 'black' : ''}"></td>`;
+                }
+                table += `</tr>`;
+            }
+
+            table += `</table>`;
+            document.getElementById("tableContainer").innerHTML = table;
+        }
+    </script>
+</body>
+</html>

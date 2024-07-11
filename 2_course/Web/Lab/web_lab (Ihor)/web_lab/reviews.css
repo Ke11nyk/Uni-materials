@@ -1,0 +1,40 @@
+.reviews_wrapper{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+}
+
+.review_container{
+    border: 2px solid rgb(54, 49, 36);
+    box-shadow: 0 0 5px 1px rgba(150, 142, 119, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.reviews_wrapper a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reviews_wrapper a:hover{
+    text-shadow: #00000093 0 0 12px;;
+}
+
+
+.reviews_wrapper h1{
+    line-height: 36px;
+}
+
+.right_align{
+    text-align: right;
+}
+
+.left_align{
+    text-align: left;
+}

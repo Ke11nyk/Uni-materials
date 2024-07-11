@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css"/>
+    <title>Семінар 3</title>
+    <style>
+        body
+        {
+          font-family: 'Times New Roman', serif;
+        }
+
+        h1
+        {
+          margin-bottom: 0;
+        }
+
+        fieldset
+        {
+          margin-bottom: 1%;
+          padding: 1%;
+        }
+
+        legend
+        {
+          padding: 0 0.1875em;
+          font-weight: bold;
+          font-variant: small-caps;
+        }
+
+        label
+        {
+          width: 6.875em;
+          display: inline-block;
+          vertical-align: top;
+          margin: 0.375em;
+        }
+
+        em
+        {
+          font-weight: bold;
+          font-style: normal;
+          color: #f00000;
+        }
+
+        input:focus
+        {
+          background: #EAEAEA;
+        }
+
+        input, textarea
+        {
+          font-size: 1em;
+          width: 50%;
+        }
+
+        textarea
+        {
+          height: 10.25em;
+        }
+
+        select
+        {
+          font-size: 1em;
+          width: 51.5%;
+        }
+
+        input[type=checkbox]
+        {
+          width: 1em;
+        }
+
+        input[type=submit]
+        {
+          font-size: 1em;
+          width: 6em;
+        }
+
+        .form_block
+        {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          max-width: 50%;
+          padding: 0 1.875em;
+        }
+    </style>
+  </head>
+
+  <body class="form_block">
+    <div >
+      <form>
+        <h1>Форма заявки на роботу в зоопарку</h1>
+
+        <p><i>Будь ласка, заповніть форму. Обов'язкові поля відмічені</i><em>*</em></p>
+        <fieldset>
+          <legend>Контактна інформація</legend>
+            <label>Ім'я <em>*</em></label>
+            <input><br>
+            <label>Телефон</label>
+            <input><br>
+            <label>E-mail <em>*</em></label>
+            <input><br>
+        </fieldset>
+        <fieldset>
+          <legend>Персональна інформація</legend>
+            <label>Вік<em>*</em></label>
+            <input><br>
+            <label>Стать</label>
+            <select>
+              <option>Чоловік</option>
+              <option>Жінка</option>
+            </select><br>
+            <label>Перерахуйте особисті якості</label>
+            <textarea></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Виберіть улюблених тварин:</legend>
+          <label><input type="checkbox"> Зебра</label>
+          <label><input type="checkbox"> Слон</label>
+          <label><input type="checkbox"> Тигр</label>
+          <label><input type="checkbox"> Людина</label>
+          <label><input type="checkbox"> Скунс</label>
+          <label><input type="checkbox"> Лев</label>
+          <label><input type="checkbox"> Носоріг</label>
+          <label><input type="checkbox"> Черепаха</label>
+        </fieldset>
+        <p><input type="submit" value="Відправити"></p>
+      </form>
+    </div>
+  </body>
+</html>

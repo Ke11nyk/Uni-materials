@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Hint</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <script src='main.js'></script>
+    <style>
+         h1 {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            text-align: center;
+            color: #957dad;
+            font-family: 'Montserrat', sans-serif;
+        }
+          
+        section {
+            padding: 5%;
+            padding-top: 0;
+            height: 50vh;
+        }
+          
+        .side {
+            margin-left: 0;
+        }
+          
+        button {
+            margin: 10px;
+            border-color: #957dad !important;
+            color: #888888 !important;
+            margin-bottom: 25px;
+        }
+          
+        button:hover {
+            background-color: #fec8d8 !important;
+        }
+          
+        /* textarea {
+            padding: 3%;
+            border-color: #957dad;
+            border-width: thick;
+        } */
+        .editable {
+            width: 360px;
+            height: 120px;
+            border: 1px solid #ccc;
+            
+        }
+          
+        .flex-box {
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #999;
+            padding: 0;
+            margin: 0;
+        }
+        tr:first-child td,
+        td:first-child {
+            background-color: #ccc;
+            /* padding: 1px 3px; */
+            font-weight: bold;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        svg {
+            display: none;
+        }
+        .removable:hover {
+            background-color: black;
+            cursor: pointer;
+            animation: fadeIn 0.6s;
+        }
+        .removable:hover svg {
+            width: 17px;
+            height: 17px;
+            margin: 2px;
+            margin-left: -10px;
+            padding: 0;
+            border: 0;
+            display: inline;
+            fill: white;
+            position: relative;
+        }
+        .removableColumn svg {
+            position: absolute;
+            bottom: 0px;
+            left: 1px;
+        }
+    </style>
+    <script>
+        function bold() {
+            var sel = window.getSelection();
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = 'font-weight: bold;'; 
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+        
+        function italic() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = 'font-style: italic;'; 
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+
+        function underline() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = 'text-decoration: underline;'; 
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+        
+        function color() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var elem = document.createElement('span');
+                var col = document.getElementById("col").value;
+                console.log(col);
+                elem.style = 'color: ' + col + ';'; 
+                console.log(elem.style);
+                elem.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(elem); 
+            }
+        }
+        
+        function upper() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = 'text-transform: uppercase;'; 
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+        
+        function lower() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = 'text-transform: lowercase;'; 
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+        
+        function clear() {
+            var sel = window.getSelection(); 
+            if (sel.rangeCount) {
+                var element = document.createElement('span');
+                element.style = '';
+                element.innerHTML = sel.toString();
+                var range = sel.getRangeAt(0);
+                range.deleteContents(); 
+                range.insertNode(element); 
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <!-- TEXT EDITOR -->
+    <section class="">
+        <h1 class="shadow-sm">TEXT EDITOR</h1>
+        <div class="flex-box">
+            <div class="row">
+                <div class="col">
+                    <button type="button" onclick="bold()" class=" shadow-sm btn btn-outline-secondary" data-toggle="tooltip"data-placement="top" title="Bold Text"> Bold</button>
+                    <button type="button"  onclick="italic()" class="shadow-sm btn btn-outline-success"  data-toggle="tooltip" data-placement="top" title="Italic Text">Italic</button>
+                    <button type="button"  onclick="underline()" class="shadow-sm btn btn-outline-success"  data-toggle="tooltip" data-placement="top" title="Underline Text">Underline</button>
+                    <button type="button" onclick="color()"  class=" shadow-sm btn btn-outline-primary" data-toggle="tooltip" data-placement="top"title="Change Color">Change Color</button>
+                    <input type="color" id="col" value="#1111">
+                    <button type="button" onclick="upper()"  class="btn shadow-sm btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Uppercase Text">Upper Case</button>
+                    <button type="button" onclick="lower()" class="btn shadow-sm btn-outline-primary" data-toggle="tooltip" data-placement="top"  title="Lowercase Text"> Lower Case</button>
+                    <button type="button" onclick="clear()" class="btn shadow-sm btn-outline-primary side" data-toggle="tooltip" data-placement="top" title="Clear Formatting">Clear Formatting</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+            </div>
+            <div class="col-md-6 col-sm-9">
+                <div class="flex-box">
+                    <div contenteditable="true" class="editable shadow">
+                        Enter Text
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </section>
+    <!-- TABLE GENERATION -->
+    <section class="">
+        <table></table>
+        <button type="button" class="btn" onclick="AddRow()"> Add row </button>
+        <button type="button" class="btn" onclick="AddColumn()"> Add column </button>
+        <input type="number" placeholder="7" min="0" id="inrows" onchange="createTableManually()" />
+        <input type="number" placeholder="7" min="0" id="incolumns" onchange="createTableManually()"/>
+    </section>
+    <script>
+          var rows = 3;
+          var columns = 3;
+  
+          const rebuild = function() {
+              var counter = 0;
+              var rows = document.querySelectorAll('tr');
+              rows.forEach((row) => {
+                  for (var j = 0; j < columns; j++) {
+  
+                      let c = String.fromCharCode('A'.charCodeAt(0) + j - 1)
+                      if (counter && j) {
+                          let value = row.childNodes[j].childNodes[0].value;
+                          row.childNodes[j].innerHTML =
+                              "<input id='" + c + counter + "'/>";
+                          row.childNodes[j].childNodes[0].value = value;
+                      } else {
+                          const symbol = counter || c
+                          console.log(typeof symbol)
+                          row.childNodes[j].innerHTML =
+                              typeof symbol !== 'string' ? '<div class="removableColumn">' + symbol + '</div>' : '<div class="removableRow">' + symbol + '</div>'
+                      }
+                  }
+                  counter++;
+              })
+          }
+  
+          const createTableManually = function() {
+              rows = document.getElementById("inrows").value || 3;
+              columns = document.getElementById("incolumns").value || 3;
+              if (rows < 0 || columns < 0) {
+                  alert("Enter positive numbers greater then 1");
+                  return;
+              }
+              document.querySelector('table').childNodes.forEach((element) => {element.remove()});
+              createTable();
+          }
+  
+        function createTable() {
+              for (var i = 0; i < rows; i++) {
+                  let row = document.querySelector('table').insertRow(-1);
+                  for (var j = 0; j < columns; j++) {
+                      let letter = String.fromCharCode('A'.charCodeAt(0) + j - 1);
+                      if (i && j) {
+                          row.insertCell(-1).innerHTML ="<input id='" + letter + i + "'/>"
+                      } else {
+                          const symbol = i || letter;
+                          row.insertCell(-1).innerHTML =typeof symbol !== 'string'? '<div class="removableColumn">' + symbol + '</div>': '<div class="removableRow">' + symbol + '</div>'
+                      }
+                  }
+              }
+              addDeletebleFeature();
+          }
+          
+          function  AddRow () {
+          let row = document.querySelector('table').insertRow(-1)
+          for (let j = 0; j < columns; j++) {
+  
+              let letter = String.fromCharCode('A'.charCodeAt(0) + j - 1)
+  
+              if (rows && j) {
+                  row.insertCell(-1).innerHTML =
+                      "<input id='" + letter + rows + "'/>"
+              } else {
+                  const symbol = rows || letter
+                  console.log(typeof symbol)
+                  row.insertCell(-1).innerHTML =
+                      typeof symbol !== 'string'? '<div class="deletebleColumn">' + symbol + '</div>': '<div class="deletebleRow">' + symbol + '</div>'
+                  }
+              }
+              rows++;
+              rebuild();
+              addDeletebleFeature();
+          }
+  
+            function AddColumn() {
+              for (let i = 0; i < rows; i++) {
+                  let row = document.querySelector('table').rows[i];
+  
+                      let letter = String.fromCharCode('A'.charCodeAt(0) + columns - 1)
+  
+                      if (i && columns) {
+                          row.insertCell(-1).innerHTML ="<input id='" + letter + i + "'/>"
+                      } else {
+                          const symbol = i || letter
+                          console.log(typeof symbol)
+                          row.insertCell(-1).innerHTML =
+                              typeof symbol !== 'string'? '<div class="deletebleColumn">' + symbol + '</div>': '<div class="deletebleRow">' + symbol + '</div>'
+                      }
+              }
+              columns++;
+              rebuild();
+              addDeletebleFeature();
+          }
+  
+          const deletable = (el) => {
+              if (el.innerText === '@') {
+                  return
+              }
+              if (el.classList[1] === 'deletable') {
+                  return
+              }
+              el.classList.add('deletable')
+              el.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 4h-3.5l-1-1h-5l-1 1H5v2h14zM6 7v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zm8 7v4h-4v-4H8l4-4 4 4h-2z"/></svg>`
+          }
+  
+          const addDeletebleFeature = function () {
+              const deletableRows = document.querySelectorAll('.deletebleRow')
+  
+              deletableRows.forEach((row) => {
+                  deletable(row)
+                  if (row.innerText !== '@') {
+                      row.addEventListener('click', (e) => {
+                          let elements = document.querySelectorAll(
+                              `[id^=${row.innerText}]`
+                          )
+                          elements.forEach((elm) => {
+                              elm.parentNode.remove()
+                              console.log('deleted ' + elm.id)
+                          })
+                          row.parentNode.remove()
+                          columns--;
+                          rebuild();
+                          addDeletebleFeature();
+                      })
+                  }
+              })
+  
+              const deletableColumns = document.querySelectorAll('.deletebleColumn')
+              deletableColumns.forEach((column) => {
+                  deletable(column)
+                  if (column.innerText !== '@') {
+                      column.addEventListener('click', (e) => {
+                          let elements = document.querySelectorAll(
+                              `[id$=${"'" + column.innerText + "'"}]`
+                          )
+                          console.log(elements);
+                          elements.forEach((elm) => {
+                              elm.remove()
+                              console.log('deleted ' + elm.id)
+                          })
+                          column.parentNode.parentNode.remove()
+                          rows--;
+                          rebuild();
+                          addDeletebleFeature();
+                      })
+                  }
+              })
+          }
+  
+          window.onload = createTable();
+  
+      </script>
+</body>
+</html>

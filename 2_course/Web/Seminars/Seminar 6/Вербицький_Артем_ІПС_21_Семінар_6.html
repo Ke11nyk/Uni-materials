@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seminar 6</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .card-img-top {
+            border-radius: 50%;
+            border: 3px solid red;
+            width: 70%; /* Adjust this to change the radius */
+            height: auto;
+            object-fit: cover;
+            margin-top: 5%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            border-radius: 50%;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 30px;
+            background-size: cover;
+        }
+        .btn-google {
+            background-image: url('g.png');
+        }
+        .btn-facebook {
+            background-image: url('fb.png');
+        }
+        .btn-twitter {
+            background-image: url('tw.png');
+        }
+        .card:hover {
+            background-color: #f8f9fa;
+        }
+        .main-body {
+            text-align: center;
+        }
+        .card-body {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Наша команда</h1>
+        <div class="main-body">Ми три козаки із Запорізької Січі. Багато мандруємо по світу, спілкуємось з людьми з різних країн та епох. <br>Навіть зустрічаємось з інопланетянами<br><br></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="око.png" class="card-img-top" alt="Козак Око">
+                    <div class="card-body">
+                        <h5 class="card-title">Козак Око</h5>
+                        <p class="card-text">Маленький козак, але бадьорий та войовничий</p>
+                        <div class="d-flex justify-content-around">
+                            <a href="#" class="btn btn-google"></a>
+                            <a href="#" class="btn btn-facebook"></a>
+                            <a href="#" class="btn btn-twitter"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="грай.png" class="card-img-top" alt="Козак Грай">
+                    <div class="card-body">
+                        <h5 class="card-title">Козак Грай</h5>
+                        <p class="card-text">Отаман команди. Постійно готується до битв</p>
+                        <div class="d-flex justify-content-around">
+                            <a href="#" class="btn btn-google"></a>
+                            <a href="#" class="btn btn-facebook"></a>
+                            <a href="#" class="btn btn-twitter"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="тур.png" class="card-img-top" alt="Козак Тур">
+                    <div class="card-body">
+                        <h5 class="card-title">Козак Тур</h5>
+                        <p class="card-text">Здоровий як тисячник часу. Часто буває сатириним казкам</p>
+                        <div class="d-flex justify-content-around">
+                            <a href="#" class="btn btn-google"></a>
+                            <a href="#" class="btn btn-facebook"></a>
+                            <a href="#" class="btn btn-twitter"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
