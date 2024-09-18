@@ -1,0 +1,8 @@
+C 1     // Think for 1 ms
+R 1     // Request left fork (resource number = philosopher number)
+C 1     // Wait for 1 ms
+R 2     // Request right fork (resource number = (philosopher number + 1) % 5)
+C 2     // Eat for 2 ms
+F 1     // Release left fork
+F 2     // Release right fork
+H       // Halt

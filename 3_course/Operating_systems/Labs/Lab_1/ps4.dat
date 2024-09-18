@@ -1,0 +1,13 @@
+C 1    // Think for 10 ms
+R 4    // Request left fork
+C 1    // Check right fork
+F 4    // Release left fork
+C 1    // Think for 10 ms
+R 4    // Request left fork
+C 1    // Check right fork
+F 4    // Release left fork
+C 1    // Think for 10 ms
+R 4    // Request left fork
+C 1    // Check right fork
+F 4    // Release left fork
+H      // Halt
