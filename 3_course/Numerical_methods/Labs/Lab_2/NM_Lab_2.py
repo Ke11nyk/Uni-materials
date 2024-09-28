@@ -1,7 +1,11 @@
 import numpy as np
 
+BORDER_LENGTH = 100
+
 def create_matrix_and_vector(n):
     A = np.eye(n)
+    b = np.zeros(n)
+
     for k in range(n):
         A[k, k] = 1 + k * 0.1
     for k in range(1, n):
@@ -9,119 +13,199 @@ def create_matrix_and_vector(n):
     for k in range(1, n - 1):
         A[k + 1, k] = 1
     A[0, n - 1] = 1
-    b = np.sin(np.arange(1, n+1) * np.pi / n)
+
+    for k in range(0, n - 1):
+        b[k] = np.sin(np.pi / (n - k))
+
     return A, b
 
-def gauss(A, b):
-    steps = []
-    A = A.copy()
-    b = b.copy()
-    n = len(b)
-    
-    for i in range(n):
-        max_row = i + np.argmax(np.abs(A[i:, i]))
-        A[[i, max_row]] = A[[max_row, i]]
-        b[[i, max_row]] = b[[max_row, i]]
-        
-        for j in range(i+1, n):
-            factor = A[j, i] / A[i, i]
-            A[j, i:] -= factor * A[i, i:]
-            b[j] -= factor * b[i]
-        
-        steps.append({
-            'step': i+1,
-            'A': A.copy(),
-            'b': b.copy()
-        })
-    
-    x = np.zeros(n)
-    for i in range(n-1, -1, -1):
-        x[i] = (b[i] - np.dot(A[i, i+1:], x[i+1:])) / A[i, i]
-    
-    steps.append({
-        'step': 'final',
-        'x': x
-    })
-    
-    return x, steps
+def check_gauss(matr):
+    print("\nChecking if this system of linear computations can be solved with Gauss method:")
 
-def jacobi(A, b, eps, max_iterations=1000):
-    steps = []
+    det = np.linalg.det(matr)
+    print("Determinant: ", det)
+    if(det == 0):
+        print("Determinant is 0 -> cannot be solved")
+        print("-" * BORDER_LENGTH)
+        return False
+    
+    print("All good")
+    print("-" * BORDER_LENGTH)
+
+    return True
+
+def gauss(A, b):
+    print("GAUSS METHOD")
+
+    if(check_gauss(A) == False):
+        return np.zeros(len(b))
+    
+    matr_len = len(b)
+    for i in range(matr_len):
+        p = np.identity(matr_len)
+        m = np.identity(matr_len)
+
+        print("Current A on step", i, ":\n", A)
+        print("\nCurrent b on step", i, ":\n", b)
+
+        max_row = np.argmax(np.abs(A[i:matr_len, i])) + i
+        print("\nMax Row Ind:", max_row)
+
+        p[[i, max_row]] = p[[max_row, i]]
+        print("\nP matrix:\n", p)
+
+        A = np.matmul(p, A)
+        b = np.matmul(p, b.transpose())
+
+        for j in range(matr_len):
+            if(j < i):
+                m[j, i] = 0
+            elif(j == i):
+                m[j, i] = 1 / A[j, i]
+            else :
+                m[j, i] = -A[j, i] / A[i, i]
+        
+        print("\nM matrix:\n", m)
+        print("-" * BORDER_LENGTH)
+
+        A = np.matmul(m, A)
+        b = np.matmul(m, b.transpose())
+        
+    print("Result A:\n", A)
+    print("\nResult b:", b)
+    print("-" * BORDER_LENGTH)
+
+    x = np.zeros(matr_len)
+    for i in range(matr_len - 1, -1, -1):
+        x[i] = b[i]
+        for j in range(i + 1, matr_len):
+            x[i] -= A[i, j] * x[j]
+    
+    return x
+
+def check_jacobi(matr, eps):
+    print("\nChecking if this system of linear computations can be solved with Jacobi method:")
+
+    for i in range(len(matr)):
+        if(matr[i,i] == 0):
+            print("Unable to solve: one of diagonal elements is 0")
+            return False
+        
+        s = 0
+        for j in range(len(matr)):
+            if(j != i):
+                s += abs(matr[i,j])
+
+        if(s > abs(matr[i,i])):
+            print("Unable to solve: sum of absolutes of elements in row is greater than diagonal element in row", i)
+            return False
+        
+    print("All good")
+    print("\nChecking the Theorem about convergence condition for any starting approximation for Jacobi method:")
+
+    matr_upper = np.zeros((len(matr), len(matr)))
+    matr_lower = np.zeros((len(matr), len(matr)))
+    diag = np.zeros((len(matr), len(matr)))
+
+    for i in range(len(matr)):
+        diag[i,i] = matr[i,i]
+        for j in range(i+1, len(matr)):
+            matr_upper[i,j] = matr[i,j]
+            matr_lower[j,i] = matr[j,i]
+            
+    print("\n", matr_upper, "\n\n", matr_lower, "\n\n", diag)
+
+    upper_lower = np.add(matr_upper, matr_lower)
+    print("\n", upper_lower)
+
+    d_m = -1 * np.linalg.inv(diag)
+    print("\n", d_m)
+
+    B = np.matmul(d_m, upper_lower)
+    print("\nB:\n", B)
+
+    u, sig, v = np.linalg.svd(B)
+    for i in range(len(B)):
+        diag[i][i] = -sig[i]
+    
+    B = np.add(B, diag)
+    det = np.linalg.det(B)
+
+    print("\nSignature numbers of B matrix:", sig)
+    print("\nMatrix (A1 + A2 + lD):\n", B, "\n\nAnd its determinant:", det)
+
+    if abs(det) <= eps:
+        print("\nConditions are met: Jacobi method converges for all approximations")
+    else:
+        print("\nConditions are not met: Jacobi method may not converge for all approximations")
+    return True
+            
+    
+def jacobi(A, b, eps):
+    print("JACOBI METHOD")
+
+    if(check_jacobi(A, eps) == False):
+        return np.zeros(len(b))
+    
     n = len(b)
-    x = np.zeros(n)
-    D = np.diag(A)
-    R = A - np.diagflat(D)
-    
-    for iteration in range(max_iterations):
-        x_new = (b - np.dot(R, x)) / D
-        steps.append({
-            'iteration': iteration+1,
-            'x': x_new.copy()
-        })
+    x = np.zeros(len(b))
+
+    print("\nStarting approximation:", x)
+
+    while True:
+        x_new = np.zeros(n)
+
+        for i in range(n):
+            x_new[i] = (b[i] - np.dot(A[i, :i], x[:i]) - np.dot(A[i, i+1:], x[i+1:])) / A[i, i]
+
+        print("Current approximation with Jacobi:", x_new)
         
-        if np.linalg.norm(x_new - x) < eps:
-            return x_new, steps
+        #Using Frobenius norm
+        frob = np.linalg.norm(x_new - x)
+
+        print("-" * BORDER_LENGTH)
+
+        if frob < eps:
+            print("Frobenius norm:", frob,"is less than", eps, "-> result obtained")
+            return x_new
         
+        print("Frobenius norm:", frob, "is not less than", eps, "-> continuing iterations")
+
         x = x_new
-    
-    return x, steps
 
 def get_error(x_actual, x_approx):
-    return np.linalg.norm(x_approx - x_actual) / np.linalg.norm(x_actual)
-
-def solve_linear_system(n, eps=1e-6):
-    # Create matrix A and vector b
-    A, b = create_matrix_and_vector(n)
+    print("\nCalculating error between actual result (from gauss method) and approximated result (from jacobi method):")
     
-    # Solve using Gauss method
-    gauss_solution, gauss_steps = gauss(A, b)
-    
-    # Solve using Jacobi method
-    jacobi_solution, jacobi_steps = jacobi(A, b, eps)
-    
-    # Calculate error
-    error = get_error(gauss_solution, jacobi_solution)
-    
-    return {
-        'matrix_A': A,
-        'vector_b': b,
-        'gauss_solution': gauss_solution,
-        'gauss_steps': gauss_steps,
-        'jacobi_solution': jacobi_solution,
-        'jacobi_steps': jacobi_steps,
-        'error': error
-    }
-
-# Example usage
-n = 11  # Small size for demonstration
-result = solve_linear_system(n)
-
-print("Matrix A:")
-print(result['matrix_A'])
-print("\nVector b:")
-print(result['vector_b'])
-print("\nGauss solution:")
-print(result['gauss_solution'])
-print("\nJacobi solution:")
-print(result['jacobi_solution'])
-print("\nError between Gauss and Jacobi solutions:")
-print(result['error'])
-
-print("\nGauss steps:")
-for step in result['gauss_steps']:
-    print(f"Step {step['step']}:")
-    if 'A' in step:
-        print("A:")
-        print(step['A'])
-        print("b:")
-        print(step['b'])
+    if (np.linalg.norm(x_approx) != 0):
+        er = np.linalg.norm(x_approx - x_actual) / np.linalg.norm(x_approx)
     else:
-        print("Final solution:")
-        print(step['x'])
+        er = "-"
+    print("Error:", er)
 
-print("\nJacobi steps:")
-for step in result['jacobi_steps'][:5]:  # Print first 5 steps
-    print(f"Iteration {step['iteration']}:")
-    print(step['x'])
-if len(result['jacobi_steps']) > 5:
-    print("...")  # Indicate that there are more steps
+def get_cond(matr):
+    u, sig, v = np.linalg.svd(matr)
+    c = np.linalg.cond(matr)
+
+    print("\nCondition number of a matrix:", c)
+    print(max(abs(sig)), " ", min(abs(sig)))
+
+    if(c <= (max(abs(sig)) / min(abs(sig))) + 0.001 and c >= (max(abs(sig)) / min(abs(sig))) - 0.001):
+        print("Condition number", c, "is more or equal to", max(abs(sig)) / min(abs(sig)))
+
+    print("-" * BORDER_LENGTH)
+
+print("Enter size of matrix A and vector b:")
+n = int(input())
+A, b = create_matrix_and_vector(n)
+
+get_cond(A)
+gauss_solution = gauss(A, b)
+print("Solution (Gauss):", gauss_solution)
+print("-" * BORDER_LENGTH)
+jacobi_solution = jacobi(A, b, 0.001)
+print("-" * BORDER_LENGTH)
+print("Solution (Jacobi):", jacobi_solution)
+print("-" * BORDER_LENGTH)
+print("Solution (Gauss):", gauss_solution)
+print("Solution (Jacobi):", jacobi_solution)
+get_error(gauss_solution, jacobi_solution)
