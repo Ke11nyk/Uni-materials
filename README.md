@@ -1,4 +1,4 @@
-# Uni-materials
+# 🎓 Uni-materials
 
 Educational materials and works of FCSC's student. Below is a table with links to the main folders:
 
