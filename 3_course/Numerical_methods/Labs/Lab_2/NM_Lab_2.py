@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 BORDER_LENGTH = 100
 
@@ -22,8 +23,12 @@ def create_matrix_and_vector(n):
 def check_gauss(matr):
     print("\nChecking if this system of linear computations can be solved with Gauss method:")
 
+    start = time.time()
     det = np.linalg.det(matr)
+    final = time.time()
     print("Determinant: ", det)
+    print("Time: ")
+    print(final - start)
     if(det == 0):
         print("Determinant is 0 -> cannot be solved")
         print("-" * BORDER_LENGTH)
