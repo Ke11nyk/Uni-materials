@@ -2,6 +2,7 @@ import numpy as np
 import time
 
 BORDER_LENGTH = 100
+MAX_STEPS = 5
 
 def create_matrix_and_vector(n):
     A = np.eye(n)
@@ -20,15 +21,59 @@ def create_matrix_and_vector(n):
 
     return A, b
 
+def test_matrix_and_vector():
+    A = np.array([[10.0, 2.0, -1.0, -3.0, 4.0], [2.0, 12.0, 3.0, 1.0, -5.0], [-1.0, 3.0, 14.0, -4.0, 6.0], [-3.0, 1.0, -4.0, 15.0, 2.0], [4.0, -5.0, 6.0, 2.0, 17.0]])
+    b = np.array([20.0, 30.0, 40.0, 50.0, 60.0])
+
+    return A, b
+
+def gauss_elimination(A, b=None, calculate_determinant=False):
+    n = len(A)
+    if b is None:
+        b = np.zeros(n)
+    det = 1.0
+    
+    for i in range(n):
+        max_element = abs(A[i][i])
+        max_row = i
+        for k in range(i + 1, n):
+            if abs(A[k][i]) > max_element:
+                max_element = abs(A[k][i])
+                max_row = k
+
+        if max_row != i:
+            A[i], A[max_row] = A[max_row].copy(), A[i].copy()
+            b[i], b[max_row] = b[max_row], b[i]
+            det *= -1
+
+        pivot = A[i][i]
+        if pivot == 0:
+            if calculate_determinant:
+                return 0
+            else:
+                raise ValueError("Matrix is singular")
+
+        det *= pivot
+
+        for k in range(i + 1, n):
+            factor = A[k][i] / pivot
+            for j in range(i, n):
+                A[k][j] -= factor * A[i][j]
+            b[k] -= factor * b[i]
+
+    if calculate_determinant:
+        return det
+    else:
+        return A, b
+
+def gauss_determinant(A):
+    return gauss_elimination(A.copy(), calculate_determinant=True)
+
 def check_gauss(matr):
     print("\nChecking if this system of linear computations can be solved with Gauss method:")
 
-    start = time.time()
-    det = np.linalg.det(matr)
-    final = time.time()
+    det = gauss_determinant(matr)
     print("Determinant: ", det)
-    print("Time: ")
-    print(final - start)
     if(det == 0):
         print("Determinant is 0 -> cannot be solved")
         print("-" * BORDER_LENGTH)
@@ -42,49 +87,31 @@ def check_gauss(matr):
 def gauss(A, b):
     print("GAUSS METHOD")
 
-    if(check_gauss(A) == False):
+    if not check_gauss(A):
         return np.zeros(len(b))
     
-    matr_len = len(b)
-    for i in range(matr_len):
-        p = np.identity(matr_len)
-        m = np.identity(matr_len)
+    A_copy, b_copy = A.copy(), b.copy()
+    n = len(b)
+    steps_to_show = min(MAX_STEPS - 1, n - 1)
 
-        print("Current A on step", i, ":\n", A)
-        print("\nCurrent b on step", i, ":\n", b)
+    for i in range(n):
+        if i < steps_to_show or i == n - 1:
+            print(f"\nStep {i + 1}:")
+            print("Current A:\n", A_copy)
+            print("Current b:\n", b_copy)
+        elif i == steps_to_show:
+            print("\n... (intermediate steps omitted) ...")
 
-        max_row = np.argmax(np.abs(A[i:matr_len, i])) + i
-        print("\nMax Row Ind:", max_row)
+        A_copy, b_copy = gauss_elimination(A_copy, b_copy)
 
-        p[[i, max_row]] = p[[max_row, i]]
-        print("\nP matrix:\n", p)
-
-        A = np.matmul(p, A)
-        b = np.matmul(p, b.transpose())
-
-        for j in range(matr_len):
-            if(j < i):
-                m[j, i] = 0
-            elif(j == i):
-                m[j, i] = 1 / A[j, i]
-            else :
-                m[j, i] = -A[j, i] / A[i, i]
-        
-        print("\nM matrix:\n", m)
-        print("-" * BORDER_LENGTH)
-
-        A = np.matmul(m, A)
-        b = np.matmul(m, b.transpose())
-        
-    print("Result A:\n", A)
-    print("\nResult b:", b)
     print("-" * BORDER_LENGTH)
 
-    x = np.zeros(matr_len)
-    for i in range(matr_len - 1, -1, -1):
-        x[i] = b[i]
-        for j in range(i + 1, matr_len):
-            x[i] -= A[i, j] * x[j]
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = b_copy[i]
+        for j in range(i + 1, n):
+            x[i] -= A_copy[i][j] * x[j]
+        x[i] /= A_copy[i][i]
     
     return x
 
@@ -117,24 +144,19 @@ def check_jacobi(matr, eps):
         for j in range(i+1, len(matr)):
             matr_upper[i,j] = matr[i,j]
             matr_lower[j,i] = matr[j,i]
-            
-    print("\n", matr_upper, "\n\n", matr_lower, "\n\n", diag)
 
     upper_lower = np.add(matr_upper, matr_lower)
-    print("\n", upper_lower)
 
     d_m = -1 * np.linalg.inv(diag)
-    print("\n", d_m)
 
     B = np.matmul(d_m, upper_lower)
-    print("\nB:\n", B)
 
     u, sig, v = np.linalg.svd(B)
     for i in range(len(B)):
         diag[i][i] = -sig[i]
     
     B = np.add(B, diag)
-    det = np.linalg.det(B)
+    det = gauss_determinant(B)
 
     print("\nSignature numbers of B matrix:", sig)
     print("\nMatrix (A1 + A2 + lD):\n", B, "\n\nAnd its determinant:", det)
@@ -145,7 +167,6 @@ def check_jacobi(matr, eps):
         print("\nConditions are not met: Jacobi method may not converge for all approximations")
     return True
             
-    
 def jacobi(A, b, eps):
     print("JACOBI METHOD")
 
@@ -157,26 +178,39 @@ def jacobi(A, b, eps):
 
     print("\nStarting approximation:", x)
 
+    steps_taken = 0
     while True:
         x_new = np.zeros(n)
 
         for i in range(n):
             x_new[i] = (b[i] - np.dot(A[i, :i], x[:i]) - np.dot(A[i, i+1:], x[i+1:])) / A[i, i]
 
-        print("Current approximation with Jacobi:", x_new)
-        
-        #Using Frobenius norm
+        if steps_taken < MAX_STEPS - 1:
+            print(f"\nStep {steps_taken + 1}:")
+            print("Current approximation:", x_new)
+        elif steps_taken == MAX_STEPS - 1:
+            print("\n... (intermediate steps omitted) ...")
+
         frob = np.linalg.norm(x_new - x)
 
-        print("-" * BORDER_LENGTH)
+        steps_taken += 1
 
         if frob < eps:
+            print(f"\nFinal Step {steps_taken}:")
+            print("Final approximation:", x_new)
             print("Frobenius norm:", frob,"is less than", eps, "-> result obtained")
             return x_new
         
-        print("Frobenius norm:", frob, "is not less than", eps, "-> continuing iterations")
-
         x = x_new
+
+def get_error(x_actual, x_approx):
+    print("\nCalculating error between actual result (from gauss method) and approximated result (from jacobi method):")
+    
+    if (np.linalg.norm(x_approx) != 0):
+        er = np.linalg.norm(x_approx - x_actual) / np.linalg.norm(x_approx)
+    else:
+        er = "-"
+    print("Error:", er)
 
 def get_error(x_actual, x_approx):
     print("\nCalculating error between actual result (from gauss method) and approximated result (from jacobi method):")
@@ -199,18 +233,75 @@ def get_cond(matr):
 
     print("-" * BORDER_LENGTH)
 
-print("Enter size of matrix A and vector b:")
-n = int(input())
-A, b = create_matrix_and_vector(n)
+def inverse_matrix(A):
+    n = len(A)
+    inv = np.eye(n)
+    
+    for i in range(n):
+        if A[i][i] == 0:
+            raise ValueError("Matrix is not invertible")
+        
+        for j in range(n):
+            if i != j:
+                ratio = A[j][i] / A[i][i]
+                for k in range(n):
+                    A[j][k] = A[j][k] - ratio * A[i][k]
+                    inv[j][k] = inv[j][k] - ratio * inv[i][k]
+    
+    for i in range(n):
+        divisor = A[i][i]
+        for j in range(n):
+            A[i][j] = A[i][j] / divisor
+            inv[i][j] = inv[i][j] / divisor
+    
+    return inv
+
+# print("Enter size of matrix A and vector b:")
+# n = int(input())
+# A, b = create_matrix_and_vector(n)
+
+A, b = test_matrix_and_vector()
 
 get_cond(A)
-gauss_solution = gauss(A, b)
+
+# Compare determinant calculation methods
+start_time = time.time()
+np_det = np.linalg.det(A)
+np_det_time = time.time() - start_time
+
+start_time = time.time()
+gauss_det = gauss_determinant(A.copy())
+gauss_det_time = time.time() - start_time
+
+print(f"NumPy determinant: {np_det}, Time: {np_det_time:.6f} seconds")
+print(f"Gauss determinant: {gauss_det}, Time: {gauss_det_time:.6f} seconds")
+print("-" * BORDER_LENGTH)
+
+# Calculate inverse matrix
+start_time = time.time()
+inv_A = inverse_matrix(A.copy())
+inv_time = time.time() - start_time
+print(f"Inverse matrix calculation time: {inv_time:.6f} seconds")
+print("Inverse matrix:")
+print(inv_A)
+print("-" * BORDER_LENGTH)
+
+# Gauss method
+start_time = time.time()
+gauss_solution = gauss(A.copy(), b.copy())
+gauss_time = time.time() - start_time
+print(f"Gauss method execution time: {gauss_time:.6f} seconds")
 print("Solution (Gauss):", gauss_solution)
 print("-" * BORDER_LENGTH)
-jacobi_solution = jacobi(A, b, 0.001)
-print("-" * BORDER_LENGTH)
+
+# Jacobi method
+start_time = time.time()
+jacobi_solution = jacobi(A.copy(), b.copy(), 0.001)
+jacobi_time = time.time() - start_time
+print(f"Jacobi method execution time: {jacobi_time:.6f} seconds")
 print("Solution (Jacobi):", jacobi_solution)
 print("-" * BORDER_LENGTH)
+
 print("Solution (Gauss):", gauss_solution)
 print("Solution (Jacobi):", jacobi_solution)
 get_error(gauss_solution, jacobi_solution)
