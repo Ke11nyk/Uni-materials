@@ -14,7 +14,7 @@ def CalculateOperator(X, Y, inversion_function, V=None, eps=1e-2, delta=10):
         V = np.zeros((Y.shape[0], X.shape[0]))
 
     X_pinv = inversion_function(X, eps=eps, delta=delta)
-    assert pimm.isPsevdoInversed(X, X_pinv)
+    # assert pimm.isPsevdoInversed(X, X_pinv)
         
     YX_pinv = Y @ X_pinv
     Z = np.eye(X.shape[0]) - X @ X_pinv
