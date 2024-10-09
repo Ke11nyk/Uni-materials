@@ -1,42 +1,79 @@
 import numpy as np
-from PIL import Image
+import imageio.v2 as imageio
+import matplotlib.pyplot as plt
+import PseudoInverseMatrixMethods as pimm
 
-def image_to_matrix(image_path, target_size):
-    try:
-        # Open the image
-        with Image.open(image_path) as img:
-            # Convert the image to grayscale
-            img_gray = img.convert('L')
-            
-            # Resize the image to the target size
-            img_resized = img_gray.resize(target_size, Image.LANCZOS)
-            
-            # Convert the image to a numpy array
-            img_matrix = np.array(img_resized)
-            
-        return img_matrix
-    except IOError:
-        print(f"Error: Unable to open the image file {image_path}")
-        return None
+def read_image(filename):
+    # Read the .bmp input and output files as a numpy 2D matrix
+    X = imageio.imread(filename)
+    # Convert the image to a NumPy array
+    return np.array(X)
 
-# Define the paths to your images
-image1_path = 'x1.bmp'
-image2_path = 'y4.bmp'
+def CalculateOperator(X, Y, inversion_function, V=None, eps=1e-2, delta=10):
+    if V is None:
+        V = np.zeros((Y.shape[0], X.shape[0]))
 
-# Define the target size (we'll use the larger width and height)
-target_size = (256, 188)
+    X_pinv = inversion_function(X, eps=eps, delta=delta)
+    assert pimm.isPsevdoInversed(X, X_pinv)
+        
+    YX_pinv = Y @ X_pinv
+    Z = np.eye(X.shape[0]) - X @ X_pinv
+    
+    VZ = V @ Z.T
+    A = YX_pinv + VZ
+    return A
 
-# Convert both images to matrices
-matrix1 = image_to_matrix(image1_path, target_size)
-matrix2 = image_to_matrix(image2_path, target_size)
 
-if matrix1 is not None and matrix2 is not None:
-    print(f"Shape of matrix1: {matrix1.shape}")
-    print(f"Shape of matrix2: {matrix2.shape}")
+def ApplyOperator(X_, A_):
+    return A_ @ X_
 
-    # You can now use these matrices for further processing
-    # For example, to get the average brightness of each image:
-    print(f"Average brightness of image1: {np.mean(matrix1)}")
-    print(f"Average brightness of image2: {np.mean(matrix2)}")
-else:
-    print("Error occurred while processing the images.")
+def ShowImage(X_):
+    plt.imshow(X_, cmap='gray')
+    plt.show()
+
+
+def CalculateError1(Y, Y_expected):
+        return np.linalg.norm(Y - Y_expected, ord=1)
+
+def calculate_error(true_matrix, predicted_matrix):
+    # Calculate the Mean Squared Error between the true matrix and the predicted matrix
+    mse = np.mean((true_matrix - predicted_matrix)**2)
+    rmse = np.sqrt(mse)
+    return mse, rmse
+
+
+def main():
+    X = read_image('x1.bmp')
+    Y = read_image('y4.bmp')
+
+    print('X shape:', X.shape)
+    print('Y shape:', Y.shape)
+
+    # Append a row of ones to the input matrix
+    m = X.shape[1]
+    X = np.vstack((X, np.ones((1, m))))
+    print('X:', X)
+
+    # Moore-Penrose method
+    A1 = CalculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose, eps=1e-60, delta=1000)
+    Y1 = ApplyOperator(X, A1)
+    ShowImage(Y1)
+
+    # Greville method
+    A2 = CalculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, eps=1e-60, delta=None)
+    Y2 = ApplyOperator(X, A2)
+    ShowImage(Y2)
+
+    # SVD method
+    A3 = CalculateOperator(X, Y, pimm.pseudoInverseMatrix_SVD, eps=1e-60, delta=None)
+    Y3 = ApplyOperator(X, A3)
+    ShowImage(Y3)
+
+    print('Error 1 Moore-Penrose:', CalculateError1(Y, Y1))
+    print('Error 1 Greville:', CalculateError1(Y, Y2))
+
+    print('MSE, RMSE Moore-Penrose:', calculate_error(Y, Y1))
+    print('MSE, RMSE Greville:', calculate_error(Y, Y2))
+
+if __name__ == "__main__":
+    main()
