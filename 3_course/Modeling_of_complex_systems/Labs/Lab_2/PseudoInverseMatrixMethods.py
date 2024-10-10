@@ -1,6 +1,7 @@
 import numpy as np
 import os
 from datetime import datetime
+from scipy.optimize import minimize_scalar
 
 def isPsevdoInversed(A, A_psevdo_inverse) -> bool:
     #  A * A+ * A = A;
@@ -64,8 +65,46 @@ def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=10):
         A0 = A1
         iterations += 1
 
-    # Return the path to the log file
-    # return log_file
+
+def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=10, max_iterations=1000):
+    def pinv(M, rcond=1e-15):
+        U, s, Vt = np.linalg.svd(M, full_matrices=False)
+        s[s < rcond] = 0
+        return Vt.T @ np.diag(np.where(s != 0, 1/s, 0)) @ U.T
+
+    def objective(delta):
+        return np.linalg.norm(A - A @ A.T @ pinv(A @ A.T + delta**2 * np.eye(A.shape[0])) @ A, ord='fro')
+
+    # Create logs directory if it doesn't exist
+    log_dir = os.path.join('logs', 'gradient_descent')
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+
+    # Create a log file with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f'gradient_descent_pseudo_inverse_log_{timestamp}.txt')
+
+    def log(message):
+        with open(log_file, 'a') as f:
+            f.write(message + '\n')
+
+    log(f'Starting optimization with eps={eps}, delta={delta}, max_iterations={max_iterations}')
+
+    result = minimize_scalar(
+        objective,
+        method='brent',
+        bracket=(eps, delta),
+        options={'maxiter': max_iterations}
+    )
+
+    optimal_delta = result.x
+    log(f'Optimal delta: {optimal_delta}')
+    log(f'Optimization result: {result}')
+
+    A_plus = A.T @ pinv(A @ A.T + optimal_delta**2 * np.eye(A.shape[0]))
+    log(f'Computed pseudo-inverse: {A_plus}')
+
+    return A_plus
 
 
 def pseudoInverseMatrix_Greville(A, eps=1e-6, delta=None):

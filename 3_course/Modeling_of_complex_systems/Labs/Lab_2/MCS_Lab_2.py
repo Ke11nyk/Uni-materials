@@ -58,15 +58,20 @@ def main():
     Y1 = applyOperator(X, A1)
     showImage(Y1)
 
-    # Greville method
-    A2 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, eps=1e-60, delta=None)
+    # ??? method
+    A2 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose_GradientDescent, eps=1e-60, delta=1000)
     Y2 = applyOperator(X, A2)
     showImage(Y2)
 
-    # SVD method
-    A3 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_SVD, eps=1e-60, delta=None)
+    # Greville method
+    A3 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, eps=1e-60, delta=None)
     Y3 = applyOperator(X, A3)
     showImage(Y3)
+
+    # SVD method
+    A4 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_SVD, eps=1e-60, delta=None)
+    # Y4 = applyOperator(X, A4)
+    # showImage(Y4)
 
     print('Error 1 Moore-Penrose:', calculateError1(Y, Y1))
     print('Error 1 Greville:', calculateError1(Y, Y2))
