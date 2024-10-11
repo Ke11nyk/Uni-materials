@@ -1,83 +1,133 @@
 import numpy as np
+import time
 import imageio.v2 as imageio
 import matplotlib.pyplot as plt
 import PseudoInverseMatrixMethods as pimm
+import json
+import psutil
+import os
 
 def readImage(filename):
-    # Read the .bmp input and output files as a numpy 2D matrix
     X = imageio.imread(filename)
-    # Convert the image to a NumPy array
     return np.array(X)
 
-def calculateOperator(X, Y, inversion_function, V=None, eps=1e-2, delta=10):
+def calculateOperator(X, Y, inversion_function, V=None, eps=1e-6, delta=10):
     if V is None:
         V = np.zeros((Y.shape[0], X.shape[0]))
 
+    start_time = time.time()
+    start_memory = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024  # Memory in MB
+
     X_pinv = inversion_function(X, eps=eps, delta=delta)
-    # assert pimm.isPsevdoInversed(X, X_pinv)
-        
+
+    end_time = time.time()
+    end_memory = psutil.Process(os.getpid()).memory_info().rss / 1024 / 1024  # Memory in MB
+
+    inversion_time = end_time - start_time
+    memory_used = end_memory - start_memory
+    
     YX_pinv = Y @ X_pinv
     Z = np.eye(X.shape[0]) - X @ X_pinv
     
     VZ = V @ Z.T
     A = YX_pinv + VZ
-    return A
+
+    operation_count = X.shape[0] * X.shape[1] * (X.shape[0] + Y.shape[0])  # Approximate operation count
+
+    return A, inversion_time, memory_used, operation_count
 
 def applyOperator(X_, A_):
     return A_ @ X_
 
-def showImage(X_):
+def saveImage(X_, filename):
+    plt.figure(figsize=(10, 10))
     plt.imshow(X_, cmap='gray')
-    plt.show()
+    plt.axis('off')
+    plt.savefig(filename, bbox_inches='tight', pad_inches=0)
+    plt.close()
 
-
-def calculateError1(Y, Y_expected):
-        return np.linalg.norm(Y - Y_expected, ord=1)
-
-def calculateError(true_matrix, predicted_matrix):
-    # Calculate the Mean Squared Error between the true matrix and the predicted matrix
-    mse = np.mean((true_matrix - predicted_matrix)**2)
+def calculateError(Y, Y_expected):
+    error_norm = np.linalg.norm(Y - Y_expected, ord=1)
+    mse = np.mean((Y - Y_expected)**2)
     rmse = np.sqrt(mse)
-    return mse, rmse
-
+    return error_norm, mse, rmse
 
 def main():
     X = readImage('x1.bmp')
     Y = readImage('y4.bmp')
 
-    print('X shape:', X.shape)
-    print('Y shape:', Y.shape)
-
-    # Append a row of ones to the input matrix
     m = X.shape[1]
     X = np.vstack((X, np.ones((1, m))))
-    print('X:', X)
 
-    # Moore-Penrose method
-    A1 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose, eps=1e-60, delta=1000)
-    Y1 = applyOperator(X, A1)
-    showImage(Y1)
+    saveImage(Y, 'original_Y.png')
 
-    # ??? method
-    A2 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose_GradientDescent, eps=1e-60, delta=1000)
-    Y2 = applyOperator(X, A2)
-    showImage(Y2)
+    results = {}
+
+    # Moore-Penrose method (original)
+    A_MP, time_MP, memory_MP, ops_MP = calculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose, eps=1e-60, delta=1000)
+    Y_MP = applyOperator(X, A_MP)
+    error_norm_MP, mse_MP, rmse_MP = calculateError(Y, Y_MP)
+
+    # Moore-Penrose method (gradient descent)
+    A_MP_GD, time_MP_GD, memory_MP_GD, ops_MP_GD = calculateOperator(X, Y, pimm.pseudoInverseMatrix_MoorePenrose_GradientDescent, eps=1e-60, delta=1000)
+    Y_MP_GD = applyOperator(X, A_MP_GD)
+    error_norm_MP_GD, mse_MP_GD, rmse_MP_GD = calculateError(Y, Y_MP_GD)
+
+    # Compare and choose the better Moore-Penrose result
+    if error_norm_MP < error_norm_MP_GD:
+        saveImage(Y_MP, 'moore_penrose_result.png')
+        results['Moore-Penrose'] = {
+            'method': 'Original',
+            'time': time_MP,
+            'memory': memory_MP,
+            'operations': ops_MP,
+            'error_norm': error_norm_MP,
+            'mse': mse_MP,
+            'rmse': rmse_MP
+        }
+    else:
+        saveImage(Y_MP_GD, 'moore_penrose_result.png')
+        results['Moore-Penrose'] = {
+            'method': 'Gradient Descent',
+            'time': time_MP_GD,
+            'memory': memory_MP_GD,
+            'operations': ops_MP_GD,
+            'error_norm': error_norm_MP_GD,
+            'mse': mse_MP_GD,
+            'rmse': rmse_MP_GD
+        }
 
     # Greville method
-    A3 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, eps=1e-60, delta=None)
-    Y3 = applyOperator(X, A3)
-    showImage(Y3)
+    A_G, time_G, memory_G, ops_G = calculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, eps=1e-60)
+    Y_G = applyOperator(X, A_G)
+    saveImage(Y_G, 'greville_result.png')
+    error_norm_G, mse_G, rmse_G = calculateError(Y, Y_G)
+    results['Greville'] = {
+        'time': time_G,
+        'memory': memory_G,
+        'operations': ops_G,
+        'error_norm': error_norm_G,
+        'mse': mse_G,
+        'rmse': rmse_G
+    }
 
     # SVD method
-    A4 = calculateOperator(X, Y, pimm.pseudoInverseMatrix_SVD, eps=1e-60, delta=None)
-    # Y4 = applyOperator(X, A4)
-    # showImage(Y4)
+    A_SVD, time_SVD, memory_SVD, ops_SVD = calculateOperator(X, Y, pimm.pseudoInverseMatrix_SVD, eps=1e-60)
+    Y_SVD = applyOperator(X, A_SVD)
+    saveImage(Y_SVD, 'svd_result.png')
+    error_norm_SVD, mse_SVD, rmse_SVD = calculateError(Y, Y_SVD)
+    results['SVD'] = {
+        'time': time_SVD,
+        'memory': memory_SVD,
+        'operations': ops_SVD,
+        'error_norm': error_norm_SVD,
+        'mse': mse_SVD,
+        'rmse': rmse_SVD
+    }
 
-    print('Error 1 Moore-Penrose:', calculateError1(Y, Y1))
-    print('Error 1 Greville:', calculateError1(Y, Y2))
-
-    print('MSE, RMSE Moore-Penrose:', calculateError(Y, Y1))
-    print('MSE, RMSE Greville:', calculateError(Y, Y2))
+    # Save results to a JSON file
+    with open('results.json', 'w') as f:
+        json.dump(results, f, indent=2)
 
 if __name__ == "__main__":
     main()
