@@ -3,6 +3,19 @@ import os
 from datetime import datetime
 from scipy.optimize import minimize_scalar
 
+def setup_logging(method_name):
+    log_dir = os.path.join('logs', method_name)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_file = os.path.join(log_dir, f'{method_name}_pseudo_inverse_log_{timestamp}.txt')
+    
+    def log(message):
+        with open(log_file, 'a') as f:
+            f.write(message + '\n')
+    
+    return log
+
 def isPsevdoInversed(A, A_psevdo_inverse) -> bool:
     #  A * A+ * A = A;
     if not np.allclose(A @ A_psevdo_inverse @ A, A):
@@ -21,28 +34,12 @@ def isPsevdoInversed(A, A_psevdo_inverse) -> bool:
         print('A+ * A - not symmetric matrix n x n')
         return False
     
+    print('Matrix is pseudo-inversed')
     return True
 
-
-def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=10):
-    # Calculate the Moore-Penrose pseudo-inverse of a matrix
-    # A: input matrix
-    # returns: pseudo-inverse of A
-    # eps: tolerance for zero singular values
-
-    # Create logs directory if it doesn't exist
-    log_dir = os.path.join('logs', 'moorepenrose')
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-
-    # Create a log file with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f'moorepenrose_pseudo_inverse_log_{timestamp}.txt')
-
-    def log(message):
-        with open(log_file, 'a') as f:
-            f.write(message + '\n')
-
+def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
+    log = setup_logging('moorepenrose')
+    
     log(f'delta: {delta}')
 
     A0 = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(A.shape[0]))
@@ -53,20 +50,21 @@ def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=10):
 
     iterations = 0
     while True:
-        A1 = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(A.shape[0]))
-        log(f'A1: {A1}')
-        if np.linalg.norm(A0 - A1, ord=2) < eps:
+        A_plus = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(A.shape[0]))
+        log(f'A1: {A_plus}')
+        if np.linalg.norm(A0 - A_plus, ord=2) < eps:
             log(f'iterations: {iterations}')
-            return A1
+            return A_plus
         
         delta = delta / 2
         log(f'delta: {delta}')
 
-        A0 = A1
+        A0 = A_plus
         iterations += 1
 
+def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, max_iterations=1000):
+    log = setup_logging('gradient_descent')
 
-def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=10, max_iterations=1000):
     def pinv(M, rcond=1e-15):
         U, s, Vt = np.linalg.svd(M, full_matrices=False)
         s[s < rcond] = 0
@@ -74,19 +72,6 @@ def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=10, max_
 
     def objective(delta):
         return np.linalg.norm(A - A @ A.T @ pinv(A @ A.T + delta**2 * np.eye(A.shape[0])) @ A, ord='fro')
-
-    # Create logs directory if it doesn't exist
-    log_dir = os.path.join('logs', 'gradient_descent')
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-
-    # Create a log file with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f'gradient_descent_pseudo_inverse_log_{timestamp}.txt')
-
-    def log(message):
-        with open(log_file, 'a') as f:
-            f.write(message + '\n')
 
     log(f'Starting optimization with eps={eps}, delta={delta}, max_iterations={max_iterations}')
 
@@ -106,48 +91,29 @@ def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=10, max_
 
     return A_plus
 
-
 def pseudoInverseMatrix_Greville(A, eps=1e-6, delta=None):
-    # Calculate the Greville pseudo-inverse of a matrix
-    # A: input matrix
-    # returns: pseudo-inverse of A
-    # eps: tolerance for zero singular values
+    log = setup_logging('greville')
 
-    # Create logs directory if it doesn't exist
-    log_dir = os.path.join('logs', 'greville')
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-
-    # Create a log file with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f'greville_pseudo_inverse_log_{timestamp}.txt')
-
-    def log(message):
-        with open(log_file, 'a') as f:
-            f.write(message + '\n')
-
-    inverse_matrix = np.vstack(A[0] / np.dot(A[0].T, A[0]) if np.dot(A[0].T, A[0]) != 0 else A[0])
+    A_plus = np.vstack(A[0] / np.dot(A[0].T, A[0]) if np.dot(A[0].T, A[0]) != 0 else A[0])
     current_matrix = np.array([A[0]])
     n = A.shape[0]
     for i in range(1, n):
         a = A[i].reshape(-1, 1)
-        z = np.identity(current_matrix.shape[1]) - np.dot(inverse_matrix, current_matrix)
+        z = np.identity(current_matrix.shape[1]) - np.dot(A_plus, current_matrix)
         current_matrix = np.vstack([current_matrix, A[i]])
 
         denum = np.dot(a.T, np.dot(z, a))[0, 0]
         if np.abs(denum) < eps:
-            r = np.dot(inverse_matrix, inverse_matrix.T)
+            r = np.dot(A_plus, A_plus.T)
             denum = 1 + np.dot(a.T, np.dot(r, a))
-            inverse_matrix = np.hstack((inverse_matrix - np.dot(z, np.dot(a, np.dot(a.T, inverse_matrix))) / denum, np.dot(r, a) / denum))
+            A_plus = np.hstack((A_plus - np.dot(z, np.dot(a, np.dot(a.T, A_plus))) / denum, np.dot(r, a) / denum))
         else:
-            inverse_matrix = np.hstack((inverse_matrix - np.dot(z, np.dot(a, np.dot(a.T, inverse_matrix))) / denum, np.dot(z, a) / denum))
+            A_plus = np.hstack((A_plus - np.dot(z, np.dot(a, np.dot(a.T, A_plus))) / denum, np.dot(z, a) / denum))
 
         log('-' * 74)
-        log(f'inverse_matrix: {inverse_matrix}')
+        log(f'inverse_matrix: {A_plus}')
 
-    # Return both the inverse matrix and the path to the log file
-    return inverse_matrix #, log_file
-
+    return A_plus
 
 def powerIteration(A, num_iterations=100):
     m, n = A.shape
@@ -209,23 +175,7 @@ def customSVD(A, k=None, epsilon=1e-10, max_iterations=1000):
     return U, S, V.T
 
 def pseudoInverseMatrix_SVD(A, eps=1e-6, delta=None):
-    # Calculate the pseudo-inverse of a matrix using Singular Value Decomposition (SVD)
-    # A: input matrix
-    # returns: pseudo-inverse of A
-    # eps: tolerance for zero singular values
-
-    # Create logs directory if it doesn't exist
-    log_dir = os.path.join('logs', 'svd')
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-    
-    # Create a log file with timestamp
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = os.path.join(log_dir, f'svd_pseudo_inverse_log_{timestamp}.txt')
-    
-    def log(message):
-        with open(log_file, 'a') as f:
-            f.write(message + '\n')
+    log = setup_logging('svd')
     
     # Perform custom SVD
     U, s, Vt = customSVD(A)
@@ -246,4 +196,4 @@ def pseudoInverseMatrix_SVD(A, eps=1e-6, delta=None):
     log("Pseudo-inverse matrix:")
     log(str(A_plus))
     
-    return A_plus #, log_file
+    return A_plus
