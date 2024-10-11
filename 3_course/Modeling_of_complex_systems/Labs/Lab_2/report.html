@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo-Inverse Matrix Methods Comparison</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .image-item {
+            margin: 10px;
+            text-align: center;
+        }
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .chart {
+            width: 45%;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pseudo-Inverse Matrix Methods Comparison</h1>
+
+    <h2>Image Results</h2>
+    <div class="image-container">
+        <div class="image-item">
+            <h3>Original Y</h3>
+            <img src="original_Y.png" alt="Original Y">
+        </div>
+        <div class="image-item">
+            <h3>Moore-Penrose Result</h3>
+            <img src="moore_penrose_result.png" alt="Moore-Penrose Result">
+        </div>
+        <div class="image-item">
+            <h3>Greville Result</h3>
+            <img src="greville_result.png" alt="Greville Result">
+        </div>
+        <div class="image-item">
+            <h3>SVD Result</h3>
+            <img src="svd_result.png" alt="SVD Result">
+        </div>
+    </div>
+
+    <h2>Performance Comparison</h2>
+    <div class="chart-container">
+        <div class="chart">
+            <canvas id="timeChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="memoryChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="operationsChart"></canvas>
+        </div>
+        <div class="chart">
+            <canvas id="errorChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Embed the JSON data directly in the script
+        async function loadJSON() {
+            const response = await fetch('results.json');
+            if (!response.ok) {
+                throw new Error('Response was not ok: ' + response.statusText);
+            }
+            return await response.json();
+        }
+
+        loadJSON().then(data => {
+            const methods = Object.keys(data);
+            const times = methods.map(method => data[method].time);
+            const memories = methods.map(method => data[method].memory);
+            const operations = methods.map(method => data[method].operations);
+            const errors = methods.map(method => data[method].error_norm);
+
+            // Time Chart
+            new Chart(document.getElementById('timeChart'), {
+                type: 'bar',
+                data: {
+                    labels: methods,
+                    datasets: [{
+                        label: 'Execution Time (s)',
+                        data: times,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Execution Time Comparison'
+                        }
+                    }
+                }
+            });
+
+            // Memory Chart
+            new Chart(document.getElementById('memoryChart'), {
+                type: 'bar',
+                data: {
+                    labels: methods,
+                    datasets: [{
+                        label: 'Memory Usage (MB)',
+                        data: memories,
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Memory Usage Comparison'
+                        }
+                    }
+                }
+            });
+
+            // Operations Chart
+            new Chart(document.getElementById('operationsChart'), {
+                type: 'bar',
+                data: {
+                    labels: methods,
+                    datasets: [{
+                        label: 'Number of Operations',
+                        data: operations,
+                        backgroundColor: 'rgba(255, 159, 64, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Number of Operations Comparison'
+                        }
+                    }
+                }
+            });
+
+            // Error Chart
+            new Chart(document.getElementById('errorChart'), {
+                type: 'bar',
+                data: {
+                    labels: methods,
+                    datasets: [{
+                        label: 'Error Norm',
+                        data: errors,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Error Norm Comparison'
+                        }
+                    }
+                }
+            });
+        }).catch(error => console.error('Error loading JSON data:', error));
+    </script>
+</body>
+</html>
