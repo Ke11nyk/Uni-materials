@@ -167,6 +167,9 @@ def check_jacobi(matr, eps):
         print("\nConditions are not met: Jacobi method may not converge for all approximations")
     return True
             
+def euclid_norm(vector):
+    return np.sqrt(np.sum(np.square(vector)))
+
 def jacobi(A, b, eps):
     print("JACOBI METHOD")
 
@@ -191,14 +194,16 @@ def jacobi(A, b, eps):
         elif steps_taken == MAX_STEPS - 1:
             print("\n... (intermediate steps omitted) ...")
 
-        frob = np.linalg.norm(x_new - x)
+        #euc = np.linalg.norm(x_new - x)
+
+        euc = euclid_norm(x_new - x)
 
         steps_taken += 1
 
-        if frob < eps:
+        if euc < eps:
             print(f"\nFinal Step {steps_taken}:")
             print("Final approximation:", x_new)
-            print("Frobenius norm:", frob,"is less than", eps, "-> result obtained")
+            print("Euclid norm:", euc,"is less than", eps, "-> result obtained")
             return x_new
         
         x = x_new
