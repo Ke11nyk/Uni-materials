@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <h2>Performance Comparison (Chosen Moore-Penrose, Greville, and SVD)</h2>
+    <h2 id="pc-methods"></h2>
 
     <div class="chart-container">
         <div class="chart">
@@ -141,6 +141,9 @@
 
             const bestMethodDescription = document.getElementById('chosen-method-description');
             bestMethodDescription.innerText = `Based on the above comparison, the ${data['Best'].method} method was chosen as the more accurate approach, with a lower RMSE and slightly better performance in terms of execution time and memory usage.`;
+
+            const pcMethodsTitle = document.getElementById('pc-methods');
+            pcMethodsTitle.innerText = `Performance Comparison (${data['Best'].method}, Greville, and SVD)`;
 
             function createChart(ctx, labels, data, label, backgroundColor, borderColor, yAxisLabel) {
             return new Chart(ctx, {
