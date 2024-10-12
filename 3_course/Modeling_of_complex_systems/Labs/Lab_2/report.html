@@ -8,76 +8,118 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 1200px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
-        .image-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+
+        h1, h2, h3 {
+            color: #2c3e50;
         }
-        .image-item {
-            margin: 10px;
-            text-align: center;
-        }
-        .image-item img {
-            max-width: 100%;
-            height: auto;
-        }
+
         .chart-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            margin-bottom: 20px;
         }
         .chart {
-            width: 45%;
+            flex: 1 1 300px;
             margin: 10px;
+            text-align: center;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .image-item {
+            flex: 1;
+            margin: 10px;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        canvas {
+            max-width: 100%;
         }
     </style>
 </head>
 <body>
     <h1>Pseudo-Inverse Matrix Methods Comparison</h1>
 
-    <h2>Image Results</h2>
-    <div class="image-container">
-        <div class="image-item">
-            <h3>Original Y</h3>
-            <img src="original_Y.png" alt="Original Y">
+    <h2>Moore-Penrose vs Gradient Descent Comparison</h2>
+
+    <div class="chart-container">
+        <div class="chart">
+            <h3>Execution Time</h3>
+            <canvas id="timeChart1"></canvas>
         </div>
-        <div class="image-item">
-            <h3>Moore-Penrose Result</h3>
-            <img src="moore_penrose_result.png" alt="Moore-Penrose Result">
+        <div class="chart">
+            <h3>Memory Usage</h3>
+            <canvas id="memoryChart1"></canvas>
         </div>
-        <div class="image-item">
-            <h3>Greville Result</h3>
-            <img src="greville_result.png" alt="Greville Result">
+        <div class="chart">
+            <h3>Operation Count</h3>
+            <canvas id="operationsChart1"></canvas>
         </div>
-        <div class="image-item">
-            <h3>SVD Result</h3>
-            <img src="svd_result.png" alt="SVD Result">
+        <div class="chart">
+            <h3>Error Metrics</h3>
+            <canvas id="errorChart1"></canvas>
         </div>
     </div>
 
-    <h2>Performance Comparison</h2>
+    <h2 id="chosen-method"></h2>
+    <p id="chosen-method-description"></p>
+
+    <h2>Image Results</h2>
+
+    <div class="image-container">
+        <div class="image-item">
+            <h3>Original Y</h3>
+            <img src="results/original_Y.png" alt="Original Y">
+        </div>
+        <div class="image-item">
+            <h3 id="best-title"></h3>
+            <img src="results/moore_penrose_result.png" alt="Chosen Moore-Penrose Result">
+        </div>
+        <div class="image-item">
+            <h3>Greville Result</h3>
+            <img src="results/greville_result.png" alt="Greville Result">
+        </div>
+    </div>
+
+    <h2>Performance Comparison (Chosen Moore-Penrose, Greville, and SVD)</h2>
+
     <div class="chart-container">
         <div class="chart">
-            <canvas id="timeChart"></canvas>
+            <h3>Execution Time</h3>
+            <canvas id="timeChart2"></canvas>
         </div>
         <div class="chart">
-            <canvas id="memoryChart"></canvas>
+            <h3>Memory Usage</h3>
+            <canvas id="memoryChart2"></canvas>
         </div>
         <div class="chart">
-            <canvas id="operationsChart"></canvas>
+            <h3>Operation Count</h3>
+            <canvas id="operationsChart2"></canvas>
         </div>
         <div class="chart">
-            <canvas id="errorChart"></canvas>
+            <h3>Error Metrics</h3>
+            <canvas id="errorChart2"></canvas>
         </div>
     </div>
 
     <script>
-        // Embed the JSON data directly in the script
-        async function loadJSON() {
+    // Embed the JSON data directly in the script
+    async function loadJSON() {
             const response = await fetch('results.json');
             if (!response.ok) {
                 throw new Error('Response was not ok: ' + response.statusText);
@@ -92,93 +134,91 @@
             const operations = methods.map(method => data[method].operations);
             const errors = methods.map(method => data[method].error_norm);
 
-            // Time Chart
-            new Chart(document.getElementById('timeChart'), {
-                type: 'bar',
-                data: {
-                    labels: methods,
-                    datasets: [{
-                        label: 'Execution Time (s)',
-                        data: times,
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Execution Time Comparison'
-                        }
-                    }
-                }
-            });
+            document.getElementById('best-title').innerText = data['Best'].method;
 
-            // Memory Chart
-            new Chart(document.getElementById('memoryChart'), {
-                type: 'bar',
-                data: {
-                    labels: methods,
-                    datasets: [{
-                        label: 'Memory Usage (MB)',
-                        data: memories,
-                        backgroundColor: 'rgba(153, 102, 255, 0.6)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Memory Usage Comparison'
-                        }
-                    }
-                }
-            });
+            const bestMethodTitle = document.getElementById('chosen-method');
+            bestMethodTitle.innerText = `Chosen Moore-Penrouse method: ${data['Best'].method}`;
 
-            // Operations Chart
-            new Chart(document.getElementById('operationsChart'), {
-                type: 'bar',
-                data: {
-                    labels: methods,
-                    datasets: [{
-                        label: 'Number of Operations',
-                        data: operations,
-                        backgroundColor: 'rgba(255, 159, 64, 0.6)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Number of Operations Comparison'
-                        }
-                    }
-                }
-            });
+            const bestMethodDescription = document.getElementById('chosen-method-description');
+            bestMethodDescription.innerText = `Based on the above comparison, the ${data['Best'].method} method was chosen as the more accurate approach, with a lower RMSE and slightly better performance in terms of execution time and memory usage.`;
 
-            // Error Chart
-            new Chart(document.getElementById('errorChart'), {
+            function createChart(ctx, labels, data, label, backgroundColor, borderColor, yAxisLabel) {
+            return new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: methods,
+                    labels: labels,
                     datasets: [{
-                        label: 'Error Norm',
-                        data: errors,
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                        label: label,
+                        data: data,
+                        backgroundColor: backgroundColor,
+                        borderColor: borderColor,
+                        borderWidth: 1
                     }]
                 },
                 options: {
-                    responsive: true,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Error Norm Comparison'
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: yAxisLabel
+                            }
                         }
                     }
                 }
             });
+        }
+
+        // Moore-Penrose vs Gradient Descent charts
+        createChart(document.getElementById('timeChart1'),
+            ['Moore-Penrose', 'Gradient Descent'],
+            [data['Moore-Penrose'].time, data['Gradient Descent'].time],
+            'Execution Time', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 99, 132, 1)',
+            'Time (seconds)');
+
+        createChart(document.getElementById('memoryChart1').getContext('2d'),
+            ['Moore-Penrose', 'Gradient Descent'],
+            [data['Moore-Penrose'].memory, data['Gradient Descent'].memory],
+            'Memory Usage', 'rgba(54, 162, 235, 0.5)', 'rgba(54, 162, 235, 1)',
+            'Memory (MB)');
+
+        createChart(document.getElementById('operationsChart1').getContext('2d'),
+            ['Moore-Penrose', 'Gradient Descent'],
+            [data['Moore-Penrose'].operations, data['Gradient Descent'].operations],
+            'Operation Count', 'rgba(255, 206, 86, 0.5)', 'rgba(255, 206, 86, 1)',
+            'Number of Operations');
+
+        createChart(document.getElementById('errorChart1').getContext('2d'),
+            ['Moore-Penrose', 'Gradient Descent'],
+            [data['Moore-Penrose'].rmse, data['Gradient Descent'].rmse],
+            'RMSE', 'rgba(75, 192, 192, 0.5)',  'rgba(75, 192, 192, 1)',
+            'Root Mean Square Error');
+
+        // Comparison charts (Best Moore-Penrose, Greville, SVD)
+        createChart(document.getElementById('timeChart2').getContext('2d'),
+            [data['Best'].method, 'Greville', 'SVD'],
+            [data['Best'].time, data['Greville'].time, data['SVD'].time],
+            'Execution Time', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 99, 132, 1)',
+            'Time (seconds)');
+
+        createChart(document.getElementById('memoryChart2').getContext('2d'),
+            [data['Best'].method, 'Greville', 'SVD'],
+            [data['Best'].memory, data['Greville'].memory, data['SVD'].memory],
+            'Memory Usage', 'rgba(54, 162, 235, 0.5)', 'rgba(54, 162, 235, 1)',
+            'Memory (MB)');
+
+        const method_name = data['Best'].method == 'Gradient Descent' ? 'GD' : 'MP';
+        createChart(document.getElementById('operationsChart2').getContext('2d'),
+            [method_name, 'Greville', 'SVD'],
+            [data['Best'].operations, data['Greville'].operations, data['SVD'].operations],
+            'Operation Count', 'rgba(255, 206, 86, 0.5)', 'rgba(255, 206, 86, 1)',
+            'Number of Operations');
+
+        createChart(document.getElementById('errorChart2').getContext('2d'),
+            [data['Best'].method, 'Greville', 'SVD'],
+            [data['Best'].rmse, data['Greville'].rmse, data['SVD'].rmse],
+            'RMSE', 'rgba(75, 192, 192, 0.5)',  'rgba(75, 192, 192, 1)',
+            'Root Mean Square Error');
         }).catch(error => console.error('Error loading JSON data:', error));
     </script>
 </body>

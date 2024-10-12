@@ -37,12 +37,12 @@ def isPsevdoInversed(A, A_psevdo_inverse) -> bool:
     print('Matrix is pseudo-inversed')
     return True
 
+
 def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
     log = setup_logging('moorepenrose')
+    m, n = A.shape
     
-    log(f'delta: {delta}')
-
-    A0 = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(A.shape[0]))
+    A0 = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(m))
     log(f'A0: {A0}')
     
     delta = delta / 2
@@ -50,11 +50,12 @@ def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
 
     iterations = 0
     while True:
-        A_plus = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(A.shape[0]))
+        A_plus = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(m))
         log(f'A1: {A_plus}')
+
         if np.linalg.norm(A0 - A_plus, ord=2) < eps:
             log(f'iterations: {iterations}')
-            return A_plus
+            return A_plus, iterations
         
         delta = delta / 2
         log(f'delta: {delta}')
@@ -64,6 +65,7 @@ def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
 
 def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, max_iterations=1000):
     log = setup_logging('gradient_descent')
+    m, n = A.shape
 
     def pinv(M, rcond=1e-15):
         U, s, Vt = np.linalg.svd(M, full_matrices=False)
@@ -71,7 +73,7 @@ def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, ma
         return Vt.T @ np.diag(np.where(s != 0, 1/s, 0)) @ U.T
 
     def objective(delta):
-        return np.linalg.norm(A - A @ A.T @ pinv(A @ A.T + delta**2 * np.eye(A.shape[0])) @ A, ord='fro')
+        return np.linalg.norm(A - A @ A.T @ pinv(A @ A.T + delta**2 * np.eye(m)) @ A, ord='fro')
 
     log(f'Starting optimization with eps={eps}, delta={delta}, max_iterations={max_iterations}')
 
@@ -86,23 +88,24 @@ def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, ma
     log(f'Optimal delta: {optimal_delta}')
     log(f'Optimization result: {result}')
 
-    A_plus = A.T @ pinv(A @ A.T + optimal_delta**2 * np.eye(A.shape[0]))
+    A_plus = A.T @ pinv(A @ A.T + optimal_delta**2 * np.eye(m))
     log(f'Computed pseudo-inverse: {A_plus}')
 
-    return A_plus
+    return A_plus, result.nfev # Return number of function evaluations as iterations
 
 def pseudoInverseMatrix_Greville(A, eps=1e-6, delta=None):
     log = setup_logging('greville')
 
+    m, n = A.shape
     A_plus = np.vstack(A[0] / np.dot(A[0].T, A[0]) if np.dot(A[0].T, A[0]) != 0 else A[0])
     current_matrix = np.array([A[0]])
-    n = A.shape[0]
-    for i in range(1, n):
+
+    for i in range(1, m):
         a = A[i].reshape(-1, 1)
         z = np.identity(current_matrix.shape[1]) - np.dot(A_plus, current_matrix)
         current_matrix = np.vstack([current_matrix, A[i]])
-
         denum = np.dot(a.T, np.dot(z, a))[0, 0]
+
         if np.abs(denum) < eps:
             r = np.dot(A_plus, A_plus.T)
             denum = 1 + np.dot(a.T, np.dot(r, a))
@@ -113,10 +116,11 @@ def pseudoInverseMatrix_Greville(A, eps=1e-6, delta=None):
         log('-' * 74)
         log(f'inverse_matrix: {A_plus}')
 
-    return A_plus
+    return A_plus, None
 
 def powerIteration(A, num_iterations=100):
     m, n = A.shape
+
     if m >= n:
         x = np.random.rand(n)
         for _ in range(num_iterations):
@@ -139,7 +143,7 @@ def customSVD(A, k=None, epsilon=1e-10, max_iterations=1000):
         V = np.zeros((n, k))
 
         for i in range(k):
-            v = powerIteration(A, num_iterations=max_iterations)
+            v, iter_ops = powerIteration(A, num_iterations=max_iterations)
             u = A @ v
             sigma = np.linalg.norm(u)
             
@@ -176,6 +180,7 @@ def customSVD(A, k=None, epsilon=1e-10, max_iterations=1000):
 
 def pseudoInverseMatrix_SVD(A, eps=1e-6, delta=None):
     log = setup_logging('svd')
+    m, n = A.shape
     
     # Perform custom SVD
     U, s, Vt = customSVD(A)
@@ -196,4 +201,4 @@ def pseudoInverseMatrix_SVD(A, eps=1e-6, delta=None):
     log("Pseudo-inverse matrix:")
     log(str(A_plus))
     
-    return A_plus
+    return A_plus, None
