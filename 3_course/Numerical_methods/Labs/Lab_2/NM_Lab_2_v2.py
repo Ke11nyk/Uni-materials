@@ -20,7 +20,16 @@ def create_matrix_and_vector(n):
 
 # Find condition number
 def condition_number(A):
-    return np.linalg.cond(A)
+    norm_A = np.linalg.norm(A, ord=np.inf)
+    A_inv = gaussian_elimination(A, find_inverse=True)
+    
+    if A_inv is None:
+        return float('inf')
+
+    norm_A_inv = np.linalg.norm(A_inv, ord=np.inf)
+    cond = norm_A * norm_A_inv
+
+    return cond
 
 # Gaussian elimination with selection of the main one by column
 def gaussian_elimination(A, b=None, find_inverse=False, find_determinant=False, log_file='gaussian_log.txt'):
@@ -135,7 +144,11 @@ def calculate_error(x1, x2):
 
 def main():
     # Example usage
-    A = np.array([[10.0, 2.0, -1.0, -3.0, 4.0], [2.0, 12.0, 3.0, 1.0, -5.0], [-1.0, 3.0, 14.0, -4.0, 6.0], [-3.0, 1.0, -4.0, 15.0, 2.0], [4.0, -5.0, 6.0, 2.0, 17.0]])
+    A = np.array([[10.0, 2.0, -1.0, -3.0, 4.0], 
+                  [2.0, 12.0, 3.0, 1.0, -5.0], 
+                  [-1.0, 3.0, 14.0, -4.0, 6.0], 
+                  [-3.0, 1.0, -4.0, 15.0, 2.0], 
+                  [4.0, -5.0, 6.0, 2.0, 17.0]])
     b = np.array([20.0, 30.0, 40.0, 50.0, 60.0])
 
     print("Condition number of A:", condition_number(A))
