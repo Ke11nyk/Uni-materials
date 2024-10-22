@@ -96,7 +96,7 @@ def main():
     if rmse_MP < rmse_MP_GD:
         saveImage(Y_MP, 'moore_penrose_result.png')
         best_MP = {
-            'method': 'Original',
+            'method': 'Moore-Penrose',
             'time': time_MP,
             'memory': memory_MP,
             'operations': ops_MP,
@@ -134,7 +134,7 @@ def main():
         'rmse': rmse_MP_GD
     }
 
-    results['Best'] = best_MP
+    results['Best Moore-Penrose'] = best_MP
 
     # Greville method
     A_G, time_G, memory_G, ops_G = calculateOperator(X, Y, pimm.pseudoInverseMatrix_Greville, oc.count_operations_greville, eps=1e-60)

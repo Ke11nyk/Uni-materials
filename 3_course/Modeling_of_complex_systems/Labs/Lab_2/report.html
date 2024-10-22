@@ -134,16 +134,16 @@
             const operations = methods.map(method => data[method].operations);
             const errors = methods.map(method => data[method].error_norm);
 
-            document.getElementById('best-title').innerText = data['Best'].method;
+            document.getElementById('best-title').innerText = data['Best Moore-Penrose'].method;
 
             const bestMethodTitle = document.getElementById('chosen-method');
-            bestMethodTitle.innerText = `Chosen Moore-Penrouse method: ${data['Best'].method}`;
+            bestMethodTitle.innerText = `Chosen Moore-Penrouse method: ${data['Best Moore-Penrose'].method}`;
 
             const bestMethodDescription = document.getElementById('chosen-method-description');
-            bestMethodDescription.innerText = `Based on the above comparison, the ${data['Best'].method} method was chosen as the more accurate approach, with a lower RMSE and slightly better performance in terms of execution time and memory usage.`;
+            bestMethodDescription.innerText = `Based on the above comparison, the ${data['Best Moore-Penrose'].method} method was chosen as the more accurate approach, with a lower RMSE and slightly better performance in terms of execution time and memory usage.`;
 
             const pcMethodsTitle = document.getElementById('pc-methods');
-            pcMethodsTitle.innerText = `Performance Comparison (${data['Best'].method}, Greville, and SVD)`;
+            pcMethodsTitle.innerText = `Performance Comparison (${data['Best Moore-Penrose'].method}, Greville, and SVD)`;
 
             function createChart(ctx, labels, data, label, backgroundColor, borderColor, yAxisLabel) {
             return new Chart(ctx, {
@@ -199,27 +199,27 @@
 
         // Comparison charts (Best Moore-Penrose, Greville, SVD)
         createChart(document.getElementById('timeChart2').getContext('2d'),
-            [data['Best'].method, 'Greville', 'SVD'],
-            [data['Best'].time, data['Greville'].time, data['SVD'].time],
+            [data['Best Moore-Penrose'].method, 'Greville', 'SVD'],
+            [data['Best Moore-Penrose'].time, data['Greville'].time, data['SVD'].time],
             'Execution Time', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 99, 132, 1)',
             'Time (seconds)');
 
         createChart(document.getElementById('memoryChart2').getContext('2d'),
-            [data['Best'].method, 'Greville', 'SVD'],
-            [data['Best'].memory, data['Greville'].memory, data['SVD'].memory],
+            [data['Best Moore-Penrose'].method, 'Greville', 'SVD'],
+            [data['Best Moore-Penrose'].memory, data['Greville'].memory, data['SVD'].memory],
             'Memory Usage', 'rgba(54, 162, 235, 0.5)', 'rgba(54, 162, 235, 1)',
             'Memory (MB)');
 
-        const method_name = data['Best'].method == 'Gradient Descent' ? 'GD' : 'MP';
+        const method_name = data['Best Moore-Penrose'].method == 'Gradient Descent' ? 'GD' : 'MP';
         createChart(document.getElementById('operationsChart2').getContext('2d'),
             [method_name, 'Greville', 'SVD'],
-            [data['Best'].operations, data['Greville'].operations, data['SVD'].operations],
+            [data['Best Moore-Penrose'].operations, data['Greville'].operations, data['SVD'].operations],
             'Operation Count', 'rgba(255, 206, 86, 0.5)', 'rgba(255, 206, 86, 1)',
             'Number of Operations');
 
         createChart(document.getElementById('errorChart2').getContext('2d'),
-            [data['Best'].method, 'Greville', 'SVD'],
-            [data['Best'].rmse, data['Greville'].rmse, data['SVD'].rmse],
+            [data['Best Moore-Penrose'].method, 'Greville', 'SVD'],
+            [data['Best Moore-Penrose'].rmse, data['Greville'].rmse, data['SVD'].rmse],
             'RMSE', 'rgba(75, 192, 192, 0.5)',  'rgba(75, 192, 192, 1)',
             'Root Mean Square Error');
         }).catch(error => console.error('Error loading JSON data:', error));
