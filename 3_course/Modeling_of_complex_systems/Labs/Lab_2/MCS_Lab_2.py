@@ -1,16 +1,60 @@
 import numpy as np
 import time
-import imageio.v2 as imageio
-import matplotlib.pyplot as plt
 import PseudoInverseMatrixMethods as pimm
 import OperationsCounter as oc
 import json
 import psutil
 import os
+import cv2
 
-def readImage(filename):
-    X = imageio.imread(filename)
-    return np.array(X)
+#reading input images X and Y
+def readImage():
+    #read the image & convert it to float32 for multiplication
+    x_img = cv2.imread("x1.bmp", cv2.IMREAD_GRAYSCALE)
+    y_img = cv2.imread("y4.bmp", cv2.IMREAD_GRAYSCALE)
+    
+    #display the image
+    cv2.imshow("Image x", x_img)
+    cv2.imshow("Image y", y_img)
+    #wait for the user to press a key
+    cv2.waitKey(0)
+    #close all windows
+    cv2.destroyAllWindows()
+        
+    x = x_img.astype(float)
+    y = y_img.astype(float)
+
+    print(f"x size: {x.shape} , y size: {y.shape}")
+    return x, y
+
+def saveImage(matrix, filename="output.png"):
+    # Create results directory if it doesn't exist
+    results_dir = "results"
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+    
+    # Ensure the filename ends with .png
+    if not filename.endswith('.png'):
+        filename = filename + '.png'
+    
+    # Create full path for saving
+    save_path = os.path.join(results_dir, filename)
+    
+    # Ensure the matrix values are in valid range for uint8
+    # First normalize to 0-1 range
+    normalized = (matrix - matrix.min()) / (matrix.max() - matrix.min())
+    # Then scale to 0-255 range
+    img = (normalized * 255).astype('uint8')
+    
+    # Save the image in PNG format to results folder
+    cv2.imwrite(save_path, img)
+    
+    # Display the image
+    cv2.imshow("Converted Image", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
+    return img
 
 def calculateOperator(X, Y, inversion_function, operations_calculation, V=None, eps=1e-6, delta=10):
     if V is None:
@@ -43,25 +87,13 @@ def calculateOperator(X, Y, inversion_function, operations_calculation, V=None, 
 def applyOperator(X_, A_):
     return A_ @ X_
 
-def saveImage(X_, filename):
-    results_dir = 'results'
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
-    
-    filepath = os.path.join(results_dir, filename)
-    plt.figure(figsize=(10, 10))
-    plt.imshow(X_, cmap='gray')
-    plt.axis('off')
-    plt.savefig(filepath, bbox_inches='tight', pad_inches=0)
-    plt.close()
-
 def calculateError(Y, Y_expected):
     error_norm = np.linalg.norm(Y - Y_expected, ord=1)
     mse = np.mean((Y - Y_expected)**2)
     rmse = np.sqrt(mse)
     return error_norm, mse, rmse
 
-def numpy_to_python(obj):
+def numpyToPython(obj):
     if isinstance(obj, np.integer):
         return int(obj)
     elif isinstance(obj, np.floating):
@@ -72,11 +104,7 @@ def numpy_to_python(obj):
         return obj
 
 def main():
-    X = readImage('x1.bmp')
-    Y = readImage('y4.bmp')
-
-    m = X.shape[1]
-    X = np.vstack((X, np.ones((1, m))))
+    X, Y = readImage()
 
     saveImage(Y, 'original_Y.png')
 
@@ -165,7 +193,7 @@ def main():
     }
 
     # Convert NumPy types to Python native types
-    results = {k: {kk: numpy_to_python(vv) for kk, vv in v.items()} for k, v in results.items()}
+    results = {k: {kk: numpyToPython(vv) for kk, vv in v.items()} for k, v in results.items()}
 
     # Save results to a JSON file
     with open('results.json', 'w') as f:
