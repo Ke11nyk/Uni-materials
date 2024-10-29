@@ -64,6 +64,7 @@ Educational materials and works of FCSC's student. Below is a table with links t
     <td>
         <li><a href="./3_course/Distributed_computing">Distributed Computing</a></li>
         <li><a href="./3_course/Modeling_of_complex_systems">Modeling of Complex Systems</a></li>
+        <li><a href="./3_course/NoSQL">NoSQL</a></li>
         <li><a href="./3_course/Numerical_methods">Numerical Methods</a></li>
         <li><a href="./3_course/OOP">OOP</a></li>
         <li><a href="./3_course/Operating_systems">Operating Systems</a></li>
