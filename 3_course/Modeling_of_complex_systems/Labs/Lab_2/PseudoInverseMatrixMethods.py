@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from scipy.optimize import minimize_scalar
 
-def setup_logging(method_name):
+def setupLogging(method_name):
     log_dir = os.path.join('logs', method_name)
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
@@ -39,7 +39,7 @@ def isPsevdoInversed(A, A_psevdo_inverse) -> bool:
 
 
 def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
-    log = setup_logging('moorepenrose')
+    log = setupLogging('moorepenrose')
     m, n = A.shape
     
     A0 = A.T @ np.linalg.inv(A @ A.T + delta**2 * np.identity(m))
@@ -64,7 +64,7 @@ def pseudoInverseMatrix_MoorePenrose(A, eps=1e-6, delta=1000):
         iterations += 1
 
 def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, max_iterations=1000):
-    log = setup_logging('gradient_descent')
+    log = setupLogging('gradient_descent')
     m, n = A.shape
 
     def pinv(M, rcond=1e-15):
@@ -94,7 +94,7 @@ def pseudoInverseMatrix_MoorePenrose_GradientDescent(A, eps=1e-6, delta=1000, ma
     return A_plus, result.nfev # Return number of function evaluations as iterations
 
 def pseudoInverseMatrix_Greville(A, eps=1e-6, delta=None):
-    log = setup_logging('greville')
+    log = setupLogging('greville')
 
     m, n = A.shape
     A_plus = np.vstack(A[0] / np.dot(A[0].T, A[0]) if np.dot(A[0].T, A[0]) != 0 else A[0])
@@ -179,7 +179,7 @@ def customSVD(A, k=None, epsilon=1e-10, max_iterations=1000):
     return U, S, V.T
 
 def pseudoInverseMatrix_SVD(A, eps=1e-6, delta=None):
-    log = setup_logging('svd')
+    log = setupLogging('svd')
     m, n = A.shape
     
     # Perform custom SVD
