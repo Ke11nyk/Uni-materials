@@ -2,6 +2,13 @@ import numpy as np
 import csv
 from datetime import datetime
 import time
+import matplotlib.pyplot as plt
+import os
+
+def ensure_logs_directory():
+    """Create logs directory if it doesn't exist"""
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
 
 def read_file(file_name):
     with open(file_name, 'r') as file:
@@ -20,19 +27,11 @@ def finite_diff(y_vec_func, b_vec, b_values, delta=1e-5):
     
     for j in range(m):
         original_value = b_values[b_vec[j]]
-        
-        # Calculate y with a positive perturbation
         b_values[b_vec[j]] = original_value + delta
         y_plus = y_vec_func(b_values)
-        
-        # Calculate y with a negative perturbation
         b_values[b_vec[j]] = original_value - delta
         y_minus = y_vec_func(b_values)
-        
-        # Restore original value
         b_values[b_vec[j]] = original_value
-        
-        # Calculate the finite difference derivative
         deriv_matrix[:, j] = (y_plus - y_minus) / (2 * delta)
     
     return deriv_matrix
@@ -64,14 +63,24 @@ def init_matr(params):
     ]
     return np.array(matr)
 
+def get_model_solution(params, y0, t_points, h=0.2):
+    a_matrix = init_matr(params)
+    y_current = y0
+    y_solution = [y0]
+    
+    for _ in range(len(t_points) - 1):
+        y_current = get_y(a_matrix, y_current, h)
+        y_solution.append(y_current)
+    
+    return np.array(y_solution)
+
 def approximate(y_matr, params, beta_symbols, beta_values, eps, h=0.2):
+    ensure_logs_directory()
     start_time = time.time()
     
-    # Create a log file with timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_filename = f'approximation_log_{timestamp}.csv'
+    log_filename = os.path.join('logs', f'approximation_log_{timestamp}.csv')
     
-    # Initialize the CSV file with headers
     with open(log_filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
         headers = ['iteration'] + beta_symbols + ['quality_degree']
@@ -111,7 +120,6 @@ def approximate(y_matr, params, beta_symbols, beta_values, eps, h=0.2):
         integral_part_mult *= h
         quality_degree *= h
         
-        # Log the current iteration data
         with open(log_filename, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([iteration] + list(beta_vector) + [quality_degree])
@@ -124,24 +132,84 @@ def approximate(y_matr, params, beta_symbols, beta_values, eps, h=0.2):
         if quality_degree < eps:
             end_time = time.time()
             execution_time = end_time - start_time
-            return beta_values, iteration + 1, execution_time
+            
+            # Save final summary to a separate file
+            summary_filename = os.path.join('logs', f'summary_{timestamp}.txt')
+            with open(summary_filename, 'w') as f:
+                f.write("Parameter Identification Results:\n")
+                f.write("--------------------------------\n")
+                f.write("\nIdentified parameters:\n")
+                for param, value in beta_values.items():
+                    f.write(f"{param}: {value:.6f}\n")
+                f.write(f"\nQuality indicator: {quality_degree:.6e}\n")
+                f.write(f"Total iterations: {iteration + 1}\n")
+                f.write(f"Execution time: {execution_time:.2f} seconds\n")
+            
+            return beta_values, iteration + 1, execution_time, quality_degree
             
         iteration += 1
 
+def plot_results(measured_data, model_solution, t_points, save_prefix):
+    ensure_logs_directory()
+    variables = ['x₁', 'dx₁/dt', 'x₂', 'dx₂/dt', 'x₃', 'dx₃/dt']
+    fig, axes = plt.subplots(3, 2, figsize=(15, 12))
+    axes = axes.flatten()
+    
+    for i, (ax, var) in enumerate(zip(axes, variables)):
+        ax.plot(t_points, measured_data[:, i], 'r.', label='Measured', markersize=4)
+        ax.plot(t_points, model_solution[:, i], 'b-', label='Model')
+        ax.set_title(f'Variable {var}')
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Value')
+        ax.grid(True)
+        ax.legend()
+    
+    plt.tight_layout()
+    plot_path = os.path.join('logs', f'{save_prefix}_comparison.png')
+    plt.savefig(plot_path)
+    plt.close()
+
 def main():
+    ensure_logs_directory()
+    
+    # Read input data
     input_data = read_file('./y4.txt')
+    t_points = np.arange(0, 0.2 * len(input_data), 0.2)
+    
+    # Initial parameters
     params = {'c1': 0.14, 'c2': 0.3, 'c4': 0.12, 'm1': 12}
     to_approx = {'m2': 21, 'c3': 0.15, 'm3': 11}
     
-    result, iterations, execution_time = approximate(input_data, params, ['m2', 'c3', 'm3'], to_approx, 1e-6)
+    # Run approximation
+    result, iterations, execution_time, quality = approximate(
+        input_data, params, ['m2', 'c3', 'm3'], to_approx, 1e-6
+    )
     
-    print("\nExecution Summary:")
-    print("-----------------")
-    print(f"Total iterations: {iterations}")
-    print(f"Execution time: {execution_time:.2f} seconds")
-    print("\nFinal approximation:")
+    # Get model solution with identified parameters
+    final_params = {**params, **result}
+    model_solution = get_model_solution(final_params, input_data[0], t_points)
+    
+    # Generate timestamp for file names
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    print("\nParameter Identification Results:")
+    print("--------------------------------")
+    print("Initial parameters:")
+    for param, value in to_approx.items():
+        print(f"{param}: {value:.6f}")
+    
+    print("\nIdentified parameters:")
     for param, value in result.items():
         print(f"{param}: {value:.6f}")
+    
+    print("\nPerformance metrics:")
+    print(f"Quality indicator: {quality:.6e}")
+    print(f"Total iterations: {iterations}")
+    print(f"Execution time: {execution_time:.2f} seconds")
+    
+    # Plot and save results
+    plot_results(input_data, model_solution, t_points, f'results_{timestamp}')
+    print(f"\nResults have been saved to the 'logs' directory")
 
 if __name__ == "__main__":
     main()
