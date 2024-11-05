@@ -185,7 +185,8 @@ enum split_mode { KeepFirstHalf, KeepSecondHalf };
 // Parallel bubble sort algorithm
 void ParallelBubble(double *pProcData, int BlockSize) {
     // Local sorting the process data
-    SerialBubbleSort(pProcData, BlockSize);
+    // SerialBubbleSort(pProcData, BlockSize);
+    SerialStdSort(pProcData, BlockSize);
 
     int Offset;
     split_mode SplitMode;
