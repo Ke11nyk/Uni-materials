@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
-import math
 from scipy.optimize import fsolve
 
 def f(x):
@@ -20,27 +19,21 @@ def find_monotonicity(a, b, steps=1000):
     increasing = all(d >= 0 for d in derivative)
     decreasing = all(d <= 0 for d in derivative)
     
-    # Якщо функція є монотонною на всьому відрізку, повертаємо це
     if increasing:
         return "monotonic increasing", [(a, b)]
     elif decreasing:
         return "monotonic decreasing", [(a, b)]
     
-    # Якщо функція не монотонна, визначаємо інтервали між точками зміни знаку похідної
     intervals = []
     start = a
     
     for i in range(1, len(x)):
-        # Якщо похідна змінює знак
         if derivative[i-1] * derivative[i] <= 0:
-            # Додаємо інтервал між попередньою точкою та поточною
             end = (x[i-1] + x[i]) / 2
             intervals.append((start, end))
-            start = end  # Оновлюємо початок наступного інтервалу
+            start = end
     
-    # Додаємо останній інтервал до кінця
     intervals.append((start, b))
-    
     return "non-monotonic", intervals
 
 def chebyshev_nodes(a, b, n):
@@ -126,47 +119,89 @@ def calculate_errors(x_plot, y_exact, y_interpolated):
 def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
     """
     Обернена інтерполяція для знаходження x такого, що f(x) = y_value
-    використовуючи метод Лагранжа на кожному інтервалі монотонності.
-    
-    Args:
-        y_value (float): значення y, для якого шукаємо x
-        x_nodes (array): масив значень x у вузлах
-        y_nodes (array): масив значень y у вузлах
-        monotonicity (tuple): інформація про монотонність та інтервали локалізації
-        
-    Returns:
-        list: знайдені значення x для кожного інтервалу
     """
-    
     def target_function(x, nodes, values):
         return lagrange_interpolation(x, nodes, values) - y_value
     
+    # Перевірка діапазону
+    y_min, y_max = min(y_nodes), max(y_nodes)
+    if y_value < y_min or y_value > y_max:
+        return []
+    
     if not isinstance(monotonicity, tuple):
-        x_initial_guess = (x_nodes[0] + x_nodes[-1]) / 2
-        x_solution = fsolve(lambda x: target_function(x, x_nodes, y_nodes), x_initial_guess)
-        return [x_solution[0]]
+        x_initial_guesses = [x_nodes[0], x_nodes[-1]]
+        solutions = []
+        for guess in x_initial_guesses:
+            try:
+                x_solution = fsolve(lambda x: target_function(x, x_nodes, y_nodes), 
+                                  guess, 
+                                  full_output=True)
+                if x_solution[2] == 1:
+                    solutions.append(x_solution[0][0])
+            except:
+                continue
+        return list(set(solutions))
     
     intervals = monotonicity[1]
     solutions = []
     
     for interval in intervals:
-        # Вибираємо точки та значення для поточного інтервалу
-        x_sub_nodes = [x for x in x_nodes if interval[0] <= x <= interval[1]]
-        y_sub_nodes = [y for x, y in zip(x_nodes, y_nodes) if interval[0] <= x <= interval[1]]
+        # Вибір вузлів для інтервалу
+        mask = [(x >= interval[0]) and (x <= interval[1]) for x in x_nodes]
+        x_sub_nodes = [x for x, m in zip(x_nodes, mask) if m]
+        y_sub_nodes = [y for y, m in zip(y_nodes, mask) if m]
         
         if len(x_sub_nodes) < 2:
-            continue  # Пропускаємо інтервал, якщо недостатньо точок для інтерполяції
+            continue
+            
+        # Використання декількох початкових наближень
+        x_guesses = np.linspace(interval[0], interval[1], 5)  # Збільшено кількість початкових наближень
         
-        # Початкове значення для fsolve на основі середини інтервалу
-        x_initial_guess = (interval[0] + interval[1]) / 2
-        try:
-            x_solution = fsolve(lambda x: target_function(x, x_sub_nodes, y_sub_nodes), x_initial_guess)
-            if interval[0] <= x_solution[0] <= interval[1]:
-                solutions.append(x_solution[0])
-        except ValueError:
-            pass  # Пропускаємо інтервали, де корінь не знайдено
+        for x_guess in x_guesses:
+            try:
+                x_solution = fsolve(lambda x: target_function(x, x_sub_nodes, y_sub_nodes),
+                                  x_guess,
+                                  full_output=True)
+                if (x_solution[2] == 1 and
+                    interval[0] <= x_solution[0][0] <= interval[1] and
+                    abs(target_function(x_solution[0][0], x_sub_nodes, y_sub_nodes)) < 1e-10):
+                    solutions.append(x_solution[0][0])
+            except:
+                continue
     
-    return solutions
+    # Видалення дублікатів
+    if solutions:
+        unique_solutions = []
+        for sol in solutions:
+            if not any(abs(sol - existing) < 1e-10 for existing in unique_solutions):
+                unique_solutions.append(sol)
+        return sorted(unique_solutions)
+    
+    return []
+
+def plot_inverse_interpolation(x_nodes, y_nodes, monotonicity):
+    """Функція для побудови графіка оберненої функції"""
+    # Генерація точок для оберненої функції
+    y_values = np.linspace(min(y_nodes), max(y_nodes), 50)
+    x_inverse_values = []
+    y_inverse_values = []
+    
+    for y_val in y_values:
+        solutions = inverse_interpolation(y_val, x_nodes, y_nodes, monotonicity)
+        for x_sol in solutions:
+            x_inverse_values.append(x_sol)
+            y_inverse_values.append(y_val)
+    
+    # Побудова точок оберненої функції
+    plt.scatter(y_inverse_values, x_inverse_values, color='red', s=30, label='Обернена інтерполяція')
+    
+    # Побудова точної оберненої функції
+    y_exact = np.linspace(min(y_nodes), max(y_nodes), 1000)
+    x_exact_pos = np.sqrt(5/y_exact - 1)  # Додатна гілка
+    x_exact_neg = -np.sqrt(5/y_exact - 1)  # Від'ємна гілка
+    
+    plt.plot(y_exact, x_exact_pos, 'k-', label='Точна функція')
+    plt.plot(y_exact, x_exact_neg, 'k-')
 
 def main():
     # Введення степеня інтерполяційного полінома
@@ -183,18 +218,10 @@ def main():
     uniform_values = [f(x) for x in uniform]
     chebyshev_values = [f(x) for x in chebyshev]
 
-    # Виведення таблиць розділених різниць
-    print("\nДля рівномірних вузлів:")
-    print_divided_differences_table(uniform, uniform_values)
-    
-    print("\nДля вузлів Чебишова:")
-    print_divided_differences_table(chebyshev, chebyshev_values)
-    
-    # Створення точок для побудови графіків
+    # 1. Пряма інтерполяція та час виконання
     x_plot = np.linspace(a, b, 1000)
     y_plot = [f(x) for x in x_plot]
     
-    # Час роботи та обчислення інтерполяцій
     print("\nЧас роботи методів інтерполяції:")
     
     # Рівномірні вузли
@@ -214,18 +241,18 @@ def main():
     start_time = time()
     y_newton_chebyshev = [newton_interpolation(x, chebyshev, chebyshev_values) for x in x_plot]
     print(f"Метод Ньютона (вузли Чебишова): {time() - start_time:.6f} сек")
+
+    # 2. Таблиці розділених різниць
+    print("\nДля рівномірних вузлів:")
+    print_divided_differences_table(uniform, uniform_values)
     
-    # Обчислення похибок
-    abs_err_lagrange_uniform, rel_err_lagrange_uniform = calculate_errors(x_plot, y_plot, y_lagrange_uniform)
-    abs_err_newton_uniform, rel_err_newton_uniform = calculate_errors(x_plot, y_plot, y_newton_uniform)
-    abs_err_lagrange_chebyshev, rel_err_lagrange_chebyshev = calculate_errors(x_plot, y_plot, y_lagrange_chebyshev)
-    abs_err_newton_chebyshev, rel_err_newton_chebyshev = calculate_errors(x_plot, y_plot, y_newton_chebyshev)
+    print("\nДля вузлів Чебишова:")
+    print_divided_differences_table(chebyshev, chebyshev_values)
+
+    # 3. Графіки прямої інтерполяції
+    plt.figure(figsize=(15, 5))
     
-    # Створення графіків (2 фігури: для інтерполяції та для похибок)
-    # Перша фігура - інтерполяція
-    plt.figure(figsize=(15, 10))
-    
-    plt.subplot(2, 2, 1)
+    plt.subplot(1, 2, 1)
     plt.plot(x_plot, y_plot, 'k-', label='Точна функція')
     plt.plot(x_plot, y_lagrange_uniform, 'r--', label='Лагранж')
     plt.plot(x_plot, y_newton_uniform, 'b:', label='Ньютон')
@@ -234,7 +261,7 @@ def main():
     plt.legend()
     plt.grid(True)
     
-    plt.subplot(2, 2, 2)
+    plt.subplot(1, 2, 2)
     plt.plot(x_plot, y_plot, 'k-', label='Точна функція')
     plt.plot(x_plot, y_lagrange_chebyshev, 'r--', label='Лагранж')
     plt.plot(x_plot, y_newton_chebyshev, 'b:', label='Ньютон')
@@ -242,71 +269,17 @@ def main():
     plt.title('Інтерполяція на вузлах Чебишова')
     plt.legend()
     plt.grid(True)
-    
-    # Значення y для оберненої інтерполяції
-    y_values = np.linspace(1.0, 5.0, 5)  # 5 точок від 1 до 5
 
-    # Перевірка монотонності
-    monotonicity = find_monotonicity(a, b)
-    print("\nАналіз монотонності:")
-    if isinstance(find_monotonicity(a, b), tuple):
-        print("Функція не монотонна")
-        print("Точки локалізації:", monotonicity[1])
-    else:
-        print(f"Функція {monotonicity}")
-
-    # Виклик функції inverse_interpolation для кожного значення y в y_values
-    x_inverse_uniform = [inverse_interpolation(y, uniform, uniform_values, monotonicity) for y in y_values]
-    x_inverse_chebyshev = [inverse_interpolation(y, chebyshev, chebyshev_values, monotonicity) for y in y_values]
-
-    # Графік точної оберненої функції
-    y_plot_inverse = np.linspace(1, 5, 1000)
-    x_plot_inverse = [-np.sqrt(5/y - 1) for y in y_plot_inverse]
-
-    # Розгортання списку x_inverse_uniform для побудови графіка
-    y_plot_inverse_uniform = []
-    x_plot_inverse_uniform = []
-
-    for y_val, x_vals in zip(y_values, x_inverse_uniform):
-        if isinstance(x_vals, list):  # Якщо отримали кілька значень для одного y
-            for x_val in x_vals:
-                y_plot_inverse_uniform.append(y_val)
-                x_plot_inverse_uniform.append(x_val)
-        else:  # Якщо отримали одне значення для y
-            y_plot_inverse_uniform.append(y_val)
-            x_plot_inverse_uniform.append(x_vals)
-
-    # Розгортання списку x_inverse_chebyshev для побудови графіка
-    y_plot_inverse_chebyshev = []
-    x_plot_inverse_chebyshev = []
-
-    for y_val, x_vals in zip(y_values, x_inverse_chebyshev):
-        if isinstance(x_vals, list):  # Якщо отримали кілька значень для одного y
-            for x_val in x_vals:
-                y_plot_inverse_chebyshev.append(y_val)
-                x_plot_inverse_chebyshev.append(x_val)
-        else:  # Якщо отримали одне значення для y
-            y_plot_inverse_chebyshev.append(y_val)
-            x_plot_inverse_chebyshev.append(x_vals)
-
-    plt.subplot(2, 2, 3)
-    plt.plot(y_plot_inverse, x_plot_inverse, 'k-', label='Точна функція')
-    plt.plot(y_plot_inverse_uniform, x_plot_inverse_uniform, 'ro', label='Обернена (рівн.)')
-    plt.title('Обернена інтерполяція (рівномірні вузли)')
-    plt.legend()
-    plt.grid(True)
-
-    plt.subplot(2, 2, 4)
-    plt.plot(y_plot_inverse, x_plot_inverse, 'k-', label='Точна функція')
-    plt.plot(y_plot_inverse_chebyshev, x_plot_inverse_chebyshev, 'ro', label='Обернена (рівн.)')
-    plt.title('Обернена інтерполяція (вузли Чебишова)')
-    plt.legend()
-    plt.grid(True)
-    
     plt.tight_layout()
     plt.savefig('interpolation_report.png')
+
+    # 4. Похибки прямої інтерполяції
+    abs_err_lagrange_uniform, rel_err_lagrange_uniform = calculate_errors(x_plot, y_plot, y_lagrange_uniform)
+    abs_err_newton_uniform, rel_err_newton_uniform = calculate_errors(x_plot, y_plot, y_newton_uniform)
+    abs_err_lagrange_chebyshev, rel_err_lagrange_chebyshev = calculate_errors(x_plot, y_plot, y_lagrange_chebyshev)
+    abs_err_newton_chebyshev, rel_err_newton_chebyshev = calculate_errors(x_plot, y_plot, y_newton_chebyshev)
     
-    # Друга фігура - похибки
+    # 5. Графіки похибок прямої інтерполяції
     plt.figure(figsize=(15, 10))
     
     # Абсолютні похибки для рівномірних вузлів
@@ -345,19 +318,39 @@ def main():
     
     plt.tight_layout()
     plt.savefig('errors_report.png')
+
+    # 6. Інверсна інтерполяція
+
+    # Перевірка монотонності
+    monotonicity = find_monotonicity(a, b)
+    print("\nАналіз монотонності:")
+    if isinstance(monotonicity, tuple):
+        print("Функція не монотонна")
+        print("Інтервали монотонності:", monotonicity[1])
+    else:
+        print(f"Функція {monotonicity}")
+
+    # 7. Графіки інверсної інтерполяції
+    plt.figure(figsize=(15, 5))
     
-    # Виведення максимальних похибок
-    print("\nМаксимальні абсолютні похибки:")
-    print(f"Лагранж (рівномірні вузли): {np.max(abs_err_lagrange_uniform):.6f}")
-    print(f"Ньютон (рівномірні вузли): {np.max(abs_err_newton_uniform):.6f}")
-    print(f"Лагранж (вузли Чебишова): {np.max(abs_err_lagrange_chebyshev):.6f}")
-    print(f"Ньютон (вузли Чебишова): {np.max(abs_err_newton_chebyshev):.6f}")
+    plt.subplot(1, 2, 1)
+    plot_inverse_interpolation(uniform, uniform_values, monotonicity)
+    plt.title('Обернена інтерполяція (рівномірні вузли)')
+    plt.xlabel('y')
+    plt.ylabel('x')
+    plt.legend()
+    plt.grid(True)
     
-    print("\nМаксимальні відносні похибки (%):")
-    print(f"Лагранж (рівномірні вузли): {np.max(rel_err_lagrange_uniform):.6f}")
-    print(f"Ньютон (рівномірні вузли): {np.max(rel_err_newton_uniform):.6f}")
-    print(f"Лагранж (вузли Чебишова): {np.max(rel_err_lagrange_chebyshev):.6f}")
-    print(f"Ньютон (вузли Чебишова): {np.max(rel_err_newton_chebyshev):.6f}")
+    plt.subplot(1, 2, 2)
+    plot_inverse_interpolation(chebyshev, chebyshev_values, monotonicity)
+    plt.title('Обернена інтерполяція (вузли Чебишова)')
+    plt.xlabel('y')
+    plt.ylabel('x')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.savefig('inverse_interpolation_report.png')
 
 if __name__ == "__main__":
     main()
