@@ -13,23 +13,35 @@ def df(x):
     return -10*x / (1 + x**2)**2
 
 def find_monotonicity(a, b, steps=1000):
-    """Перевірка монотонності функції на відрізку [a,b]"""
+    """Перевірка монотонності функції на відрізку [a, b] та повернення інтервалів монотонності."""
     x = np.linspace(a, b, steps)
     derivative = df(x)
     
     increasing = all(d >= 0 for d in derivative)
     decreasing = all(d <= 0 for d in derivative)
     
+    # Якщо функція є монотонною на всьому відрізку, повертаємо це
     if increasing:
-        return "monotonic increasing"
+        return "monotonic increasing", [(a, b)]
     elif decreasing:
-        return "monotonic decreasing"
-    else:
-        critical_points = []
-        for i in range(1, len(x)):
-            if derivative[i-1] * derivative[i] <= 0:
-                critical_points.append((x[i-1] + x[i])/2)
-        return "non-monotonic", critical_points
+        return "monotonic decreasing", [(a, b)]
+    
+    # Якщо функція не монотонна, визначаємо інтервали між точками зміни знаку похідної
+    intervals = []
+    start = a
+    
+    for i in range(1, len(x)):
+        # Якщо похідна змінює знак
+        if derivative[i-1] * derivative[i] <= 0:
+            # Додаємо інтервал між попередньою точкою та поточною
+            end = (x[i-1] + x[i]) / 2
+            intervals.append((start, end))
+            start = end  # Оновлюємо початок наступного інтервалу
+    
+    # Додаємо останній інтервал до кінця
+    intervals.append((start, b))
+    
+    return "non-monotonic", intervals
 
 def chebyshev_nodes(a, b, n):
     """Обчислення вузлів Чебишова"""
@@ -111,21 +123,57 @@ def calculate_errors(x_plot, y_exact, y_interpolated):
     relative_error = absolute_error / (np.array(y_exact) + 1e-10) * 100
     return absolute_error, relative_error
 
+def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
+    """
+    Обернена інтерполяція для знаходження x такого, що f(x) = y_value
+    використовуючи метод Лагранжа на кожному інтервалі монотонності.
+    
+    Args:
+        y_value (float): значення y, для якого шукаємо x
+        x_nodes (array): масив значень x у вузлах
+        y_nodes (array): масив значень y у вузлах
+        monotonicity (tuple): інформація про монотонність та інтервали локалізації
+        
+    Returns:
+        list: знайдені значення x для кожного інтервалу
+    """
+    
+    def target_function(x, nodes, values):
+        return lagrange_interpolation(x, nodes, values) - y_value
+    
+    if not isinstance(monotonicity, tuple):
+        x_initial_guess = (x_nodes[0] + x_nodes[-1]) / 2
+        x_solution = fsolve(lambda x: target_function(x, x_nodes, y_nodes), x_initial_guess)
+        return [x_solution[0]]
+    
+    intervals = monotonicity[1]
+    solutions = []
+    
+    for interval in intervals:
+        # Вибираємо точки та значення для поточного інтервалу
+        x_sub_nodes = [x for x in x_nodes if interval[0] <= x <= interval[1]]
+        y_sub_nodes = [y for x, y in zip(x_nodes, y_nodes) if interval[0] <= x <= interval[1]]
+        
+        if len(x_sub_nodes) < 2:
+            continue  # Пропускаємо інтервал, якщо недостатньо точок для інтерполяції
+        
+        # Початкове значення для fsolve на основі середини інтервалу
+        x_initial_guess = (interval[0] + interval[1]) / 2
+        try:
+            x_solution = fsolve(lambda x: target_function(x, x_sub_nodes, y_sub_nodes), x_initial_guess)
+            if interval[0] <= x_solution[0] <= interval[1]:
+                solutions.append(x_solution[0])
+        except ValueError:
+            pass  # Пропускаємо інтервали, де корінь не знайдено
+    
+    return solutions
+
 def main():
     # Введення степеня інтерполяційного полінома
     n = int(input("Введіть степінь інтерполяційного полінома: "))
     
     # Визначення відрізка
     a, b = -1, 1
-    
-    # Перевірка монотонності
-    monotonicity = find_monotonicity(a, b)
-    print("\nАналіз монотонності:")
-    if isinstance(monotonicity, tuple):
-        print("Функція не монотонна")
-        print("Точки локалізації:", monotonicity[1])
-    else:
-        print(f"Функція {monotonicity}")
     
     # Створення вузлів
     uniform = uniform_nodes(a, b, n+1)
@@ -192,6 +240,66 @@ def main():
     plt.plot(x_plot, y_newton_chebyshev, 'b:', label='Ньютон')
     plt.plot(chebyshev, chebyshev_values, 'go', label='Вузли')
     plt.title('Інтерполяція на вузлах Чебишова')
+    plt.legend()
+    plt.grid(True)
+    
+    # Значення y для оберненої інтерполяції
+    y_values = np.linspace(1.0, 5.0, 5)  # 5 точок від 1 до 5
+
+    # Перевірка монотонності
+    monotonicity = find_monotonicity(a, b)
+    print("\nАналіз монотонності:")
+    if isinstance(find_monotonicity(a, b), tuple):
+        print("Функція не монотонна")
+        print("Точки локалізації:", monotonicity[1])
+    else:
+        print(f"Функція {monotonicity}")
+
+    # Виклик функції inverse_interpolation для кожного значення y в y_values
+    x_inverse_uniform = [inverse_interpolation(y, uniform, uniform_values, monotonicity) for y in y_values]
+    x_inverse_chebyshev = [inverse_interpolation(y, chebyshev, chebyshev_values, monotonicity) for y in y_values]
+
+    # Графік точної оберненої функції
+    y_plot_inverse = np.linspace(1, 5, 1000)
+    x_plot_inverse = [-np.sqrt(5/y - 1) for y in y_plot_inverse]
+
+    # Розгортання списку x_inverse_uniform для побудови графіка
+    y_plot_inverse_uniform = []
+    x_plot_inverse_uniform = []
+
+    for y_val, x_vals in zip(y_values, x_inverse_uniform):
+        if isinstance(x_vals, list):  # Якщо отримали кілька значень для одного y
+            for x_val in x_vals:
+                y_plot_inverse_uniform.append(y_val)
+                x_plot_inverse_uniform.append(x_val)
+        else:  # Якщо отримали одне значення для y
+            y_plot_inverse_uniform.append(y_val)
+            x_plot_inverse_uniform.append(x_vals)
+
+    # Розгортання списку x_inverse_chebyshev для побудови графіка
+    y_plot_inverse_chebyshev = []
+    x_plot_inverse_chebyshev = []
+
+    for y_val, x_vals in zip(y_values, x_inverse_chebyshev):
+        if isinstance(x_vals, list):  # Якщо отримали кілька значень для одного y
+            for x_val in x_vals:
+                y_plot_inverse_chebyshev.append(y_val)
+                x_plot_inverse_chebyshev.append(x_val)
+        else:  # Якщо отримали одне значення для y
+            y_plot_inverse_chebyshev.append(y_val)
+            x_plot_inverse_chebyshev.append(x_vals)
+
+    plt.subplot(2, 2, 3)
+    plt.plot(y_plot_inverse, x_plot_inverse, 'k-', label='Точна функція')
+    plt.plot(y_plot_inverse_uniform, x_plot_inverse_uniform, 'ro', label='Обернена (рівн.)')
+    plt.title('Обернена інтерполяція (рівномірні вузли)')
+    plt.legend()
+    plt.grid(True)
+
+    plt.subplot(2, 2, 4)
+    plt.plot(y_plot_inverse, x_plot_inverse, 'k-', label='Точна функція')
+    plt.plot(y_plot_inverse_chebyshev, x_plot_inverse_chebyshev, 'ro', label='Обернена (рівн.)')
+    plt.title('Обернена інтерполяція (вузли Чебишова)')
     plt.legend()
     plt.grid(True)
     
