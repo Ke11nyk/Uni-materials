@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from time import time
 from scipy.optimize import fsolve
 
+# Функція та похідна від неї
 def f(x):
     """Задана функція f(x) = 5 / (1 + x^2)"""
     return 5 / (1 + x**2)
@@ -11,6 +12,7 @@ def df(x):
     """Похідна функції f(x)"""
     return -10*x / (1 + x**2)**2
 
+# Монотонність
 def find_monotonicity(a, b, steps=1000):
     """Перевірка монотонності функції на відрізку [a, b] та повернення інтервалів монотонності."""
     x = np.linspace(a, b, steps)
@@ -36,6 +38,7 @@ def find_monotonicity(a, b, steps=1000):
     intervals.append((start, b))
     return "non-monotonic", intervals
 
+# Вузли
 def chebyshev_nodes(a, b, n):
     """Обчислення вузлів Чебишова"""
     i = np.arange(n)
@@ -45,6 +48,7 @@ def uniform_nodes(a, b, n):
     """Обчислення рівномірних вузлів"""
     return np.linspace(a, b, n)
 
+# Інтерполяція Лагранжа
 def lagrange_interpolation(x, nodes, values):
     """Інтерполяція методом Лагранжа"""
     n = len(nodes)
@@ -62,6 +66,7 @@ def lagrange_interpolation(x, nodes, values):
     
     return result
 
+# Інтерполяція Ньютона
 def print_divided_differences_table(x, y):
     """Виведення таблиці розділених різниць"""
     n = len(x)
@@ -70,19 +75,19 @@ def print_divided_differences_table(x, y):
     
     # Виведення таблиці
     print("\nТаблиця розділених різниць:")
-    print("-" * 100)
+    print("-" * 18 * n)
     header = ["x", "f(x)"]
     for i in range(1, n):
         header.append(f"f[x0...x{i}]")
     print(f"{' '.join(f'{h:>15}' for h in header)}")
-    print("-" * 100)
+    print("-" * 18 * n)
     
     for i in range(n):
         row = [f"{x[i]:15.6f}", f"{f[i, 0]:15.6f}"]
         for j in range(1, n-i):
             row.append(f"{f[i, j]:15.6f}")
         print("".join(row))
-    print("-" * 100)
+    print("-" * 18 * n)
 
 def divided_differences(x, y):
     """Обчислення розділених різниць для методу Ньютона"""
@@ -110,12 +115,14 @@ def newton_interpolation(x, nodes, values):
     
     return result
 
+# Обчислення похибок
 def calculate_errors(x_plot, y_exact, y_interpolated):
     """Обчислення абсолютної та відносної похибок"""
     absolute_error = np.abs(np.array(y_exact) - np.array(y_interpolated))
     relative_error = absolute_error / (np.array(y_exact) + 1e-10) * 100
     return absolute_error, relative_error
 
+# Інверсна інтерполяція
 def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
     """
     Обернена інтерполяція для знаходження x такого, що f(x) = y_value
@@ -133,9 +140,9 @@ def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
         solutions = []
         for guess in x_initial_guesses:
             try:
-                x_solution = fsolve(lambda x: target_function(x, x_nodes, y_nodes), 
-                                  guess, 
-                                  full_output=True)
+                x_solution = fsolve(lambda x: target_function(x, x_nodes, y_nodes),
+                                    guess,
+                                    full_output=True)
                 if x_solution[2] == 1:
                     solutions.append(x_solution[0][0])
             except:
@@ -160,8 +167,8 @@ def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
         for x_guess in x_guesses:
             try:
                 x_solution = fsolve(lambda x: target_function(x, x_sub_nodes, y_sub_nodes),
-                                  x_guess,
-                                  full_output=True)
+                                    x_guess,
+                                    full_output=True)
                 if (x_solution[2] == 1 and
                     interval[0] <= x_solution[0][0] <= interval[1] and
                     abs(target_function(x_solution[0][0], x_sub_nodes, y_sub_nodes)) < 1e-10):
@@ -202,6 +209,7 @@ def plot_inverse_interpolation(x_nodes, y_nodes, monotonicity):
     
     plt.plot(y_exact, x_exact_pos, 'k-', label='Точна функція')
     plt.plot(y_exact, x_exact_neg, 'k-')
+
 
 def main():
     # Введення степеня інтерполяційного полінома
@@ -319,9 +327,7 @@ def main():
     plt.tight_layout()
     plt.savefig('errors_report.png')
 
-    # 6. Інверсна інтерполяція
-
-    # Перевірка монотонності
+    # 6. Перевірка монотонності
     monotonicity = find_monotonicity(a, b)
     print("\nАналіз монотонності:")
     if isinstance(monotonicity, tuple):
