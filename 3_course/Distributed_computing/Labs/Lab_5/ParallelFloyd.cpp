@@ -35,47 +35,56 @@ int main(int argc, char* argv[]) {
     MPI_Comm_size(MPI_COMM_WORLD, &ProcNum);
     MPI_Comm_rank(MPI_COMM_WORLD, &ProcRank);
 
-    if(ProcRank == 0)
-        printf("Parallel Floyd algorithm\n");
+    // if(ProcRank == 0)
+    //     printf("Parallel Floyd algorithm\n");
 
-    // Process initialization
-    ProcessInitialization(pMatrix, pProcRows, Size, RowNum);
+    // TEST 1-7
+    for (int i = 0; i < 7; i++) {
+        if (i == 0)
+            Size = 10;
+        else
+            Size = 500 + (i - 1) * 100;
 
-    if (ProcRank == 0) {
-        // Matrix copying
-        pSerialMatrix = new int[Size * Size];
-        CopyMatrix(pMatrix, Size, pSerialMatrix);
+        // Process initialization
+        ProcessInitializationTest(pMatrix, pProcRows, Size, RowNum);
+
+        if (ProcRank == 0) {
+            // Matrix copying
+            pSerialMatrix = new int[Size * Size];
+            CopyMatrix(pMatrix, Size, pSerialMatrix);
+        }
+
+        start = MPI_Wtime();
+
+        // Distributing the initial data between processes
+        DataDistribution(pMatrix, pProcRows, Size, RowNum);
+
+        // Testing the distribution
+        //TestDistribution(pMatrix, pProcRows, Size, RowNum);
+        
+        // Parallel Floyd algorithm
+        ParallelFloyd(pProcRows, Size, RowNum);
+        //ParallelPrintMatrix(pProcRows, Size, RowNum);
+
+        // Process data collection
+        ResultCollection(pMatrix, pProcRows, Size, RowNum);
+
+        //if(ProcRank == 0)
+        // PrintMatrix(pMatrix, Size, Size);
+
+        finish = MPI_Wtime();
+        //TestResult(pMatrix, pSerialMatrix, Size);
+
+        duration = finish - start;
+        if(ProcRank == 0)
+            printf("Time of execution: %f\n", duration);
+        if (ProcRank == 0)
+            delete []pSerialMatrix;
+        
+        // Process termination
+        ProcessTermination(pMatrix, pProcRows);
     }
 
-    start = MPI_Wtime();
-
-    // Distributing the initial data between processes
-    DataDistribution(pMatrix, pProcRows, Size, RowNum);
-
-    // Testing the distribution
-    //TestDistribution(pMatrix, pProcRows, Size, RowNum);
-    
-    // Parallel Floyd algorithm
-    ParallelFloyd(pProcRows, Size, RowNum);
-    //ParallelPrintMatrix(pProcRows, Size, RowNum);
-
-    // Process data collection
-    ResultCollection(pMatrix, pProcRows, Size, RowNum);
-
-    //if(ProcRank == 0)
-    // PrintMatrix(pMatrix, Size, Size);
-
-    finish = MPI_Wtime();
-    //TestResult(pMatrix, pSerialMatrix, Size);
-
-    duration = finish - start;
-    if(ProcRank == 0)
-        printf("Time of execution: %f\n", duration);
-    if (ProcRank == 0)
-        delete []pSerialMatrix;
-    
-    // Process termination
-    ProcessTermination(pMatrix, pProcRows);
     MPI_Finalize();
     
     return 0;
@@ -94,6 +103,39 @@ int& RowNum) {
                 printf("The number of vertices should be greater then"
                 "the number of processes\n");
         } while(Size < ProcNum);
+        printf("Using the graph with %d vertices\n", Size);
+    }
+
+    // Broadcast the number of vertices
+    MPI_Bcast(&Size, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    // Number of rows for each process
+    int RestRows = Size;
+    for(int i = 0; i < ProcRank; i++)
+        RestRows = RestRows - RestRows / (ProcNum - i);
+    RowNum = RestRows / (ProcNum - ProcRank);
+    
+    // Allocate memory for the current process rows
+    pProcRows = new int[Size * RowNum];
+    
+    if(ProcRank == 0) {
+        // Allocate memory for the adjacency matrix
+        pMatrix = new int[Size * Size];
+        // Data initalization
+        DummyDataInitialization(pMatrix, Size);
+        //RandomDataInitialization(pMatrix, Size);
+    }
+}
+
+// Function for allocating the memory and setting the initial values
+void ProcessInitializationTest(int *&pMatrix, int *&pProcRows, int& Size,
+int& RowNum) {
+    setvbuf(stdout, 0, _IONBF, 0);
+
+    if(ProcRank == 0) {
+        if(Size < ProcNum)
+                printf("The number of vertices should be greater then"
+                "the number of processes\n");
         printf("Using the graph with %d vertices\n", Size);
     }
 

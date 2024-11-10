@@ -28,24 +28,35 @@ int main(int argc, char* argv[]) {
 
     printf("Serial Floyd algorithm\n");
 
-    // Process initialization
-    ProcessInitialization(pMatrix, Size);
-    // printf("The matrix before Floyd algorithm\n");
-    // PrintMatrix(pMatrix, Size, Size);
-    start = clock();
+    // TEST 1-7
+    for (int i = 0; i < 7; i++) {
+        printf("\nTest %d", (i + 1));
+        printf("\n");
 
-    // Parallel Floyd algorithm
-    SerialFloyd(pMatrix, Size);
-    finish = clock();
+        if (i == 0)
+            Size = 10;
+        else
+            Size = 500 + (i - 1) * 100;
 
-    // printf("The matrix after Floyd algorithm\n");
-    // PrintMatrix(pMatrix, Size, Size);
+        // Process initialization
+        ProcessInitializationTest(pMatrix, Size);
+        // printf("The matrix before Floyd algorithm\n");
+        // PrintMatrix(pMatrix, Size, Size);
+        start = clock();
 
-    duration = (finish - start) / double(CLOCKS_PER_SEC);
-    printf("Time of execution: %f\n", duration);
-    
-    // Process termination
-    ProcessTermination(pMatrix);
+        // Parallel Floyd algorithm
+        SerialFloyd(pMatrix, Size);
+        finish = clock();
+
+        // printf("The matrix after Floyd algorithm\n");
+        // PrintMatrix(pMatrix, Size, Size);
+
+        duration = (finish - start) / double(CLOCKS_PER_SEC);
+        printf("Time of execution: %f\n", duration);
+        
+        // Process termination
+        ProcessTermination(pMatrix);
+    }
 
     return 0;
 }
@@ -59,6 +70,21 @@ void ProcessInitialization(int *&pMatrix, int& Size) {
         if(Size <= 0)
             printf("The number of vertices should be greater then zero\n");
     } while(Size <= 0);
+    
+    printf("Using graph with %d vertices\n", Size);
+    
+    // Allocate memory for the adjacency matrix
+    pMatrix = new int[Size * Size];
+    
+    // Data initalization
+    DummyDataInitialization(pMatrix, Size);
+    //RandomDataInitialization(pMatrix, Size);
+}
+
+// Function for allocating the memory and setting the initial values
+void ProcessInitializationTest(int *&pMatrix, int& Size) {
+    if(Size <= 0)
+            printf("The number of vertices should be greater then zero\n");
     
     printf("Using graph with %d vertices\n", Size);
     
