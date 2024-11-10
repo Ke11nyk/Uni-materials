@@ -122,6 +122,33 @@ def calculate_errors(x_plot, y_exact, y_interpolated):
     relative_error = absolute_error / (np.array(y_exact) + 1e-10) * 100
     return absolute_error, relative_error
 
+def calculate_inverse_errors(y_values, x_inverse_values, y_inverse_values):
+    """Обчислення похибок для оберненої інтерполяції"""
+    # Знаходження найближчих точних значень для кожного інтерпольованого x
+    absolute_errors = []
+    relative_errors = []
+    
+    for x_inv, y_inv in zip(x_inverse_values, y_inverse_values):
+        # Знаходимо точне значення x для поточного y
+        x_exact_p = np.sqrt(5/y_inv - 1)
+        x_exact_n = -np.sqrt(5/y_inv - 1)
+        
+        # Вибираємо найближче точне значення
+        error_p = abs(x_inv - x_exact_p)
+        error_n = abs(x_inv - x_exact_n)
+        
+        if error_p <= error_n:
+            abs_error = error_p
+            rel_error = (error_p / abs(x_exact_p)) * 100
+        else:
+            abs_error = error_n
+            rel_error = (error_n / abs(x_exact_n)) * 100
+            
+        absolute_errors.append(abs_error)
+        relative_errors.append(rel_error)
+    
+    return absolute_errors, relative_errors
+
 # Інверсна інтерполяція
 def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
     """
@@ -135,7 +162,7 @@ def inverse_interpolation(y_value, x_nodes, y_nodes, monotonicity):
     if y_value < y_min or y_value > y_max:
         return []
     
-    if not isinstance(monotonicity, tuple):
+    if not monotonicity[0] == "non-monotonic":
         x_initial_guesses = [x_nodes[0], x_nodes[-1]]
         solutions = []
         for guess in x_initial_guesses:
@@ -209,7 +236,8 @@ def plot_inverse_interpolation(x_nodes, y_nodes, monotonicity):
     
     plt.plot(y_exact, x_exact_pos, 'k-', label='Точна функція')
     plt.plot(y_exact, x_exact_neg, 'k-')
-
+    
+    return y_values, x_inverse_values, y_inverse_values
 
 def main():
     # Введення степеня інтерполяційного полінома
@@ -330,7 +358,7 @@ def main():
     # 6. Перевірка монотонності
     monotonicity = find_monotonicity(a, b)
     print("\nАналіз монотонності:")
-    if isinstance(monotonicity, tuple):
+    if monotonicity[0] == "non-monotonic":
         print("Функція не монотонна")
         print("Інтервали монотонності:", monotonicity[1])
     else:
@@ -339,16 +367,18 @@ def main():
     # 7. Графіки інверсної інтерполяції
     plt.figure(figsize=(15, 5))
     
+    # Обернена інтерполяція для рівномірних вузлів
     plt.subplot(1, 2, 1)
-    plot_inverse_interpolation(uniform, uniform_values, monotonicity)
+    y_values_uniform, x_inverse_uniform, y_inverse_uniform = plot_inverse_interpolation(uniform, uniform_values, monotonicity)
     plt.title('Обернена інтерполяція (рівномірні вузли)')
     plt.xlabel('y')
     plt.ylabel('x')
     plt.legend()
     plt.grid(True)
     
+    # Обернена інтерполяція для вузлів Чебишова
     plt.subplot(1, 2, 2)
-    plot_inverse_interpolation(chebyshev, chebyshev_values, monotonicity)
+    y_values_chebyshev, x_inverse_chebyshev, y_inverse_chebyshev = plot_inverse_interpolation(chebyshev, chebyshev_values, monotonicity)
     plt.title('Обернена інтерполяція (вузли Чебишова)')
     plt.xlabel('y')
     plt.ylabel('x')
@@ -357,6 +387,46 @@ def main():
 
     plt.tight_layout()
     plt.savefig('inverse_interpolation_report.png')
+
+    # 8. Похибки оберненої інтерполяції
+    abs_err_uniform, rel_err_uniform = calculate_inverse_errors(y_values_uniform, x_inverse_uniform, y_inverse_uniform)
+    abs_err_chebyshev, rel_err_chebyshev = calculate_inverse_errors(y_values_chebyshev, x_inverse_chebyshev, y_inverse_chebyshev)
+
+    # Графіки похибок оберненої інтерполяції
+    plt.figure(figsize=(15, 10))
+    
+    # Абсолютні похибки
+    plt.subplot(2, 2, 1)
+    plt.scatter(y_inverse_uniform, abs_err_uniform, c='r')
+    plt.title('Абсолютна похибка оберненої інтерполяції\n(рівномірні вузли)')
+    plt.xlabel('y')
+    plt.ylabel('Похибка')
+    plt.grid(True)
+    
+    plt.subplot(2, 2, 2)
+    plt.scatter(y_inverse_chebyshev, abs_err_chebyshev, c='b')
+    plt.title('Абсолютна похибка оберненої інтерполяції\n(вузли Чебишова)')
+    plt.xlabel('y')
+    plt.ylabel('Похибка')
+    plt.grid(True)
+    
+    # Відносні похибки
+    plt.subplot(2, 2, 3)
+    plt.scatter(y_inverse_uniform, rel_err_uniform, c='r')
+    plt.title('Відносна похибка оберненої інтерполяції (%)\n(рівномірні вузли)')
+    plt.xlabel('y')
+    plt.ylabel('Похибка (%)')
+    plt.grid(True)
+    
+    plt.subplot(2, 2, 4)
+    plt.scatter(y_inverse_chebyshev, rel_err_chebyshev, c='b')
+    plt.title('Відносна похибка оберненої інтерполяції (%)\n(вузли Чебишова)')
+    plt.xlabel('y')
+    plt.ylabel('Похибка (%)')
+    plt.grid(True)
+    
+    plt.tight_layout()
+    plt.savefig('inverse_interpolation_errors_report.png')
 
 if __name__ == "__main__":
     main()
