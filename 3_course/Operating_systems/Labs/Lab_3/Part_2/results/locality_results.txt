@@ -1,0 +1,20 @@
+Simulating policy: FIFO
+Using trace file: locality_trace.txt
+FINALSTATS hits 498   misses 502   hitrate 49.80
+
+Simulating policy: LRU
+Using trace file: locality_trace.txt
+FINALSTATS hits 503   misses 497   hitrate 50.30
+
+Simulating policy: OPT
+Using trace file: locality_trace.txt
+FINALSTATS hits 530   misses 470   hitrate 53.00
+
+Simulating policy: RAND
+Using trace file: locality_trace.txt
+FINALSTATS hits 443   misses 557   hitrate 44.30
+
+Simulating policy: CLOCK
+Using trace file: locality_trace.txt
+FINALSTATS hits 469   misses 531   hitrate 46.90
+

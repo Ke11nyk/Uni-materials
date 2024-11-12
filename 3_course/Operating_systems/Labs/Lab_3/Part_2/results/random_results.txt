@@ -1,0 +1,20 @@
+Simulating policy: FIFO
+Using trace file: random_trace.txt
+FINALSTATS hits 31   misses 969   hitrate 3.10
+
+Simulating policy: LRU
+Using trace file: random_trace.txt
+FINALSTATS hits 31   misses 969   hitrate 3.10
+
+Simulating policy: OPT
+Using trace file: random_trace.txt
+FINALSTATS hits 141   misses 859   hitrate 14.10
+
+Simulating policy: RAND
+Using trace file: random_trace.txt
+FINALSTATS hits 26   misses 974   hitrate 2.60
+
+Simulating policy: CLOCK
+Using trace file: random_trace.txt
+FINALSTATS hits 32   misses 968   hitrate 3.20
+
