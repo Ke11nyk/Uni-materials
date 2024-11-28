@@ -1,19 +1,19 @@
 Starting Gaussian Elimination
 Initial augmented matrix:
-[[ 1.40797552e+00  1.29239253e-01 -1.83852516e-05]
- [-2.02511590e+00  1.04931364e+00  8.82304367e-06]]
+[[ 1.40811595e+00  1.29122171e-01 -4.86577059e-05]
+ [-2.02500634e+00  1.04946991e+00  1.84106249e-04]]
 
 Row swap: 1 <-> 2
 Matrix after row swap:
-[[-2.02511590e+00  1.04931364e+00  8.82304367e-06]
- [ 1.40797552e+00  1.29239253e-01 -1.83852516e-05]]
+[[-2.02500634e+00  1.04946991e+00  1.84106249e-04]
+ [ 1.40811595e+00  1.29122171e-01 -4.86577059e-05]]
 
 Eliminate variable x1 from equation 2
 Matrix after elimination:
-[[-2.02511590e+00  1.04931364e+00  8.82304367e-06]
- [ 0.00000000e+00  8.58781654e-01 -1.22509709e-05]]
+[[-2.02500634e+00  1.04946991e+00  1.84106249e-04]
+ [ 0.00000000e+00  8.58885475e-01  7.93631011e-05]]
 
 Gaussian Elimination completed. Starting back-substitution.
-Back-substitution step 1: x2 = [-1.42655246e-05]
-Back-substitution step 2: x1 = [-1.17484897e-05]
+Back-substitution step 1: x2 = [9.24024255e-05]
+Back-substitution step 2: x1 = [-4.30283513e-05]
 Process completed.
