@@ -59,7 +59,7 @@ Educational materials and works of FCSC's student. Below is a table with links t
     </td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="./3_course">3 course</a></td>
+    <td rowspan="4"><a href="./3_course">3 course</a></td>
     <td>5 semester</td>
     <td>
         <li><a href="./3_course/Distributed_computing">Distributed Computing</a></li>
