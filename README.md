@@ -59,7 +59,7 @@ Educational materials and works of FCSC's student. Below is a table with links t
     </td>
   </tr>
   <tr>
-    <td rowspan="2"><a href="./3_course">3 course</a></td>
+    <td rowspan="4"><a href="./3_course">3 course</a></td>
     <td>5 semester</td>
     <td>
         <li><a href="./3_course/Distributed_computing">Distributed Computing</a></li>
@@ -73,6 +73,22 @@ Educational materials and works of FCSC's student. Below is a table with links t
   </tr>
   <tr>
     <td>6 semester</td>
+    <td>
+        <li><a href="">Scientific image of the world</a></li>
+        <li><a href="">Socio-political studies</a></li>
+        <li><a href="./3_course/OOP">OOP</a></li>
+        <li><a href="">Software engineering management</a></li>
+        <li><a href="">Fundamentals of cryptology</a></li>
+        <li><a href="">Fundamentals of compiler construction</a></li>
+        <li><a href="">3d Graphics</a></li>
+    </td>
+  </tr>
+  <tr>
+    <td>Practice</td>
+    <td><i><b>SEE YOU SPACE COWBOY...</b></i></td>
+  </tr>
+  <tr>
+    <td>Coursework</td>
     <td><i><b>SEE YOU SPACE COWBOY...</b></i></td>
   </tr>
 </table>
