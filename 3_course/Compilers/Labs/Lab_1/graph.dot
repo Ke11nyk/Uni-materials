@@ -1,0 +1,23 @@
+digraph StateTransitions {
+    // Налаштування графа
+    rankdir=LR;
+    bgcolor="white";
+    node [color=black, fontcolor=black];
+    edge [color=black, fontcolor=black];
+    
+    // Вузли
+    node1 [label="{1,2,3,4}", shape=circle];
+    node2 [label="{5,6,7}", shape=doublecircle, peripheries=2];
+    node3 [label="{6,7}", shape=doublecircle, peripheries=2];
+    
+    // Пуста множина
+    empty [label="Ø", shape=circle, style=dashed];
+    
+    // Переходи
+    node1 -> node2 [label="x"];
+    node1 -> node3 [label="y"];
+    node1 -> empty [label="z"];
+    node2 -> node1 [label="z"];
+    node2 -> empty [label="x,y"];
+    node3 -> empty [label="x,y,z"];
+}
