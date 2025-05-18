@@ -24,7 +24,7 @@ static std::string string_buffer;
 lineterminator  \r|\n|\r\n
 blank           [ \t\f]
 id              [a-zA-Z][_0-9a-zA-Z]*
-integer         [0-9]+
+integer         0|[1-9][0-9]*
 
  /* Declare two start conditions (sub-automate states) to handle
     strings and comments */
@@ -74,6 +74,8 @@ integer         [0-9]+
  /* Keywords */
 
 else     return yy::tiger_parser::make_ELSE(loc);
+if       return yy::tiger_parser::make_IF(loc);
+then     return yy::tiger_parser::make_THEN(loc);
 while    return yy::tiger_parser::make_WHILE(loc);
 for      return yy::tiger_parser::make_FOR(loc);
 to       return yy::tiger_parser::make_TO (loc);
@@ -85,21 +87,16 @@ break    return yy::tiger_parser::make_BREAK(loc);
 function return yy::tiger_parser::make_FUNCTION(loc);
 var      return yy::tiger_parser::make_VAR(loc);
 
- /* Integers */
-{integer} {
-    char *end;
-    long val = strtol(yytext, &end, 10);
-    if (*end != '\0' || errno == ERANGE || val > TIGER_INT_MAX) {
-        utils::error(loc, "integer out of range");
-    }
-    if (yytext[0] == '0' && yyleng > 1) {
-        utils::error(loc, "leading zeros in integers are not allowed");
-    }
-    return yy::tiger_parser::make_INT((int)val, loc);
-}
-
  /* Identifiers */
 {id}       return yy::tiger_parser::make_ID(Symbol(yytext), loc);
+{integer}  {
+    long value = strtol(yytext, nullptr, 10);
+    if (value > TIGER_INT_MAX) {
+      utils::error(loc, "Integer out of range");
+    } else {
+      return yy::tiger_parser::make_INT(value, loc);
+    }
+  }
 
  /* Strings */
 \" {BEGIN(STRING); string_buffer.clear();}
