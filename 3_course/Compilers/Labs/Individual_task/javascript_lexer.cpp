@@ -4,6 +4,8 @@
 #include <cctype>
 #include <unordered_set>
 #include <unordered_map>
+#include <fstream>
+#include <sstream>
 
 enum TokenType {
     // Non-trivial tokens for detection
@@ -18,7 +20,7 @@ enum TokenType {
     CLASS,              // class
     IMPORT_EXPORT,      // import/export
     
-    // Base tokens
+    // Basic tokens
     IDENTIFIER,
     NUMBER,
     STRING,
@@ -48,7 +50,7 @@ private:
     int line;
     int column;
     
-    // Key words of JavaScript
+    // JavaScript keywords set
     std::unordered_set<std::string> keywords = {
         "abstract", "async", "await", "boolean", "break", "byte", "case", "catch",
         "char", "class", "const", "continue", "debugger", "default", "delete", "do",
@@ -60,17 +62,20 @@ private:
         "true", "try", "typeof", "var", "void", "volatile", "while", "with", "yield"
     };
     
+    // Get current character at position
     char currentChar() {
         if (position >= input.length()) return '\0';
         return input[position];
     }
     
+    // Peek at character with offset (finite automaton state transition)
     char peekChar(int offset = 1) {
         size_t pos = position + offset;
         if (pos >= input.length()) return '\0';
         return input[pos];
     }
     
+    // Advance position and update line/column counters
     void advance() {
         if (position < input.length()) {
             if (input[position] == '\n') {
@@ -83,20 +88,24 @@ private:
         }
     }
     
+    // Skip whitespace characters
     void skipWhitespace() {
         while (std::isspace(currentChar())) {
             advance();
         }
     }
     
+    // Read string literals (finite automaton for string recognition)
     Token readString(char quote) {
         std::string value;
         int startLine = line, startColumn = column;
         
         advance(); // Skip opening quote
         
+        // String FA: process characters until closing quote
         while (currentChar() != '\0' && currentChar() != quote) {
             if (currentChar() == '\\') {
+                // Handle escape sequences
                 advance();
                 if (currentChar() != '\0') {
                     value += currentChar();
@@ -115,26 +124,30 @@ private:
         return Token(STRING, value, startLine, startColumn);
     }
     
+    // Read template literals with expression interpolation (complex FA)
     Token readTemplateLiteral() {
         std::string value;
         int startLine = line, startColumn = column;
         
         advance(); // Skip opening backtick
         
+        // Template literal FA: handle ${...} expressions
         while (currentChar() != '\0' && currentChar() != '`') {
             if (currentChar() == '\\') {
+                // Handle escape sequences
                 advance();
                 if (currentChar() != '\0') {
                     value += currentChar();
                     advance();
                 }
             } else if (currentChar() == '$' && peekChar() == '{') {
-                // Handle template expression ${...}
+                // Template expression FA: handle ${...} interpolation
                 value += "${";
                 advance(); // $
                 advance(); // {
                 
                 int braceCount = 1;
+                // Nested braces handling
                 while (currentChar() != '\0' && braceCount > 0) {
                     if (currentChar() == '{') braceCount++;
                     else if (currentChar() == '}') braceCount--;
@@ -155,16 +168,18 @@ private:
         return Token(TEMPLATE_LITERAL, value, startLine, startColumn);
     }
     
+    // Read numeric literals (FA for number recognition including scientific notation)
     Token readNumber() {
         std::string value;
         int startLine = line, startColumn = column;
         
+        // Number FA: integer and decimal parts
         while (std::isdigit(currentChar()) || currentChar() == '.') {
             value += currentChar();
             advance();
         }
         
-        // Handle scientific notation
+        // Scientific notation FA extension
         if (currentChar() == 'e' || currentChar() == 'E') {
             value += currentChar();
             advance();
@@ -181,22 +196,24 @@ private:
         return Token(NUMBER, value, startLine, startColumn);
     }
     
+    // Read identifiers and keywords (FA for identifier recognition)
     Token readIdentifier() {
         std::string value;
         int startLine = line, startColumn = column;
         
+        // Identifier FA: alphanumeric + underscore + dollar
         while (std::isalnum(currentChar()) || currentChar() == '_' || currentChar() == '$') {
             value += currentChar();
             advance();
         }
         
-        // Checking for keywords and non-trivial constructs
+        // Check for keywords and non-trivial constructs
         TokenType type = IDENTIFIER;
         
         if (keywords.find(value) != keywords.end()) {
             type = KEYWORD;
             
-            // Specific non-trivial tokens
+            // Specific non-trivial token classification
             if (value == "function") type = FUNCTION;
             else if (value == "class") type = CLASS;
             else if (value == "async" || value == "await") type = ASYNC_AWAIT;
@@ -206,22 +223,24 @@ private:
         return Token(type, value, startLine, startColumn);
     }
     
+    // Read comments (FA for single-line and multi-line comments)
     Token readComment() {
         std::string value;
         int startLine = line, startColumn = column;
         
         if (currentChar() == '/' && peekChar() == '/') {
-            // Single line comment
+            // Single line comment FA
             while (currentChar() != '\0' && currentChar() != '\n') {
                 value += currentChar();
                 advance();
             }
         } else if (currentChar() == '/' && peekChar() == '*') {
-            // Multi-line comment
+            // Multi-line comment FA
             advance(); // /
             advance(); // *
             value += "/*";
             
+            // Comment end detection FA
             while (currentChar() != '\0') {
                 if (currentChar() == '*' && peekChar() == '/') {
                     value += "*/";
@@ -238,54 +257,58 @@ private:
     }
     
 public:
+    // Constructor: initialize lexer with input code
     JavaScriptLexer(const std::string& code) 
         : input(code), position(0), line(1), column(1) {}
     
+    // Main tokenization method using finite automaton approach
     std::vector<Token> tokenize() {
         std::vector<Token> tokens;
         
+        // Main lexical analysis loop
         while (position < input.length()) {
             char ch = currentChar();
             
+            // Skip whitespace
             if (std::isspace(ch)) {
                 skipWhitespace();
                 continue;
             }
             
-            // Comments
+            // Comment recognition FA
             if (ch == '/' && (peekChar() == '/' || peekChar() == '*')) {
                 tokens.push_back(readComment());
                 continue;
             }
             
-            // Template literals
+            // Template literal recognition FA
             if (ch == '`') {
                 tokens.push_back(readTemplateLiteral());
                 continue;
             }
             
-            // Strings
+            // String literal recognition FA
             if (ch == '"' || ch == '\'') {
                 tokens.push_back(readString(ch));
                 continue;
             }
             
-            // Numbers
+            // Number recognition FA
             if (std::isdigit(ch)) {
                 tokens.push_back(readNumber());
                 continue;
             }
             
-            // Identifiers and keywords
+            // Identifier and keyword recognition FA
             if (std::isalpha(ch) || ch == '_' || ch == '$') {
                 tokens.push_back(readIdentifier());
                 continue;
             }
             
-            // Non-trivial operators
+            // Non-trivial operator recognition using FA
             int startLine = line, startColumn = column;
             
-            // Arrow function =>
+            // Arrow function FA: = -> =>
             if (ch == '=' && peekChar() == '>') {
                 tokens.push_back(Token(ARROW_FUNCTION, "=>", startLine, startColumn));
                 advance();
@@ -293,7 +316,7 @@ public:
                 continue;
             }
             
-            // Spread operator ...
+            // Spread operator FA: . -> .. -> ...
             if (ch == '.' && peekChar() == '.' && peekChar(2) == '.') {
                 tokens.push_back(Token(SPREAD_OPERATOR, "...", startLine, startColumn));
                 advance();
@@ -302,7 +325,7 @@ public:
                 continue;
             }
             
-            // Optional chaining ?.
+            // Optional chaining FA: ? -> ?.
             if (ch == '?' && peekChar() == '.') {
                 tokens.push_back(Token(OPTIONAL_CHAINING, "?.", startLine, startColumn));
                 advance();
@@ -310,7 +333,7 @@ public:
                 continue;
             }
             
-            // Nullish coalescing ??
+            // Nullish coalescing FA: ? -> ??
             if (ch == '?' && peekChar() == '?') {
                 tokens.push_back(Token(NULLISH_COALESCING, "??", startLine, startColumn));
                 advance();
@@ -318,11 +341,11 @@ public:
                 continue;
             }
             
-            // Other operators and punctuation
+            // Other operators and punctuation FA
             std::string op;
             op += ch;
             
-            // Two-character operators
+            // Two-character operator recognition FA
             if ((ch == '=' && peekChar() == '=') ||
                 (ch == '!' && peekChar() == '=') ||
                 (ch == '<' && peekChar() == '=') ||
@@ -344,11 +367,11 @@ public:
         return tokens;
     }
     
-    // Methods for detecting non-trivial structures
+    // Method to detect destructuring patterns using FA approach
     bool hasDestructuring(const std::vector<Token>& tokens) {
         for (size_t i = 0; i < tokens.size() - 2; i++) {
             if (tokens[i].value == "{" || tokens[i].value == "[") {
-                // Finding a destructuring pattern
+                // Search for destructuring pattern using FA
                 for (size_t j = i + 1; j < tokens.size(); j++) {
                     if (tokens[j].value == "=" && 
                         ((tokens[i].value == "{" && tokens[j-1].value == "}") ||
@@ -362,7 +385,7 @@ public:
     }
 };
 
-// Helper function for deriving token type
+// Helper function to convert token type to string representation
 std::string tokenTypeToString(TokenType type) {
     switch (type) {
         case FUNCTION: return "FUNCTION";
@@ -388,39 +411,76 @@ std::string tokenTypeToString(TokenType type) {
     }
 }
 
-int main() {
-    std::string jsCode = R"(
-        // Example of JavaScript code with non-trivial constructs
-        const greeting = `Hello, ${name}!`;
-        
-        const sum = (a, b) => a + b;
-        
-        async function fetchData() {
-            const data = await fetch('/api');
-            return data?.json() ?? {};
-        }
-        
-        class Person {
-            constructor(name, age) {
-                this.name = name;
-                this.age = age;
-            }
-        }
-        
-        const {name, age} = person;
-        const numbers = [1, 2, ...otherNumbers];
-        
-        import { Component } from 'react';
-        export default MyComponent;
-    )";
+// Function to read JavaScript code from file
+std::string readFileContent(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        return "";
+    }
     
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    file.close();
+    
+    return buffer.str();
+}
+
+// Main function with file input support
+int main(int argc, char* argv[]) {
+    std::string jsCode;
+    
+    // Check if filename provided as command line argument
+    if (argc > 1) {
+        std::string filename = argv[1];
+        jsCode = readFileContent(filename);
+        
+        if (jsCode.empty()) {
+            std::cerr << "Error: File is empty or could not be read." << std::endl;
+            return 1;
+        }
+        
+        std::cout << "=== Analyzing file: " << filename << " ===" << std::endl;
+    } else {
+        // Default JavaScript code for demonstration
+        jsCode = R"(
+            // Example JavaScript code with non-trivial constructs
+            const greeting = `Hello, ${name}!`;
+            
+            const sum = (a, b) => a + b;
+            
+            async function fetchData() {
+                const data = await fetch('/api');
+                return data?.json() ?? {};
+            }
+            
+            class Person {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+            }
+            
+            const {name, age} = person;
+            const numbers = [1, 2, ...otherNumbers];
+            
+            import { Component } from 'react';
+            export default MyComponent;
+        )";
+        
+        std::cout << "=== Analyzing default JavaScript code ===" << std::endl;
+        std::cout << "Usage: " << argv[0] << " <filename.js>" << std::endl;
+        std::cout << "Running with default code...\n" << std::endl;
+    }
+    
+    // Create lexer and tokenize
     JavaScriptLexer lexer(jsCode);
     std::vector<Token> tokens = lexer.tokenize();
     
     std::cout << "=== JavaScript Lexer Results ===" << std::endl;
-    std::cout << "Non-trivial tokens detected:" << std::endl << std::endl;
+    std::cout << "Detected non-trivial tokens:" << std::endl << std::endl;
     
-    // Виведення тільки нетривіальних токенів
+    // Display only non-trivial tokens
     std::unordered_set<TokenType> nontrivialTypes = {
         FUNCTION, ARROW_FUNCTION, TEMPLATE_LITERAL, SPREAD_OPERATOR,
         OPTIONAL_CHAINING, NULLISH_COALESCING, ASYNC_AWAIT, CLASS, IMPORT_EXPORT
@@ -430,14 +490,14 @@ int main() {
         if (nontrivialTypes.find(token.type) != nontrivialTypes.end()) {
             std::cout << "Type: " << tokenTypeToString(token.type) 
                       << ", Value: '" << token.value 
-                      << "', Row: " << token.line 
+                      << "', Line: " << token.line 
                       << ", Column: " << token.column << std::endl;
         }
     }
     
-    // Перевірка на деструктуризацію
+    // Check for destructuring patterns
     if (lexer.hasDestructuring(tokens)) {
-        std::cout << "\nDestructuring detected in the code!" << std::endl;
+        std::cout << "\nDestructuring detected in code!" << std::endl;
     }
     
     std::cout << "\n=== All tokens ===" << std::endl;
