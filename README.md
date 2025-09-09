@@ -91,6 +91,29 @@ Educational materials and works of FCSC's student. Below is a table with links t
     <td>Coursework</td>
     <td><a href="./3_course/Coursework">Here</a></td>
   </tr>
+  <tr>
+    <td rowspan=3"><a href="./4_course">4 course</a></td>
+    <td>7 semester</td>
+    <td>
+        <li><a href="./4_course/Ecological_and_economic_processes">Ecological and economic processes</a></li>
+        <li><a href="./4_course/English">English</a></li>
+        <li><a href="./4_course/Functional_programming">Functional programming</a></li>
+        <li><a href="./4_course/Group_project">Group project</a></li>
+        <li><a href="./4_course/Information_systems">Information systems</a></li>
+        <li><a href="./4_course/Multimedia_systems">Multimedia systems</a></li>
+        <li><a href="./4_course/Software_engineering">Software engineering</a></li>
+    </td>
+  </tr>
+  <tr>
+    <td>8 semester</td>
+    <td>
+        <i><b>SEE YOU  SPACE COWBOY</b></i>
+  </tr>
+  <tr>
+    <td>Diploma</td>
+    <td>
+        <i><b>SEE YOU  SPACE COWBOY</b></i>
+  </tr>
 </table>
 
 ## Getting Started
