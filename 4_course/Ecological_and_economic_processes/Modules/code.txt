@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аналіз моделей хижак-жертва</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .model-section {
+            margin-bottom: 50px;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .model-title {
+            font-size: 1.8em;
+            color: #495057;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #495057;
+        }
+        input, select {
+            padding: 8px 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .plot-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .analysis {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #28a745;
+        }
+        .stationary-points {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐺 Дослідження моделей хижак-жертва 🐰</h1>
+        
+        <!-- Модель 1: Класична Лотка-Вольтерра -->
+        <div class="model-section">
+            <h2 class="model-title">Модель 1: Класична Лотка-Вольтерра</h2>
+            
+            <div class="analysis">
+                <h3>Система рівнянь:</h3>
+                <p><span class="math">dx/dt = 5x - 3xy</span></p>
+                <p><span class="math">dy/dt = -3y + 5xy</span></p>
+                
+                <div class="stationary-points">
+                    <h4>Стаціонарні точки:</h4>
+                    <p><strong>O(0, 0):</strong> Сідлова точка (нестійка)</p>
+                    <p><strong>P(0.6, 5/3):</strong> Центр (нейтрально стійка)</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="x0_1">Початкова к-ть жертв (x₀):</label>
+                    <input type="number" id="x0_1" value="2" min="0.1" max="10" step="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="y0_1">Початкова к-ть хижаків (y₀):</label>
+                    <input type="number" id="y0_1" value="1" min="0.1" max="10" step="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="scenario_1">Сценарій:</label>
+                    <select id="scenario_1">
+                        <option value="custom">Власні значення</option>
+                        <option value="x_greater">x₀ > y₀</option>
+                        <option value="x_less">x₀ < y₀</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button onclick="updateModel1()">Оновити графіки</button>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div class="plot-container">
+                    <div id="phase_portrait_1"></div>
+                </div>
+                <div class="plot-container">
+                    <div id="time_series_1"></div>
+                </div>
+            </div>
+            
+            <div class="plot-container">
+                <div id="plot3d_1"></div>
+            </div>
+        </div>
+
+        <!-- Модель 2: З внутрішньовидовою конкуренцією -->
+        <div class="model-section">
+            <h2 class="model-title">Модель 2: З внутрішньовидовою конкуренцією жертв</h2>
+            
+            <div class="analysis">
+                <h3>Система рівнянь:</h3>
+                <p><span class="math">dx/dt = 5x - 1.5x² - 3xy</span></p>
+                <p><span class="math">dy/dt = -3y + 5xy</span></p>
+                
+                <div class="stationary-points">
+                    <h4>Стаціонарні точки:</h4>
+                    <p><strong>O(0, 0):</strong> Сідлова точка (нестійка)</p>
+                    <p><strong>A(10/3, 0):</strong> Стійкий вузол</p>
+                    <p><strong>P(0.6, 5/3):</strong> Сідлова точка (нестійка)</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="x0_2">Початкова к-ть жертв (x₀):</label>
+                    <input type="number" id="x0_2" value="2" min="0.1" max="10" step="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="y0_2">Початкова к-ть хижаків (y₀):</label>
+                    <input type="number" id="y0_2" value="1" min="0.1" max="10" step="0.1">
+                </div>
+                <div class="control-group">
+                    <label for="scenario_2">Сценарій:</label>
+                    <select id="scenario_2">
+                        <option value="custom">Власні значення</option>
+                        <option value="x_greater">x₀ > y₀</option>
+                        <option value="x_less">x₀ < y₀</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <button onclick="updateModel2()">Оновити графіки</button>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <div class="plot-container">
+                    <div id="phase_portrait_2"></div>
+                </div>
+                <div class="plot-container">
+                    <div id="time_series_2"></div>
+                </div>
+            </div>
+            
+            <div class="plot-container">
+                <div id="plot3d_2"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Runge-Kutta 4th order method
+        function rungeKutta4(f, x0, y0, t0, tf, h) {
+            const n = Math.floor((tf - t0) / h);
+            const t = [t0];
+            const x = [x0];
+            const y = [y0];
+            
+            for (let i = 0; i < n; i++) {
+                const ti = t[i];
+                const xi = x[i];
+                const yi = y[i];
+                
+                const [k1x, k1y] = f(ti, xi, yi);
+                const [k2x, k2y] = f(ti + h/2, xi + h*k1x/2, yi + h*k1y/2);
+                const [k3x, k3y] = f(ti + h/2, xi + h*k2x/2, yi + h*k2y/2);
+                const [k4x, k4y] = f(ti + h, xi + h*k3x, yi + h*k3y);
+                
+                x.push(xi + h/6 * (k1x + 2*k2x + 2*k3x + k4x));
+                y.push(yi + h/6 * (k1y + 2*k2y + 2*k3y + k4y));
+                t.push(ti + h);
+            }
+            
+            return {t, x, y};
+        }
+
+        // Model 1: Lotka-Volterra
+        function lotkaVolterra(t, x, y) {
+            const dxdt = 5*x - 3*x*y;
+            const dydt = -3*y + 5*x*y;
+            return [dxdt, dydt];
+        }
+
+        // Model 2: With intraspecific competition
+        function competitionModel(t, x, y) {
+            const dxdt = 5*x - 1.5*x*x - 3*x*y;
+            const dydt = -3*y + 5*x*y;
+            return [dxdt, dydt];
+        }
+
+        function updateModel1() {
+            const scenario = document.getElementById('scenario_1').value;
+            let x0, y0;
+            
+            if (scenario === 'x_greater') {
+                x0 = 3; y0 = 1;
+                document.getElementById('x0_1').value = x0;
+                document.getElementById('y0_1').value = y0;
+            } else if (scenario === 'x_less') {
+                x0 = 1; y0 = 3;
+                document.getElementById('x0_1').value = x0;
+                document.getElementById('y0_1').value = y0;
+            } else {
+                x0 = parseFloat(document.getElementById('x0_1').value);
+                y0 = parseFloat(document.getElementById('y0_1').value);
+            }
+
+            // Phase portrait
+            createPhasePortrait('phase_portrait_1', lotkaVolterra, x0, y0, 'Класична модель Лотка-Вольтерра');
+            
+            // Time series
+            createTimeSeries('time_series_1', lotkaVolterra, x0, y0, 'Динаміка популяцій');
+            
+            // 3D plot
+            create3DPlot('plot3d_1', lotkaVolterra, x0, y0, '3D траєкторія');
+        }
+
+        function updateModel2() {
+            const scenario = document.getElementById('scenario_2').value;
+            let x0, y0;
+            
+            if (scenario === 'x_greater') {
+                x0 = 3; y0 = 1;
+                document.getElementById('x0_2').value = x0;
+                document.getElementById('y0_2').value = y0;
+            } else if (scenario === 'x_less') {
+                x0 = 1; y0 = 3;
+                document.getElementById('x0_2').value = x0;
+                document.getElementById('y0_2').value = y0;
+            } else {
+                x0 = parseFloat(document.getElementById('x0_2').value);
+                y0 = parseFloat(document.getElementById('y0_2').value);
+            }
+
+            // Phase portrait
+            createPhasePortrait('phase_portrait_2', competitionModel, x0, y0, 'Модель з конкуренцією жертв');
+            
+            // Time series
+            createTimeSeries('time_series_2', competitionModel, x0, y0, 'Динаміка популяцій');
+            
+            // 3D plot
+            create3DPlot('plot3d_2', competitionModel, x0, y0, '3D траєкторія');
+        }
+
+        function createPhasePortrait(divId, model, x0, y0, title) {
+            const solution = rungeKutta4(model, x0, y0, 0, 10, 0.01);
+            
+            // Direction field
+            const xField = [];
+            const yField = [];
+            const uField = [];
+            const vField = [];
+            
+            for (let x = 0.2; x <= 4; x += 0.3) {
+                for (let y = 0.2; y <= 4; y += 0.3) {
+                    const [dx, dy] = model(0, x, y);
+                    const mag = Math.sqrt(dx*dx + dy*dy);
+                    if (mag > 0) {
+                        xField.push(x);
+                        yField.push(y);
+                        uField.push(dx / mag * 0.15);
+                        vField.push(dy / mag * 0.15);
+                    }
+                }
+            }
+
+            const traces = [
+                // Direction field
+                {
+                    type: 'scatter',
+                    mode: 'markers',
+                    x: xField,
+                    y: yField,
+                    marker: {
+                        symbol: 'arrow',
+                        angle: uField.map((u, i) => Math.atan2(vField[i], u) * 180 / Math.PI),
+                        size: 8,
+                        color: 'rgba(100, 100, 100, 0.6)'
+                    },
+                    name: 'Поле напрямків',
+                    showlegend: false
+                },
+                // Trajectory
+                {
+                    x: solution.x,
+                    y: solution.y,
+                    type: 'scatter',
+                    mode: 'lines',
+                    line: {color: '#e74c3c', width: 3},
+                    name: 'Траєкторія'
+                },
+                // Starting point
+                {
+                    x: [x0],
+                    y: [y0],
+                    type: 'scatter',
+                    mode: 'markers',
+                    marker: {color: '#2ecc71', size: 12, symbol: 'circle'},
+                    name: 'Початкова точка'
+                }
+            ];
+
+            // Add stationary points
+            if (model === lotkaVolterra) {
+                traces.push({
+                    x: [0, 0.6],
+                    y: [0, 5/3],
+                    type: 'scatter',
+                    mode: 'markers',
+                    marker: {color: '#3498db', size: 10, symbol: 'x'},
+                    name: 'Стаціонарні точки'
+                });
+            } else {
+                traces.push({
+                    x: [0, 10/3, 0.6],
+                    y: [0, 0, 5/3],
+                    type: 'scatter',
+                    mode: 'markers',
+                    marker: {color: '#3498db', size: 10, symbol: 'x'},
+                    name: 'Стаціонарні точки'
+                });
+            }
+
+            const layout = {
+                title: {text: title + ' - Фазовий портрет', font: {size: 16}},
+                xaxis: {title: 'Жертви (x)', range: [0, 4]},
+                yaxis: {title: 'Хижаки (y)', range: [0, 4]},
+                showlegend: true,
+                legend: {x: 0.02, y: 0.98}
+            };
+
+            Plotly.newPlot(divId, traces, layout);
+        }
+
+        function createTimeSeries(divId, model, x0, y0, title) {
+            const solution = rungeKutta4(model, x0, y0, 0, 10, 0.01);
+
+            const traces = [
+                {
+                    x: solution.t,
+                    y: solution.x,
+                    type: 'scatter',
+                    mode: 'lines',
+                    line: {color: '#2ecc71', width: 3},
+                    name: 'Жертви (x)'
+                },
+                {
+                    x: solution.t,
+                    y: solution.y,
+                    type: 'scatter',
+                    mode: 'lines',
+                    line: {color: '#e74c3c', width: 3},
+                    name: 'Хижаки (y)'
+                }
+            ];
+
+            const layout = {
+                title: {text: title, font: {size: 16}},
+                xaxis: {title: 'Час (t)'},
+                yaxis: {title: 'Чисельність популяції'},
+                showlegend: true
+            };
+
+            Plotly.newPlot(divId, traces, layout);
+        }
+
+        function create3DPlot(divId, model, x0, y0, title) {
+            const solution = rungeKutta4(model, x0, y0, 0, 10, 0.01);
+
+            const trace = {
+                x: solution.x,
+                y: solution.y,
+                z: solution.t,
+                type: 'scatter3d',
+                mode: 'lines',
+                line: {
+                    color: solution.t,
+                    colorscale: 'Viridis',
+                    width: 5
+                },
+                name: 'Траєкторія'
+            };
+
+            const layout = {
+                title: {text: title, font: {size: 16}},
+                scene: {
+                    xaxis: {title: 'Жертви (x)'},
+                    yaxis: {title: 'Хижаки (y)'},
+                    zaxis: {title: 'Час (t)'}
+                }
+            };
+
+            Plotly.newPlot(divId, [trace], layout);
+        }
+
+        // Initialize plots
+        updateModel1();
+        updateModel2();
+    </script>
+</body>
+</html>
