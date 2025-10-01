@@ -1,0 +1,23 @@
+cabal-version: 2.4
+name: faculty-newspaper
+version: 1.0.0.0
+synopsis: Мережева газета факультету - інформаційна система
+description: Система управління контентом факультетської газети з підтримкою статей, коментарів, статистики
+license: MIT
+author: Student
+maintainer: student@university.edu
+category: Database, Web
+
+executable faculty-newspaper
+    main-is: Main.hs
+    
+    build-depends:
+        base >= 4.7 && < 5,
+        mysql-simple >= 0.4.7,
+        text >= 1.2.4,
+        time >= 1.9.3,
+        bytestring >= 0.10.12
+    
+    default-language: Haskell2010
+    
+    ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
