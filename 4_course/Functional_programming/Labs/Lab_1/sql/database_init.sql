@@ -1,6 +1,14 @@
--- Створення бази даних
-CREATE DATABASE IF NOT EXISTS faculty_newspaper CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Видалення старої бази даних
+DROP DATABASE IF EXISTS faculty_newspaper;
+
+-- Створення бази даних з UTF-8
+CREATE DATABASE faculty_newspaper CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE faculty_newspaper;
+
+-- Встановлення кодування для сесії
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+SET character_set_connection=utf8mb4;
 
 -- Таблиця авторів
 CREATE TABLE IF NOT EXISTS authors (
@@ -11,7 +19,7 @@ CREATE TABLE IF NOT EXISTS authors (
     department VARCHAR(200) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_email (email)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця читачів
 CREATE TABLE IF NOT EXISTS readers (
@@ -22,7 +30,7 @@ CREATE TABLE IF NOT EXISTS readers (
     student_group VARCHAR(50),
     registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_email (email)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця статей
 CREATE TABLE IF NOT EXISTS articles (
@@ -38,7 +46,7 @@ CREATE TABLE IF NOT EXISTS articles (
     INDEX idx_author (author_id),
     INDEX idx_category (category),
     INDEX idx_published (is_published)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця коментарів
 CREATE TABLE IF NOT EXISTS comments (
@@ -52,7 +60,7 @@ CREATE TABLE IF NOT EXISTS comments (
     FOREIGN KEY (reader_id) REFERENCES readers(reader_id) ON DELETE CASCADE,
     INDEX idx_article (article_id),
     INDEX idx_reader (reader_id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця статистики статей
 CREATE TABLE IF NOT EXISTS article_statistics (
@@ -64,7 +72,7 @@ CREATE TABLE IF NOT EXISTS article_statistics (
     average_rating DECIMAL(3,2) DEFAULT 0.0,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця графічних матеріалів
 CREATE TABLE IF NOT EXISTS graphic_materials (
@@ -76,7 +84,7 @@ CREATE TABLE IF NOT EXISTS graphic_materials (
     upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     description TEXT,
     FOREIGN KEY (author_id) REFERENCES authors(author_id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця категорій
 CREATE TABLE IF NOT EXISTS categories (
@@ -84,14 +92,14 @@ CREATE TABLE IF NOT EXISTS categories (
     category_name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Таблиця тегів
 CREATE TABLE IF NOT EXISTS tags (
     tag_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     tag_name VARCHAR(50) NOT NULL UNIQUE,
     usage_count BIGINT DEFAULT 0
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Зв'язуюча таблиця для статей і тегів
 CREATE TABLE IF NOT EXISTS article_tags (
@@ -100,7 +108,7 @@ CREATE TABLE IF NOT EXISTS article_tags (
     PRIMARY KEY (article_id, tag_id),
     FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Вставка базових категорій
 INSERT IGNORE INTO categories (category_name, description) VALUES
