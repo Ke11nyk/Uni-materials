@@ -19,6 +19,7 @@ import UI.Utils
 import Operations.Authors (getAllAuthors, displayAuthors)
 import Operations.Categories (getAllCategories, displayCategories, getCategoryName)
 import Operations.Tags (getAllTags, displayTags, linkArticleTag, displayArticleTags)
+import Operations.Materials (displayArticleMaterials)
 
 -- | Отримати всі статті з БД
 getAllArticles :: Connection -> IO [Article]
@@ -49,15 +50,19 @@ displayArticles conn articles = do
                     _ -> "Невідомий автор"
             
             -- Отримуємо назву категорії
-            categoryName <- getCategoryName conn (articleCategoryId a)
+            catName <- getCategoryName conn (articleCategoryId a)
             
             putStrLn $ show (articleId a) ++ ". " ++ T.unpack (articleTitle a)
             putStrLn $ "   Автор: " ++ authorName
-            putStrLn $ "   Категорія: " ++ T.unpack categoryName
+            putStrLn $ "   Категорія: " ++ T.unpack catName
             putStrLn $ "   Опубліковано: " ++ (if articleIsPublished a then "Так" else "Ні")
             
             -- Відобразити теги
             displayArticleTags conn (articleId a)
+            
+            -- Відобразити матеріали
+            displayArticleMaterials conn (articleId a)
+            
             putStrLn ""
 
 -- | Додати нову статтю
@@ -70,7 +75,7 @@ addArticle conn = do
     when (not $ null authors) $ do
         authorIdStr <- prompt "\nВведіть ID автора: "
         case readMaybe authorIdStr :: Maybe Int64 of
-            Just authorId -> do
+            Just authId -> do
                 title <- promptText "Назва статті: "
                 annot <- promptText "Анотація: "
                 filepath <- promptText "Шлях до файлу: "
@@ -81,7 +86,7 @@ addArticle conn = do
                 categoryIdStr <- prompt "Введіть ID категорії: "
                 
                 case readMaybe categoryIdStr :: Maybe Int64 of
-                    Just categoryId -> do
+                    Just catId -> do
                         publishedStr <- prompt "Опублікувати? (y/n): "
                         let isPublished = publishedStr == "y" || publishedStr == "Y"
                         
@@ -89,7 +94,7 @@ addArticle conn = do
                         void $ execute conn 
                             "INSERT INTO articles (title, author_id, annotation, file_path, category_id, is_published) \
                             \VALUES (?, ?, ?, ?, ?, ?)"
-                            (title, authorId, annot, filepath, categoryId, isPublished)
+                            (title, authId, annot, filepath, catId, isPublished)
                         
                         -- Отримуємо ID нової статті
                         [Only newArticleId] <- query_ conn "SELECT LAST_INSERT_ID()" :: IO [Only Int64]
@@ -104,25 +109,60 @@ addArticle conn = do
                         when (addTagsStr == "y" || addTagsStr == "Y") $ do
                             addTagsToArticle conn newArticleId
                         
+                        -- Додавання матеріалів
+                        addMaterialsStr <- prompt "Прив'язати графічні матеріали? (y/n): "
+                        when (addMaterialsStr == "y" || addMaterialsStr == "Y") $ do
+                            addMaterialsToArticle conn newArticleId
+                        
                         putStrLn "\n✓ Статтю успішно додано!"
                     Nothing -> putStrLn "\n✗ Невірний ID категорії!"
             Nothing -> putStrLn "\n✗ Невірний ID автора!"
 
 -- | Додати теги до статті
 addTagsToArticle :: Connection -> Int64 -> IO ()
-addTagsToArticle conn articleId = do
+addTagsToArticle conn artId = do
     tags <- getAllTags conn
     displayTags tags
     putStrLn "\nВведіть ID тегів через кому (наприклад: 1,3,5) або Enter для пропуску:"
     tagIdsStr <- prompt "> "
     
     let tagIds = parseTagIds tagIdsStr
-    forM_ tagIds $ \tagId -> linkArticleTag conn articleId tagId
+    forM_ tagIds $ \tId -> linkArticleTag conn artId tId
     
     when (not $ null tagIds) $
         putStrLn "✓ Теги додано!"
 
--- | Парсинг ID тегів з рядка
+-- | Додати матеріали до статті
+addMaterialsToArticle :: Connection -> Int64 -> IO ()
+addMaterialsToArticle conn artId = do
+    -- Показати доступні матеріали
+    materials <- query_ conn
+        "SELECT material_id, title, material_type FROM graphic_materials ORDER BY upload_date DESC"
+        :: IO [(Int64, T.Text, T.Text)]
+    
+    printSeparator
+    putStrLn "ДОСТУПНІ ГРАФІЧНІ МАТЕРІАЛИ"
+    printSeparator
+    
+    if null materials
+        then putStrLn "Немає доступних матеріалів."
+        else do
+            forM_ materials $ \(mid, title, mtype) ->
+                putStrLn $ show mid ++ ". " ++ T.unpack title ++ " (" ++ T.unpack mtype ++ ")"
+            
+            putStrLn "\nВведіть ID матеріалів через кому (наприклад: 1,2) або Enter для пропуску:"
+            materialIdsStr <- prompt "> "
+            
+            let materialIds = parseTagIds materialIdsStr  -- Використовуємо ту ж функцію парсингу
+            forM_ materialIds $ \mid -> do
+                void $ execute conn
+                    "INSERT IGNORE INTO article_materials (article_id, material_id) VALUES (?, ?)"
+                    (artId, mid)
+            
+            when (not $ null materialIds) $
+                putStrLn "✓ Матеріали прив'язано!"
+
+-- | Парсинг ID тегів/матеріалів з рядка
 parseTagIds :: String -> [Int64]
 parseTagIds str = 
     let parts = map (readMaybe . filter (/= ' ')) (split ',' str)

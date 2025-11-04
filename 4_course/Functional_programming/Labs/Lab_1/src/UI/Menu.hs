@@ -5,6 +5,10 @@ module UI.Menu
     ) where
 
 import Database.MySQL.Simple
+import Data.Int (Int64)
+import Text.Read (readMaybe)
+import Control.Monad (when)
+
 import UI.Utils
 import qualified Operations.Authors as Authors
 import qualified Operations.Articles as Articles
@@ -44,15 +48,16 @@ mainMenu conn = do
     putStrLn "ГРАФІЧНІ МАТЕРІАЛИ:"
     putStrLn "  13. Переглянути матеріали"
     putStrLn "  14. Додати матеріал"
+    putStrLn "  15. Зв'язати матеріал зі статтею"
     putStrLn ""
     putStrLn "КОМЕНТАРІ:"
-    putStrLn "  15. Додати коментар"
-    putStrLn "  16. Переглянути коментарі до статті"
+    putStrLn "  16. Додати коментар"
+    putStrLn "  17. Переглянути коментарі до статті"
     putStrLn ""
     putStrLn "СТАТИСТИКА:"
-    putStrLn "  17. Загальна статистика"
-    putStrLn "  18. Статистика по категоріях"
-    putStrLn "  19. Симулювати перегляд статті"
+    putStrLn "  18. Загальна статистика"
+    putStrLn "  19. Статистика по категоріях"
+    putStrLn "  20. Симулювати перегляд статті"
     putStrLn ""
     putStrLn "  0.  Вихід"
     printSeparator
@@ -130,27 +135,37 @@ mainMenu conn = do
             Materials.addMaterial conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
+        "15" -> do
+            materials <- Materials.getAllMaterials conn
+            Materials.displayMaterials conn materials
+            when (not $ null materials) $ do
+                materialIdStr <- prompt "\nВведіть ID матеріалу для зв'язування: "
+                case readMaybe materialIdStr :: Maybe Int64 of
+                    Just mid -> Materials.linkMaterialToArticle conn mid
+                    Nothing -> putStrLn "Невірний ID"
+            _ <- prompt "\nНатисніть Enter для продовження..."
+            mainMenu conn
         
         -- Коментарі
-        "15" -> do
+        "16" -> do
             Comments.addComment conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
-        "16" -> do
+        "17" -> do
             Comments.viewComments conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
         
         -- Статистика
-        "17" -> do
+        "18" -> do
             Statistics.viewStatistics conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
-        "18" -> do
+        "19" -> do
             Statistics.viewCategoryStatistics conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
-        "19" -> do
+        "20" -> do
             Statistics.simulateView conn
             _ <- prompt "\nНатисніть Enter для продовження..."
             mainMenu conn
