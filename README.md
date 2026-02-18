@@ -107,12 +107,17 @@ Educational materials and works of FCSC's student. Below is a table with links t
   <tr>
     <td>8 semester</td>
     <td>
-        <i><b>SEE YOU  SPACE COWBOY</b></i>
+        <li><a href="./4_course/Intelligent_data_processing">Intelligent data processing</a></li>
+        <li><a href="./4_course/Software_testing">Software testing</a></li>
+        <li><a href="./4_course/Labor_law_and_business_activity">Labor law and business activity</a></li>
+        <li><a href="./4_course/Economics_of_software_engineering">Economics of software engineering</a></li>
+        <li><a href="./4_course/Computer_networks">Computer networks</a></li>
+        <li><a href="./4_course/Computer_algebra">Computer algebra</a></li>
   </tr>
   <tr>
     <td>Diploma</td>
     <td>
-        <i><b>SEE YOU  SPACE COWBOY</b></i>
+        <li><a href="./4_course/Diploma">Here</a></li>
   </tr>
 </table>
 
