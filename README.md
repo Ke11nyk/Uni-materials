@@ -116,9 +116,7 @@ Educational materials and works of FCSC's student. Below is a table with links t
   </tr>
   <tr>
     <td>Diploma</td>
-    <td>
-        <li><a href="./4_course/Diploma">Here</a></li>
-  </tr>
+      <td><a href="./4_course/Diploma">Here</a></td>
 </table>
 
 ## Getting Started
