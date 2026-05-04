@@ -1,12 +1,14 @@
 {
-  "name": "Lab_3",
+  "name": "landshaft_tests",
   "version": "1.0.0",
   "description": "",
-  "main": "test_landshaft.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "selenium-webdriver": "^4.43.0"
   }
