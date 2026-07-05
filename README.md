@@ -92,7 +92,7 @@ Educational materials and works of FCSC's student. Below is a table with links t
     <td><a href="./3_course/Coursework">Here</a></td>
   </tr>
   <tr>
-    <td rowspan=3"><a href="./4_course">4 course</a></td>
+    <td rowspan=4"><a href="./4_course">4 course</a></td>
     <td>7 semester</td>
     <td>
         <li><a href="./4_course/Ecological_and_economic_processes">Ecological and economic processes</a></li>
@@ -117,6 +117,11 @@ Educational materials and works of FCSC's student. Below is a table with links t
   <tr>
     <td>Diploma</td>
       <td><a href="./4_course/Diploma">Here</a></td>
+  </tr>
+  <tr>
+    <td>Final Exam</td>
+    <td><a href="./4_course/Final_exam">Here</a></td>
+  </tr>
 </table>
 
 ## Getting Started
