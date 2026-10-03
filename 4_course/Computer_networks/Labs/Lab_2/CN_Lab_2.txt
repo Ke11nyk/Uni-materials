@@ -61,4 +61,22 @@ over a maximum of 30 hops:
 
 Trace complete.
 
-C:\Users\user>
+--------------------------------------------------------------------------------
+
+
+TracePath Output:
+ 1?: [LOCALHOST]                                         pmtu 1500
+ 1:  nova.subnetonline.com                                 0.111ms reached
+ 1:  nova.subnetonline.com                                 0.025ms reached
+     Resume: pmtu 1500 hops 1 back 1 
+
+ ---- Finished ------ 
+
+
+TracePath Output:
+ 1?: [LOCALHOST]                                         pmtu 1500
+ 1:  nova.subnetonline.com                                 0.110ms reached
+ 1:  nova.subnetonline.com                                 0.032ms reached
+     Resume: pmtu 1500 hops 1 back 1 
+
+ ---- Finished ------ 
