@@ -122,6 +122,23 @@ Educational materials and works of FCSC's student. Below is a table with links t
     <td>Final Exam</td>
     <td><a href="./4_course/Final_exam">Here</a></td>
   </tr>
+    <tr>
+    <td rowspan=4"><a href="./M_1_course">M 1 course</a></td>
+    <td>1 semester</td>
+    <td>
+        <li><a href="./M_1_course/AI_Principles_and_Methods">AI Principles and Methods</a></li>
+        <li><a href="./M_1_course/Database_design">Database design</a></li>
+        <li><a href="./M_1_course/IT_Project_Management">IT Project Management</a></li>
+        <li><a href="./M_1_course/Machine_learning">Machine learning</a></li>
+        <li><a href="./M_1_course/Robotics">Robotics</a></li>
+        <li><a href="./M_1_course/Scientific_research_methodology">Scientific research methodology</a></li>
+        <li><a href="./M_1_course/Team_Software_Development">Team Software Development</a></li>
+    </td>
+  </tr>
+  <tr>
+    <td>2 semester</td>
+    <td>
+  </tr>
 </table>
 
 ## Getting Started
